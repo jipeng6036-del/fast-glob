@@ -1,0 +1,23 @@
+npm warn EBADENGINE Unsupported engine {
+npm warn EBADENGINE   package: 'jsdoc-type-pratt-parser@9.4.0',
+npm warn EBADENGINE   required: { node: '^22.22.2 || >=24.15.0' },
+npm warn EBADENGINE   current: { node: 'v24.14.0', npm: '11.16.0' }
+npm warn EBADENGINE }
+npm warn deprecated debug@4.1.1: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
+npm warn deprecated folktale@2.3.2: This package is no longer actively maintained. Only security patches will be provided, if needed. Consider switching to fp-ts.
+
+added 405 packages, and audited 406 packages in 7m
+
+171 packages are looking for funding
+  run `npm fund` for details
+
+8 low severity vulnerabilities
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+npm warn allow-scripts 1 package has install scripts not yet covered by allowScripts:
+npm warn allow-scripts   unrs-resolver@1.12.2 (postinstall: node postinstall.js)
+npm warn allow-scripts
+npm warn allow-scripts Run `npm approve-scripts --allow-scripts-pending` to review, or `npm approve-scripts <pkg>` to allow.

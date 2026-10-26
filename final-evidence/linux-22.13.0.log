@@ -1,0 +1,2176 @@
+v22.13.0
+
+> fast-glob@4.0.0 build
+> npm run _build:compile && npm run lint && npm test
+
+
+> fast-glob@4.0.0 _build:compile
+> npm run clean && npm run compile
+
+
+> fast-glob@4.0.0 clean
+> rimraf out
+
+
+> fast-glob@4.0.0 compile
+> tsc
+
+
+> fast-glob@4.0.0 lint
+> eslint "src/**/*.ts" "*.mjs" --cache
+
+
+> fast-glob@4.0.0 test
+> mocha "out/**/*.spec.js" -s 0
+
+
+
+  Package
+    .globSync
+      ✔ should throw an error when input values can not pass validation (1ms)
+      ✔ should returns entries (5ms)
+      ✔ should returns entries (two sources) (1ms)
+    .sync
+      ✔ should be an alias for the .globSync method
+    .glob
+      ✔ should throw an error when input values can not pass validation
+      ✔ should returns entries (2ms)
+      ✔ should returns entries (two sources) (1ms)
+      ✔ should abort processing dynamic pattern with abort signal (5ms)
+      ✔ should abort processing static pattern with abort signal (3ms)
+    .async
+      ✔ should be an alias for the .glob method
+    .globStream
+      ✔ should throw an error when input values can not pass validation
+      ✔ should returns entries (3ms)
+      ✔ should returns entries (two sources) (1ms)
+      ✔ should abort processing dynamic pattern with abort signal (7ms)
+      ✔ should abort processing static pattern with abort signal (1ms)
+    .stream
+      ✔ should be an alias for the .globStream method
+    .generateTasks
+      ✔ should throw an error when input values can not pass validation (1ms)
+      ✔ should return tasks
+      ✔ should return tasks with negative patterns
+      ✔ should clean up patterns
+    .isDynamicPattern
+      ✔ should return true for dynamic pattern
+      ✔ should return false for static pattern
+    .escapePath
+      ✔ should return escaped path (1ms)
+    .convertPathToPattern
+      ✔ should return a pattern
+    posix
+      .escapePath
+        ✔ should return escaped path
+      .convertPathToPattern
+        ✔ should return a pattern
+    win32
+      .escapePath
+        ✔ should return escaped path
+      .convertPathToPattern
+        ✔ should return a pattern
+
+  Managers → Task
+    .generate
+      ✔ should return task with negative patterns from «ignore» option (1ms)
+      ✔ should return static and dynamic tasks
+      ✔ should return only dynamic tasks when the `caseSensitiveMatch` option is enabled
+      ✔ should expand patterns with brace expansion (1ms)
+      ✔ should do not expand patterns with brace expansion when the `braceExpansion` option is disabled
+      ✔ should do not process patterns when the `baseNameMatch` option is enabled and the pattern has a slash
+      ✔ should add glob star to patterns when the `baseNameMatch` option is enabled and the pattern does not have a slash
+    .convertPatternsToTasks
+      ✔ should return one task when positive patterns have a global pattern
+      ✔ should return two tasks when one of patterns contains reference to the parent directory
+      ✔ should return two tasks when all patterns refers to the different base directories
+      ✔ should not merge the absolute pattern into the global task when it is mixed with a pattern referring to the root
+      ✔ should keep the absolute pattern outside of the global task when the global merge is applied
+      ✔ should keep the original order of tasks when the global merge is not applied
+    .getPositivePatterns
+      ✔ should return only positive patterns
+    .getNegativePatternsAsPositive
+      ✔ should return negative patterns as positive (1ms)
+      ✔ should return negative patterns as positive with patterns from ignore option
+    .groupPatternsByBaseDirectory
+      ✔ should return empty object
+      ✔ should return grouped patterns
+      ✔ should remove backslashes from the base directory
+    .convertPatternGroupsToTasks
+      ✔ should return two tasks
+    .convertPatternGroupToTask
+      ✔ should return created dynamic task
+      ✔ should return created static task
+      ✔ should normalize the base path
+
+  Package loading
+    ✔ should work with import (65ms)
+    ✔ should work with require (61ms)
+
+  Providers → ProviderAsync
+    Constructor
+      ✔ should create instance of class (2ms)
+    .read
+      ✔ should return entries for dynamic task (1ms)
+      ✔ should return entries for static task (1ms)
+      ✔ should pass only positive patterns to the static reader (#499) (1ms)
+      ✔ should throw error
+
+  Providers → Filters → Deep
+    Constructor
+      ✔ should create instance of class
+    .getFilter
+      options.deep
+        ✔ should reject when an option has "0" as value
+        ✔ should reject when the depth of entry is greater than an allowable value (without base)
+        ✔ should reject when the depth of entry is greater than an allowable value (with base as current level)
+        ✔ should reject when the depth of entry is greater than an allowable value (with nested base)
+        ✔ should accept when an option has "Infinity" as value
+      options.followSymbolicLinks
+        ✔ should reject when an entry is symbolic link and option is disabled
+        ✔ should accept when an entry is symbolic link and option is enabled
+      Positive pattern
+        ✔ should reject when an entry does not match to the positive pattern (1ms)
+        ✔ should reject when an entry starts with leading dot and does not match to the positive pattern
+        ✔ should accept when an entry match to the positive pattern with leading dot
+        ✔ should accept when the positive pattern does not match by level, but the "baseNameMatch" is enabled
+        ✔ should accept when the positive pattern has a globstar
+      Negative pattern
+        ✔ should reject when an entry match to the negative pattern
+        ✔ should accept when the negative pattern has no effect to depth reading
+        ✔ should accept when an entry does not match to the negative pattern
+    Immutability
+      ✔ should return the data without changes
+
+  Providers → Filters → Entry
+    Constructor
+      ✔ should create instance of class
+    .getFilter
+      options.unique
+        ✔ should do not build the index when an option is disabled (1ms)
+        ✔ should do not add an entry to the index when an entry does not match to patterns
+        ✔ should reject a duplicate entry
+        ✔ should reject a duplicate entry when the two entries differ only by the leading dot segment
+        ✔ should accept a duplicate entry when an option is disabled
+      options.onlyFiles
+        ✔ should reject a directory entry
+        ✔ should accept a directory entry
+        ✔ should accept a file entry
+        ✔ should accept a socket entry
+      options.onlyDirectories
+        ✔ should reject a file entry
+        ✔ should reject a socket entry
+        ✔ should accept a directory entry
+      options.absolute
+        ✔ should reject when an entry match to the negative pattern
+        ✔ should reject when an entry match to the negative pattern with absolute path
+        ✔ should accept when an entry does not match to the negative pattern
+        ✔ should accept when an entry does not match to the negative pattern with absolute path
+      options.baseNameMatch
+        ✔ should reject an entry
+        ✔ should accept an entry
+      Pattern
+        ✔ should reject when an entry match to the negative pattern
+        ✔ should reject when an entry does not match to the positive pattern
+        ✔ should accept when an entry match to the positive pattern with a leading dot
+        ✔ should accept an entry with a leading dot
+        ✔ should accept when an entry match to the positive pattern
+        ✔ should try to apply patterns to the path with the trailing slash for directory entry
+        ✔ should not try to apply patterns to the path with the trailing slash for non-directory entry
+        ✔ should reject a hidden entry by negative pattern even when the dot options is disabled (1ms)
+    Immutability
+      ✔ should return the data without changes
+
+  Providers → Filters → Error
+    Constructor
+      ✔ should create instance of class
+    .getFilter
+      ✔ should return true for ENOENT error
+      ✔ should return true for ENOTDIR error
+      ✔ should return false for EPERM error
+      ✔ should return true for EPERM error when the `errorFilter` option returns true
+      ✔ should return false for ENOENT error when the `errorFilter` option returns false
+
+  Providers → Matchers → Matcher
+    .storage
+      ✔ should return created storage (1ms)
+
+  Providers → Matchers → Partial
+    .match
+      ✔ should handle patterns with globstar
+      ✔ should do not match the latest segment
+      ✔ should not descend into the last segment of a directory pattern
+      ✔ should trying to match all patterns
+      ✔ should match a static segment
+      ✔ should match a dynamic segment
+
+  Providers → Provider
+    Constructor
+      ✔ should create instance of class
+    .getRootDirectory
+      ✔ should return root directory for reader with global base (.)
+      ✔ should return root directory for reader with non-global base (fixtures)
+    .getReaderOptions
+      ✔ should return options for reader with global base (.)
+      ✔ should return options for reader with non-global base
+    .getMatcherOptions
+      ✔ should return options for matcher
+
+  Providers → ProviderStream
+    Constructor
+      ✔ should create instance of class (1ms)
+    .read
+      ✔ should return entries for dynamic entries (1ms)
+      ✔ should return entries for static entries
+      ✔ should pass only positive patterns to the static reader (#499) (1ms)
+      ✔ should emit error to the transform stream (1ms)
+      ✔ should destroy source stream when the destination stream is closed (1ms)
+
+  Providers → ProviderSync
+    Constructor
+      ✔ should create instance of class
+    .read
+      ✔ should return entries for dynamic task (1ms)
+      ✔ should return entries for static task
+      ✔ should pass only positive patterns to the static reader (#499) (1ms)
+
+  Providers → Transformers → Entry
+    Constructor
+      ✔ should create instance of class
+    .getTransformer
+      ✔ should return transformed entry as string when options is not provided
+      ✔ should return transformed entry as object when the `objectMode` option is enabled
+      ✔ should return transformed entry as object when the `stats` option is enabled (1ms)
+(node:16895) [DEP0180] DeprecationWarning: fs.Stats constructor is deprecated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+      ✔ should return entry with absolute filepath when the `absolute` option is enabled
+      ✔ should return entry with trailing slash when the `markDirectories` is enabled
+      ✔ should preserve an existing trailing slash when the `markDirectories` option is enabled
+      ✔ should preserve an existing trailing slash in object mode without mutating the entry
+      ✔ should preserve the filesystem root when the `absolute` and `markDirectories` options are enabled
+      ✔ should return correct entry when the `absolute` and `markDirectories` options is enabled
+      ✔ should do not mutate the entry when the `markDirectories` option is enabled
+
+  Readers → ReaderAsync
+    Constructor
+      ✔ should create instance of class (1ms)
+    .dynamic
+      ✔ should call fs.walk method (1ms)
+    .static
+      ✔ should call stream reader method (1ms)
+
+  Readers → Reader
+    Constructor
+      ✔ should create instance of class
+    .getFullEntryPath
+      ✔ should return path to entry
+    .makeEntry
+      ✔ should return created entry
+      ✔ should return created entry with fs.Stats
+    .isFatalError
+      ✔ should return false for ENOENT error
+      ✔ should return true for EPERM error
+      ✔ should return true for ENOENT error when the `errorFilter` option returns false
+      ✔ should return false for EPERM error when the `errorFilter` option returns true
+
+  Readers → ReaderStream
+    Constructor
+      ✔ should create instance of class
+    .dynamic
+      ✔ should call fs.walk method
+    .static
+      ✔ should return entries (1ms)
+      ✔ should throw an error when the filter does not suppress the error (1ms)
+      ✔ should do not throw an error when the filter suppress the error (1ms)
+      ✔ should do not include entry when the filter excludes it (1ms)
+
+  Readers → ReaderSync
+    Constructor
+      ✔ should create instance of class (1ms)
+    .dynamic
+      ✔ should call fs.walk method (1ms)
+    .static
+      ✔ should return entries
+      ✔ should throw an error when the filter does not suppress the error
+      ✔ should do not throw an error when the filter suppress the error
+      ✔ should do not include entry when the filter excludes it (1ms)
+
+  Settings
+    ✔ should return instance with default values
+    ✔ should return instance with custom values
+    ✔ should set the "onlyFiles" option when the "onlyDirectories" is enabled
+    ✔ should set the "objectMode" option when the "stats" is enabled
+    ✔ should return the `fs` option with custom method
+    ✔ should throw an error when the "deep" option is negative
+    ✔ should accept zero and positive values for the "deep" option
+    ✔ should transform URL to string on cwd
+
+  Utils → Array
+    .flatFirstLevel
+      ✔ should return non-nested array
+    .splitWhen
+      ✔ should return one group
+      ✔ should return group for each item of array
+      ✔ should return two group
+
+  Utils → Errno
+    .isEnoentCodeError
+      ✔ should return true for ENOENT error
+      ✔ should return false for EPERM error
+    .isEnotdirCodeError
+      ✔ should return true for ENOTDIR error
+      ✔ should return false for ENOENT error
+      ✔ should return false for EPERM error
+
+  Utils → FS
+    .createDirentFromStats
+      ✔ should convert fs.Stats to fs.Dirent
+
+  Utils → Path
+    .makeAbsolute
+      ✔ should return absolute filepath
+    .appendTrailingSeparatorToDeviceRoot
+      ✔ should return path without changes
+      ✔ should append trailing separator to a device path to the root of a drive
+    .escape
+      ✔ should return pattern without additional escape characters
+      ✔ should return pattern without escape characters
+    .escapePosixPattern
+      ✔ should return pattern with escaped glob symbols (1ms)
+    .escapeWindowsPattern
+      ✔ should return pattern with escaped glob symbols
+    .removeLeadingDotCharacters
+      ✔ should return path without changes
+      ✔ should return path without leading dit characters
+    .removeBackslashes
+      ✔ should return path without backslashes
+    .convertPathToPattern
+      ✔ should return a pattern
+    .convertPosixPathToPattern
+      ✔ should escape special characters
+    .convertWindowsPathToPattern
+      ✔ should escape special characters
+      ✔ should do nothing with escaped glob symbols
+      ✔ should convert slashes (1ms)
+      ✔ should convert relative paths
+      ✔ should convert absolute paths
+      ✔ should convert traditional DOS paths
+      ✔ should convert UNC paths
+
+  Utils → Pattern
+    .isStaticPattern
+      ✔ should return true for static pattern
+      ✔ should return false for dynamic pattern
+    .isDynamicPattern
+      Without options
+        ✔ should return false for an empty string
+        ✔ should return true for patterns that include the escape symbol
+        ✔ should return true for everything when the `caseSensitiveMatch` option is disabled
+        ✔ should return true for patterns that include common glob symbols
+        ✔ should return true for patterns that include regex group symbols
+        ✔ should return true for patterns that include regex character class symbols
+        ✔ should return true for patterns that include glob extension symbols
+        ✔ should return false for glob extension when the `extglob` option is disabled
+        ✔ should return true for patterns that include brace expansions symbols (3ms)
+        ✔ should return false for brace extension when the `braceExpansion` option is disabled
+        ✔ should return false for "!" symbols when a symbol is not specified first in the string
+        ✔ should return false for a completely static pattern
+        ✔ should return false for unfinished regex character class (3ms)
+        ✔ should return false for unfinished regex group (7ms)
+        ✔ should return false for unfinished glob extension (6ms)
+        ✔ should return false for unfinished brace expansions (5ms)
+      With options
+        ✔ should return true for patterns that include "*?" symbols even when the "extglob" option is disabled
+        ✔ should return true when the "caseSensitiveMatch" option is enabled
+        ✔ should return false for glob extension when the "extglob" option is disabled
+        ✔ should return false for brace expansions when the "braceExpansion" option is disabled
+    .convertToPositivePattern
+      ✔ should returns converted positive pattern
+      ✔ should returns pattern without changes
+    .convertToNegativePattern
+      ✔ should returns converted negative pattern
+    .isNegativePattern
+      ✔ should returns true
+      ✔ should returns false
+      ✔ should returns false for extglob
+    .isPositivePattern
+      ✔ should returns true
+      ✔ should returns false
+    .getNegativePatterns
+      ✔ should returns only negative patterns
+      ✔ should returns empty array
+    .getPositivePatterns
+      ✔ should returns only positive patterns
+      ✔ should returns empty array
+    .getPatternsInsideCurrentDirectory
+      ✔ should return patterns
+    .getPatternsOutsideCurrentDirectory
+      ✔ should return patterns
+    .isPatternRelatedToParentDirectory
+      ✔ should be `false` when the pattern refers to the current directory
+      ✔ should be `true` when the pattern equals to `..`
+      ✔ should be `true` when the pattern starts with `..` segment
+      ✔ should be `true` when the pattern starts with `./..` segment
+    .getBaseDirectory
+      ✔ should returns base directory
+      ✔ should returns base directory without slash transformation
+    .hasGlobStar
+      ✔ should returns true for pattern that includes globstar
+      ✔ should returns false for pattern that has no globstar
+    .hasTrailingSlashGlobStar
+      ✔ should returns true for pattern that ends with slash and globstar
+      ✔ should returns false for pattern that has no slash, but ends with globstar
+      ✔ should returns false for pattern that does not ends with globstar
+    .isAffectDepthOfReadingPattern
+      ✔ should return true for pattern that ends with slash and globstar
+      ✔ should return true for pattern when the last partial of the pattern is static pattern
+      ✔ should return false
+    .expandPatternsWithBraceExpansion
+      ✔ should return an array of expanded patterns with brace expansion (1ms)
+    .expandBraceExpansion
+      ✔ should preserve patterns without a brace pair
+      ✔ should process quotes when a literal brace pair is present
+      ✔ should expand numeric ranges (1ms)
+      ✔ should return an array of expanded patterns with brace expansion without dupes
+      ✔ should sort expanded patterns by length
+      ✔ should filter an empty patterns after expansion
+      ✔ should keep escaping after expansion
+    .getPatternParts
+      ✔ should return an array with a single item when the pattern is an empty string
+      ✔ should return an array with a single item (micromatch/picomatch#58)
+      ✔ should return the correct set of parts for the pattern with a forward slash (micromatch/picomatch#58)
+      ✔ should remove only the trailing empty part (1ms)
+      ✔ should preserve a prefix-only pattern
+      ✔ should return an array of pattern parts
+    .makeRe
+      ✔ should return regexp for provided pattern
+      ✔ should match absolute paths with forward slashes
+      ✔ should treat backslashes as path separators only on Windows
+    .convertPatternsToRe
+      ✔ should return regexps for provided patterns
+    .isMatchAny
+      ✔ should return true
+      ✔ should return false
+    .removeDuplicateSlashes
+      ✔ should do not change patterns
+      ✔ should do not change the device path in patterns with UNC parts
+      ✔ should remove duplicate slashes in the middle and the of the pattern
+      ✔ should form double slashes at the beginning of the pattern
+    .isAbsolute
+      ✔ should return true
+      ✔ should return false
+
+  Utils → Stream
+    .merge
+      ✔ should merge two streams into one stream (2ms)
+      ✔ should support asynchronous iteration (1ms)
+      ✔ should propagate first error into merged stream (first)
+      ✔ should propagate first error into merged stream (second)
+      ✔ should propagate destroy to source streams
+
+  Utils → String
+    .isString
+      ✔ should return true
+      ✔ should return false
+    .isEmpty
+      ✔ should return true
+      ✔ should return false
+
+
+  288 passing (265ms)
+
+
+> fast-glob@4.0.0 test:e2e:sync
+> mocha "out/**/*.e2e.js" -s 0 --grep "\(sync\)"
+
+
+
+  Errors
+    ✔ {"pattern":"non-exist-directory/**","options":{}} (sync) (17ms)
+    ✔ {"pattern":"non-exist-file.txt","options":{}} (sync) (2ms)
+
+  Errors (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"non-exist-directory"}} (sync) (1ms)
+
+  Options Absolute
+    ✔ {"pattern":"fixtures/*","options":{"absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"absolute":true}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"absolute":true}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/../*","options":{"absolute":true}} (sync) (2ms)
+
+  Options Absolute (ignore)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["fixtures/*/nested"],"absolute":true}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["**/nested"],"absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (sync) (2ms)
+
+  Options Absolute (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","absolute":true}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","absolute":true}} (sync) (1ms)
+
+  Options Absolute (cwd & ignore)
+    ✔ {"pattern":"*/*","options":{"ignore":["*/nested"],"cwd":"fixtures","absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"*/*","options":{"ignore":["**/nested"],"cwd":"fixtures","absolute":true}} (sync)
+    ✔ {"pattern":"file.md","options":{"ignore":["**/fixtures/**"],"cwd":"fixtures","absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/**"],"cwd":"fixtures","absolute":true}} (sync) (1ms)
+
+  Options MatchBase
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (sync) (1ms)
+    ✔ {"pattern":"first/*/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (sync) (1ms)
+    ✔ {"pattern":"first/**/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (sync) (1ms)
+
+  Options CaseSensitiveMatch
+    ✔ {"pattern":"fixtures/File.md","options":{}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/File.md","options":{"caseSensitiveMatch":false}} (sync) (1ms)
+
+  Options cwd (URL)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"<root>/fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","onlyFiles":false}} (sync) (2ms)
+
+  Options cwd (URL & absolute)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","absolute":true}} (sync) (1ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures","absolute":true}} (sync) (1ms)
+
+  Options Deep
+    ✔ {"pattern":"fixtures/**","options":{"deep":0}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"deep":2}} (sync) (2ms)
+
+  Options Deep (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":0}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":2}} (sync) (1ms)
+
+  Options Dot
+    ✔ {"pattern":"fixtures/*","options":{"dot":true}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"dot":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"dot":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/{.,}*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/{.*,*}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/{.,}*","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/{.**,**}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/{**/.*,**}","options":{}} (sync) (1ms)
+
+  Options Ignore
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*.md"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["!**/*.md"]}} (sync) (2ms)
+
+  Options MarkDirectories
+    ✔ {"pattern":"fixtures/**/*","options":{"markDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first/","options":{"onlyFiles":false,"markDirectories":true}} (sync)
+    ✔ {"pattern":"fixtures/first/","options":{"absolute":true,"onlyFiles":false,"markDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/fi*/","options":{"onlyFiles":false,"markDirectories":true}} (sync)
+
+  Options OnlyDirectories
+    ✔ {"pattern":"fixtures/*","options":{"onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/","options":{"onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/","options":{"onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*/","options":{"onlyDirectories":true}} (sync) (2ms)
+
+  Options OnlyDirectories (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"*/","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"**/","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+    ✔ {"pattern":"**/*/","options":{"cwd":"fixtures","onlyDirectories":true}} (sync) (1ms)
+
+  Options OnlyFiles
+    ✔ {"pattern":"fixtures/*","options":{"onlyFiles":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyFiles":true}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyFiles":true}} (sync) (2ms)
+
+  Options Files (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyFiles":true}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyFiles":true}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyFiles":true}} (sync) (2ms)
+
+  Options Unique
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":false}} (sync) (2ms)
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":true}} (sync) (1ms)
+
+  Patterns with repeated leading dot segments (././)
+    ✔ {"pattern":"././fixtures/file.md","options":{}} (sync)
+    ✔ {"pattern":"././fixtures/*.md","options":{}} (sync)
+    ✔ {"pattern":"././fixtures/first/*/*.md","options":{}} (sync)
+    ✔ {"pattern":"././fixtures/first/**/*.json","options":{}} (sync) (1ms)
+    ✔ {"pattern":"././file.md","options":{"cwd":"fixtures"}} (sync)
+    ✔ {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (sync)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (sync)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (sync)
+
+  Patterns with repeated leading dot segments (./././)
+    ✔ {"pattern":"./././fixtures/file.md","options":{}} (sync)
+    ✔ {"pattern":"./././fixtures/*.md","options":{}} (sync)
+    ✔ {"pattern":"./././fixtures/first/*/*.md","options":{}} (sync)
+    ✔ {"pattern":"./././fixtures/first/**/*.json","options":{}} (sync)
+    ✔ {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (sync)
+    ✔ {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (sync)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (sync) (1ms)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (sync)
+
+  Patterns Regular
+    ✔ {"pattern":"fixtures/*","options":{}} (sync) (9ms)
+    ✔ {"pattern":"fixtures/**","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{}} (sync) (6ms)
+    ✔ {"pattern":"fixtures/{first,second}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/{first,second}/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/**","options":{}} (sync) (4ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}/*","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*/{nested,file.md}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/{nested,file.md}","options":{}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**/{nested,file.md}","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/{nested,file.md}","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/*/nested/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/nested/**","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/{nested,file.md}/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/{nested,file.md}/*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"./fixtures/*","options":{}} (sync) (2ms)
+
+  Patterns Regular (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*/nested/*","options":{"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"{first,second}","options":{"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"{first,second}/*","options":{"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"{first,second}/**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"{first,second}/**/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/{first,second}/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/{first,second}/*/{nested,file.md}","options":{"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/{first,second}/**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/{first,second}/**/{nested,file.md}","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"{first,second}/*/nested/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"{first,second}/**/nested/**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/{nested,file.md}/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/{nested,file.md}/*","options":{"cwd":"fixtures"}} (sync) (2ms)
+
+  Patterns Regular (ignore)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["nested"]}} (sync) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["nested"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**"]}} (sync) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**/*"]}} (sync) (1ms)
+
+  Patterns Regular (ignore & cwd)
+    ✔ {"pattern":"*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (6ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (3ms)
+
+  Patterns Regular (relative)
+    ✔ {"pattern":"./*","options":{}} (sync) (3ms)
+    ✔ {"pattern":"./*","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"./**","options":{"cwd":"fixtures"}} (sync) (2ms)
+    ✔ {"pattern":"./**/*","options":{"cwd":"fixtures"}} (sync) (3ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first"}} (sync) (2ms)
+    ✔ {"pattern":"../**","options":{"cwd":"fixtures/first"}} (sync) (3ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested"}} (sync) (3ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first"}} (sync) (3ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first"}} (sync) (3ms)
+
+  Patterns Regular (relative & ignore)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (sync) (3ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["./../*"]}} (sync) (2ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (sync) (2ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["../../*"]}} (sync) (2ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["../first/**"]}} (sync) (2ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["**/first/**"]}} (sync) (1ms)
+
+  Patterns Regular (negative group)
+    ✔ {"pattern":"**/!(*.md)","options":{"cwd":"fixtures/first"}} (sync) (2ms)
+
+  Patterns Regular (segmented lists)
+    ✔ {"pattern":"{book.xml,**/library/*/book.md}","options":{"cwd":"fixtures/third"}} (sync) (2ms)
+    ✔ {"pattern":"{book.xml,library/**/a/book.md}","options":{"cwd":"fixtures/third"}} (sync) (1ms)
+
+  Patterns Root
+    ✔ {"pattern":"/*","options":{"followSymbolicLinks":false}} (sync)
+    ✔ {"pattern":"/usr/*","options":{}} (sync)
+    - {"pattern":"/*","options":{}} (sync)
+    - {"pattern":"//?//*","options":{}} (sync)
+
+  Patterns Root (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"/","followSymbolicLinks":false}} (sync)
+    - {"pattern":"*","options":{"cwd":"//?//"}} (sync)
+
+  Patterns Root (mix of absolute and relative patterns)
+    ✔ {"pattern":["/ram/candidate/fixtures/first/*.md","*.md"],"options":{"cwd":"fixtures"}} (sync)
+
+  Patterns Static
+    ✔ {"pattern":"fixtures","options":{}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{}} (sync)
+
+  Patterns Static (cwd)
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures"}} (sync)
+    ✔ {"pattern":"first","options":{"cwd":"fixtures"}} (sync) (1ms)
+
+  Patterns Static (ignore)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/file.md"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*.md"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"]}} (sync) (3ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"]}} (sync) (2ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/first"]}} (sync)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/*"]}} (sync)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**"]}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**/*"]}} (sync) (1ms)
+
+  Patterns Static (ignore & cwd)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"],"cwd":"fixtures"}} (sync)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"],"cwd":"fixtures"}} (sync) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"],"cwd":"fixtures"}} (sync)
+
+  Patterns Static (relative)
+    ✔ {"pattern":"../file.md","options":{"cwd":"fixtures/first"}} (sync) (1ms)
+    ✔ {"pattern":"../../file.md","options":{"cwd":"fixtures/first/nested"}} (sync)
+
+
+  476 passing (1s)
+  3 pending
+
+
+> fast-glob@4.0.0 test:e2e:async
+> mocha "out/**/*.e2e.js" -s 0 --grep "\(async\)"
+
+
+
+  Errors
+    ✔ {"pattern":"non-exist-directory/**","options":{}} (async) (12ms)
+    ✔ {"pattern":"non-exist-file.txt","options":{}} (async) (3ms)
+
+  Errors (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"non-exist-directory"}} (async) (1ms)
+
+  Options Absolute
+    ✔ {"pattern":"fixtures/*","options":{"absolute":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"absolute":true}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"absolute":true}} (async) (2ms)
+    ✔ {"pattern":"fixtures/../*","options":{"absolute":true}} (async) (1ms)
+
+  Options Absolute (ignore)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["fixtures/*/nested"],"absolute":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["**/nested"],"absolute":true}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (async) (2ms)
+
+  Options Absolute (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","absolute":true}} (async) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","absolute":true}} (async) (1ms)
+
+  Options Absolute (cwd & ignore)
+    ✔ {"pattern":"*/*","options":{"ignore":["*/nested"],"cwd":"fixtures","absolute":true}} (async) (2ms)
+    ✔ {"pattern":"*/*","options":{"ignore":["**/nested"],"cwd":"fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"file.md","options":{"ignore":["**/fixtures/**"],"cwd":"fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/**"],"cwd":"fixtures","absolute":true}} (async) (1ms)
+
+  Options MatchBase
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (async) (1ms)
+    ✔ {"pattern":"first/*/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (async) (1ms)
+    ✔ {"pattern":"first/**/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (async) (1ms)
+
+  Options CaseSensitiveMatch
+    ✔ {"pattern":"fixtures/File.md","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/File.md","options":{"caseSensitiveMatch":false}} (async) (2ms)
+
+  Options cwd (URL)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures"}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"<root>/fixtures"}} (async) (1ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures"}} (async) (1ms)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","onlyFiles":false}} (async) (1ms)
+
+  Options cwd (URL & absolute)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","absolute":true}} (async) (1ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures","absolute":true}} (async) (1ms)
+
+  Options Deep
+    ✔ {"pattern":"fixtures/**","options":{"deep":0}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"deep":2}} (async) (1ms)
+
+  Options Deep (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":0}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":2}} (async) (1ms)
+
+  Options Dot
+    ✔ {"pattern":"fixtures/*","options":{"dot":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"dot":true}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"dot":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/{.,}*","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/{.*,*}","options":{}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**/{.,}*","options":{}} (async) (1ms)
+    ✔ {"pattern":"fixtures/{.**,**}","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/{**/.*,**}","options":{}} (async) (1ms)
+
+  Options Ignore
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*.md"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["!**/*.md"]}} (async) (3ms)
+
+  Options MarkDirectories
+    ✔ {"pattern":"fixtures/**/*","options":{"markDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first/","options":{"onlyFiles":false,"markDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first/","options":{"absolute":true,"onlyFiles":false,"markDirectories":true}} (async)
+    ✔ {"pattern":"fixtures/fi*/","options":{"onlyFiles":false,"markDirectories":true}} (async)
+
+  Options OnlyDirectories
+    ✔ {"pattern":"fixtures/*","options":{"onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyDirectories":true}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/*/","options":{"onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**/","options":{"onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**/*/","options":{"onlyDirectories":true}} (async) (2ms)
+
+  Options OnlyDirectories (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyDirectories":true}} (async)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyDirectories":true}} (async)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"*/","options":{"cwd":"fixtures","onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"**/","options":{"cwd":"fixtures","onlyDirectories":true}} (async) (1ms)
+    ✔ {"pattern":"**/*/","options":{"cwd":"fixtures","onlyDirectories":true}} (async) (2ms)
+
+  Options OnlyFiles
+    ✔ {"pattern":"fixtures/*","options":{"onlyFiles":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyFiles":true}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyFiles":true}} (async) (1ms)
+
+  Options Files (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyFiles":true}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyFiles":true}} (async) (1ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyFiles":true}} (async) (1ms)
+
+  Options Unique
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":false}} (async) (1ms)
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":true}} (async) (1ms)
+
+  Patterns with repeated leading dot segments (././)
+    ✔ {"pattern":"././fixtures/file.md","options":{}} (async)
+    ✔ {"pattern":"././fixtures/*.md","options":{}} (async)
+    ✔ {"pattern":"././fixtures/first/*/*.md","options":{}} (async)
+    ✔ {"pattern":"././fixtures/first/**/*.json","options":{}} (async)
+    ✔ {"pattern":"././file.md","options":{"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (async)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (async) (1ms)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (async)
+
+  Patterns with repeated leading dot segments (./././)
+    ✔ {"pattern":"./././fixtures/file.md","options":{}} (async)
+    ✔ {"pattern":"./././fixtures/*.md","options":{}} (async) (1ms)
+    ✔ {"pattern":"./././fixtures/first/*/*.md","options":{}} (async)
+    ✔ {"pattern":"./././fixtures/first/**/*.json","options":{}} (async)
+    ✔ {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (async)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (async) (1ms)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (async)
+
+  Patterns Regular
+    ✔ {"pattern":"fixtures/*","options":{}} (async) (6ms)
+    ✔ {"pattern":"fixtures/**","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/{first,second}/*","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/{first,second}/**","options":{}} (async) (5ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/*","options":{}} (async) (4ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}","options":{}} (async) (2ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}/*","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*/{nested,file.md}","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/{nested,file.md}","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**/{nested,file.md}","options":{}} (async) (2ms)
+    ✔ {"pattern":"fixtures/{first,second}/{nested,file.md}","options":{}} (async) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/*/nested/*","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/nested/**","options":{}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/{nested,file.md}/*","options":{}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/{nested,file.md}/*","options":{}} (async) (3ms)
+    ✔ {"pattern":"./fixtures/*","options":{}} (async) (1ms)
+
+  Patterns Regular (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/nested","options":{"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"{first,second}","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"{first,second}/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"{first,second}/**","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"{first,second}/**/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/{first,second}/*","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/{first,second}/*/{nested,file.md}","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/{first,second}/**","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/{first,second}/**/{nested,file.md}","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"{first,second}/*/nested/*","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"{first,second}/**/nested/**","options":{"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/{nested,file.md}/*","options":{"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/{nested,file.md}/*","options":{"cwd":"fixtures"}} (async) (2ms)
+
+  Patterns Regular (ignore)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["nested"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["nested"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**"]}} (async) (7ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*"]}} (async) (7ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/*"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/*"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**/*"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*"]}} (async) (6ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/*"]}} (async) (7ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/*"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["*"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**"]}} (async) (4ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**/*"]}} (async) (3ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/*"]}} (async) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**"]}} (async) (5ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**/*"]}} (async) (2ms)
+
+  Patterns Regular (ignore & cwd)
+    ✔ {"pattern":"*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (6ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (7ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (6ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (6ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (8ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (6ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (12ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (async) (5ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (async) (4ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (2ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (4ms)
+
+  Patterns Regular (relative)
+    ✔ {"pattern":"./*","options":{}} (async) (2ms)
+    ✔ {"pattern":"./*","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"./**","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"./**/*","options":{"cwd":"fixtures"}} (async) (3ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first"}} (async) (3ms)
+    ✔ {"pattern":"../**","options":{"cwd":"fixtures/first"}} (async) (3ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested"}} (async) (2ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first"}} (async) (3ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first"}} (async) (3ms)
+
+  Patterns Regular (relative & ignore)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (async) (4ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["./../*"]}} (async) (3ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (async) (2ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (async) (2ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (async) (3ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["../../*"]}} (async) (4ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["**"]}} (async) (3ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["../first/**"]}} (async) (3ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["**/first/**"]}} (async) (2ms)
+
+  Patterns Regular (negative group)
+    ✔ {"pattern":"**/!(*.md)","options":{"cwd":"fixtures/first"}} (async) (3ms)
+
+  Patterns Regular (segmented lists)
+    ✔ {"pattern":"{book.xml,**/library/*/book.md}","options":{"cwd":"fixtures/third"}} (async) (3ms)
+    ✔ {"pattern":"{book.xml,library/**/a/book.md}","options":{"cwd":"fixtures/third"}} (async) (3ms)
+
+  Patterns Root
+    ✔ {"pattern":"/*","options":{"followSymbolicLinks":false}} (async) (1ms)
+    ✔ {"pattern":"/usr/*","options":{}} (async) (1ms)
+    - {"pattern":"/*","options":{}} (async)
+    - {"pattern":"//?//*","options":{}} (async)
+
+  Patterns Root (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"/","followSymbolicLinks":false}} (async)
+    - {"pattern":"*","options":{"cwd":"//?//"}} (async)
+
+  Patterns Root (mix of absolute and relative patterns)
+    ✔ {"pattern":["/ram/candidate/fixtures/first/*.md","*.md"],"options":{"cwd":"fixtures"}} (async)
+
+  Patterns Static
+    ✔ {"pattern":"fixtures","options":{}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{}} (async)
+
+  Patterns Static (cwd)
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures"}} (async)
+    ✔ {"pattern":"first","options":{"cwd":"fixtures"}} (async) (1ms)
+
+  Patterns Static (ignore)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/file.md"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*.md"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"]}} (async)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"]}} (async)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/first"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/*"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**"]}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**/*"]}} (async) (1ms)
+
+  Patterns Static (ignore & cwd)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"],"cwd":"fixtures"}} (async) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"],"cwd":"fixtures"}} (async) (1ms)
+
+  Patterns Static (relative)
+    ✔ {"pattern":"../file.md","options":{"cwd":"fixtures/first"}} (async) (1ms)
+    ✔ {"pattern":"../../file.md","options":{"cwd":"fixtures/first/nested"}} (async) (1ms)
+
+
+  476 passing (2s)
+  3 pending
+
+
+> fast-glob@4.0.0 test:e2e:stream
+> mocha "out/**/*.e2e.js" -s 0 --grep "\(stream\)"
+
+
+
+  Errors
+    ✔ {"pattern":"non-exist-directory/**","options":{}} (stream) (13ms)
+    ✔ {"pattern":"non-exist-file.txt","options":{}} (stream) (2ms)
+
+  Errors (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"non-exist-directory"}} (stream) (1ms)
+
+  Options Absolute
+    ✔ {"pattern":"fixtures/*","options":{"absolute":true}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"absolute":true}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"absolute":true}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/../*","options":{"absolute":true}} (stream) (1ms)
+
+  Options Absolute (ignore)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["fixtures/*/nested"],"absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/*/*","options":{"ignore":["**/nested"],"absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["<root>/fixtures/*"],"absolute":true}} (stream) (6ms)
+
+  Options Absolute (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","absolute":true}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","absolute":true}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","absolute":true}} (stream) (1ms)
+
+  Options Absolute (cwd & ignore)
+    ✔ {"pattern":"*/*","options":{"ignore":["*/nested"],"cwd":"fixtures","absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"*/*","options":{"ignore":["**/nested"],"cwd":"fixtures","absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"file.md","options":{"ignore":["**/fixtures/**"],"cwd":"fixtures","absolute":true}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/*"],"cwd":"fixtures","absolute":true}} (stream) (3ms)
+    ✔ {"pattern":"**","options":{"ignore":["<root>/fixtures/**"],"cwd":"fixtures","absolute":true}} (stream) (1ms)
+
+  Options MatchBase
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (stream) (2ms)
+    ✔ {"pattern":"first/*/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (stream) (1ms)
+    ✔ {"pattern":"first/**/file.md","options":{"cwd":"fixtures","baseNameMatch":true}} (stream) (1ms)
+
+  Options CaseSensitiveMatch
+    ✔ {"pattern":"fixtures/File.md","options":{}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/File.md","options":{"caseSensitiveMatch":false}} (stream) (1ms)
+
+  Options cwd (URL)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"<root>/fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","onlyFiles":false}} (stream) (2ms)
+
+  Options cwd (URL & absolute)
+    ✔ {"pattern":"*","options":{"cwd":"<root>/fixtures","absolute":true}} (stream) (1ms)
+    ✔ {"pattern":"**/*.md","options":{"cwd":"<root>/fixtures","absolute":true}} (stream) (2ms)
+
+  Options Deep
+    ✔ {"pattern":"fixtures/**","options":{"deep":0}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"deep":2}} (stream) (1ms)
+
+  Options Deep (cwd)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":0}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","deep":2}} (stream) (2ms)
+
+  Options Dot
+    ✔ {"pattern":"fixtures/*","options":{"dot":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"dot":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"dot":true}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/{.,}*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{.*,*}","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/{.,}*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/{.**,**}","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{**/.*,**}","options":{}} (stream) (2ms)
+
+  Options Ignore
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*.md"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["!**/*.md"]}} (stream) (2ms)
+
+  Options MarkDirectories
+    ✔ {"pattern":"fixtures/**/*","options":{"markDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first/","options":{"onlyFiles":false,"markDirectories":true}} (stream)
+    ✔ {"pattern":"fixtures/first/","options":{"absolute":true,"onlyFiles":false,"markDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/fi*/","options":{"onlyFiles":false,"markDirectories":true}} (stream)
+
+  Options OnlyDirectories
+    ✔ {"pattern":"fixtures/*","options":{"onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/*/","options":{"onlyDirectories":true}} (stream)
+    ✔ {"pattern":"fixtures/**/","options":{"onlyDirectories":true}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*/","options":{"onlyDirectories":true}} (stream) (2ms)
+
+  Options OnlyDirectories (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (2ms)
+    ✔ {"pattern":"*/","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"**/","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (1ms)
+    ✔ {"pattern":"**/*/","options":{"cwd":"fixtures","onlyDirectories":true}} (stream) (2ms)
+
+  Options OnlyFiles
+    ✔ {"pattern":"fixtures/*","options":{"onlyFiles":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**","options":{"onlyFiles":true}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"onlyFiles":true}} (stream) (2ms)
+
+  Options Files (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures","onlyFiles":true}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures","onlyFiles":true}} (stream) (1ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures","onlyFiles":true}} (stream) (1ms)
+
+  Options Unique
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":false}} (stream) (1ms)
+    ✔ {"pattern":["./file.md","file.md","*"],"options":{"cwd":"fixtures","unique":true}} (stream) (1ms)
+
+  Patterns with repeated leading dot segments (././)
+    ✔ {"pattern":"././fixtures/file.md","options":{}} (stream)
+    ✔ {"pattern":"././fixtures/*.md","options":{}} (stream) (1ms)
+    ✔ {"pattern":"././fixtures/first/*/*.md","options":{}} (stream)
+    ✔ {"pattern":"././fixtures/first/**/*.json","options":{}} (stream)
+    ✔ {"pattern":"././file.md","options":{"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (stream)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (stream)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (stream) (1ms)
+
+  Patterns with repeated leading dot segments (./././)
+    ✔ {"pattern":"./././fixtures/file.md","options":{}} (stream)
+    ✔ {"pattern":"./././fixtures/*.md","options":{}} (stream) (1ms)
+    ✔ {"pattern":"./././fixtures/first/*/*.md","options":{}} (stream)
+    ✔ {"pattern":"./././fixtures/first/**/*.json","options":{}} (stream)
+    ✔ {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (stream)
+    ✔ {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (stream)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (stream)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (stream) (1ms)
+
+  Patterns Regular
+    ✔ {"pattern":"fixtures/*","options":{}} (stream) (8ms)
+    ✔ {"pattern":"fixtures/**","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/**","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}","options":{}} (stream) (4ms)
+    ✔ {"pattern":"@(fixtures)/{first,second}/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/{first,second}/*/{nested,file.md}","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/{nested,file.md}","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/{first,second}/**/{nested,file.md}","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/{first,second}/{nested,file.md}","options":{}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/{first,second}/*/nested/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/{first,second}/**/nested/**","options":{}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/{nested,file.md}/*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/{nested,file.md}/*","options":{}} (stream) (3ms)
+    ✔ {"pattern":"./fixtures/*","options":{}} (stream) (2ms)
+
+  Patterns Regular (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/nested/**","options":{"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"cwd":"fixtures"}} (stream) (5ms)
+    ✔ {"pattern":"{first,second}","options":{"cwd":"fixtures"}} (stream) (5ms)
+    ✔ {"pattern":"{first,second}/*","options":{"cwd":"fixtures"}} (stream) (5ms)
+    ✔ {"pattern":"{first,second}/**","options":{"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"{first,second}/**/*","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/{first,second}/*","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/{first,second}/*/{nested,file.md}","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/{first,second}/**","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/{first,second}/**/{nested,file.md}","options":{"cwd":"fixtures"}} (stream) (6ms)
+    ✔ {"pattern":"{first,second}/{nested,file.md}","options":{"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"{first,second}/*/nested/*","options":{"cwd":"fixtures"}} (stream) (5ms)
+    ✔ {"pattern":"{first,second}/**/nested/**","options":{"cwd":"fixtures"}} (stream) (6ms)
+    ✔ {"pattern":"*/{nested,file.md}/*","options":{"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"**/{nested,file.md}/*","options":{"cwd":"fixtures"}} (stream) (4ms)
+
+  Patterns Regular (ignore)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["fixtures/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["fixtures/**/*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["fixtures/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["nested"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["nested"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["nested"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["*/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*","options":{"ignore":["**/nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["*/nested/**/*"]}} (stream) (6ms)
+    ✔ {"pattern":"fixtures/**","options":{"ignore":["**/nested/**/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["*/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/*","options":{"ignore":["**/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["*/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested","options":{"ignore":["**/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/*"]}} (stream) (7ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["*/nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/*","options":{"ignore":["**/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["*/nested/**/*"]}} (stream) (6ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**","options":{"ignore":["**/nested/**/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/*"]}} (stream) (7ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["nested/**/*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/*/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/*"]}} (stream) (5ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["*/nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/*","options":{"ignore":["**/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["nested/**/*"]}} (stream) (4ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["*/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**","options":{"ignore":["**/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["*/nested/**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/**/nested/**/*","options":{"ignore":["**/nested/**/*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["*"]}} (stream) (3ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["**/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/*"]}} (stream) (2ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/!(ignore)*","options":{"ignore":["fixtures/**/*"]}} (stream) (2ms)
+
+  Patterns Regular (ignore & cwd)
+    ✔ {"pattern":"*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["fixtures/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (5ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (4ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"*/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["*/nested/**/*"],"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"**/nested/**/*","options":{"ignore":["**/nested/**/*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (3ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"!(ignore)*","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream) (2ms)
+
+  Patterns Regular (relative)
+    ✔ {"pattern":"./*","options":{}} (stream) (2ms)
+    ✔ {"pattern":"./*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"./**","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"./**/*","options":{"cwd":"fixtures"}} (stream) (2ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first"}} (stream) (2ms)
+    ✔ {"pattern":"../**","options":{"cwd":"fixtures/first"}} (stream) (2ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested"}} (stream) (1ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first"}} (stream) (2ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first"}} (stream) (1ms)
+
+  Patterns Regular (relative & ignore)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (stream) (2ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["./../*"]}} (stream) (1ms)
+    ✔ {"pattern":"./../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (stream) (1ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["../*"]}} (stream) (1ms)
+    ✔ {"pattern":"../*","options":{"cwd":"fixtures/first","ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["../../*"]}} (stream) (1ms)
+    ✔ {"pattern":"../../*","options":{"cwd":"fixtures/first/nested","ignore":["**"]}} (stream) (2ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["../first/**"]}} (stream) (1ms)
+    ✔ {"pattern":"../{first,second}","options":{"cwd":"fixtures/first","ignore":["**/first/**"]}} (stream) (1ms)
+
+  Patterns Regular (negative group)
+    ✔ {"pattern":"**/!(*.md)","options":{"cwd":"fixtures/first"}} (stream) (1ms)
+
+  Patterns Regular (segmented lists)
+    ✔ {"pattern":"{book.xml,**/library/*/book.md}","options":{"cwd":"fixtures/third"}} (stream) (2ms)
+    ✔ {"pattern":"{book.xml,library/**/a/book.md}","options":{"cwd":"fixtures/third"}} (stream) (2ms)
+
+  Patterns Root
+    ✔ {"pattern":"/*","options":{"followSymbolicLinks":false}} (stream)
+    ✔ {"pattern":"/usr/*","options":{}} (stream) (1ms)
+    - {"pattern":"/*","options":{}} (stream)
+    - {"pattern":"//?//*","options":{}} (stream)
+
+  Patterns Root (cwd)
+    ✔ {"pattern":"*","options":{"cwd":"/","followSymbolicLinks":false}} (stream)
+    - {"pattern":"*","options":{"cwd":"//?//"}} (stream)
+
+  Patterns Root (mix of absolute and relative patterns)
+    ✔ {"pattern":["/ram/candidate/fixtures/first/*.md","*.md"],"options":{"cwd":"fixtures"}} (stream) (1ms)
+
+  Patterns Static
+    ✔ {"pattern":"fixtures","options":{}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{}} (stream)
+
+  Patterns Static (cwd)
+    ✔ {"pattern":"file.md","options":{"cwd":"fixtures"}} (stream)
+    ✔ {"pattern":"first","options":{"cwd":"fixtures"}} (stream) (1ms)
+
+  Patterns Static (ignore)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"]}} (stream)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"]}} (stream)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/file.md"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*.md"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["fixtures/**/*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"]}} (stream)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/first"]}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/*"]}} (stream)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**"]}} (stream)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["fixtures/**/*"]}} (stream) (1ms)
+
+  Patterns Static (ignore & cwd)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["file.md"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*.md"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/file.md","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["first"],"cwd":"fixtures"}} (stream)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["*"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**"],"cwd":"fixtures"}} (stream) (1ms)
+    ✔ {"pattern":"fixtures/first","options":{"ignore":["**/*"],"cwd":"fixtures"}} (stream)
+
+  Patterns Static (relative)
+    ✔ {"pattern":"../file.md","options":{"cwd":"fixtures/first"}} (stream)
+    ✔ {"pattern":"../../file.md","options":{"cwd":"fixtures/first/nested"}} (stream) (1ms)
+
+
+  476 passing (1s)
+  3 pending
+

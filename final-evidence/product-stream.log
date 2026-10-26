@@ -1,0 +1,52 @@
+Using /ram/candidate/herebyfile.mjs to run bench:product:stream
+Starting bench:product:stream:flatten
+Label                  import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+---------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream fast-glob *     25.956ms ±33.136%   2.431ms ±40.284%  7.538 MiB ±0.420%  6 ±0.000%        71.257ms ±30.988%  
+stream node-fs-glob *  0.329ms ±108.462%   0.943ms ±39.696%  5.583 MiB ±5.197%  6 ±0.000%        39.762ms ±21.233%  
+stream node-glob *     7.332ms ±31.268%    2.718ms ±35.929%  5.905 MiB ±1.295%  6 ±0.000%        47.321ms ±24.713%  
+
+Finished bench:product:stream:flatten in 1m 3.9s
+Starting bench:product:stream:extension_flatten
+Label                       import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+--------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream fast-glob *.json     22.158ms ±20.625%   2.131ms ±34.278%  7.531 MiB ±0.473%  2 ±0.000%        60.600ms ±17.343%  
+stream node-fs-glob *.json  0.266ms ±23.896%    0.774ms ±25.406%  5.881 MiB ±4.954%  2 ±0.000%        35.073ms ±16.254%  
+stream node-glob *.json     8.240ms ±36.430%    2.943ms ±34.936%  5.871 MiB ±0.741%  2 ±0.000%        54.508ms ±29.827%  
+
+Finished bench:product:stream:extension_flatten in 1m 0.7s
+Starting bench:product:stream:deep
+Label                   import.time (time)  time (time)         memory (memory)     entries (value)  process.time (time)
+----------------------  ------------------  ------------------  ------------------  ---------------  -------------------
+stream fast-glob **     23.162ms ±33.420%   56.999ms ±34.848%   9.310 MiB ±3.066%   13664 ±0.000%    119.370ms ±32.248% 
+stream node-fs-glob **  0.292ms ±31.529%    183.213ms ±26.167%  13.062 MiB ±3.340%  13664 ±0.000%    221.426ms ±24.584% 
+stream node-glob **     7.151ms ±30.278%    115.340ms ±26.982%  25.151 MiB ±0.684%  13664 ±0.000%    163.942ms ±24.539% 
+
+Finished bench:product:stream:deep in 3m 18.6s
+Starting bench:product:stream:extension_deep
+Label                        import.time (time)  time (time)         memory (memory)     entries (value)  process.time (time)
+---------------------------  ------------------  ------------------  ------------------  ---------------  -------------------
+stream fast-glob **/*.js     22.934ms ±26.096%   52.092ms ±24.516%   10.414 MiB ±0.703%  7412 ±0.000%     113.901ms ±22.074% 
+stream node-fs-glob **/*.js  0.361ms ±47.946%    207.673ms ±32.986%  10.996 MiB ±5.455%  7412 ±0.000%     253.302ms ±31.103% 
+stream node-glob **/*.js     6.415ms ±37.472%    88.809ms ±26.910%   28.097 MiB ±1.169%  7412 ±0.000%     132.889ms ±25.086% 
+
+Finished bench:product:stream:extension_deep in 3m 20.9s
+Starting bench:product:stream:partial_flatten
+Label                                                import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+---------------------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream fast-glob {fixtures,out}/{first,second}/*     23.437ms ±25.552%   2.385ms ±37.086%  7.846 MiB ±0.190%  2 ±0.000%        66.693ms ±23.587%  
+stream node-fs-glob {fixtures,out}/{first,second}/*  0.298ms ±35.747%    1.935ms ±57.544%  5.600 MiB ±0.432%  2 ±0.000%        39.366ms ±21.618%  
+stream node-glob {fixtures,out}/{first,second}/*     7.135ms ±28.785%    2.948ms ±33.396%  6.031 MiB ±2.300%  2 ±0.000%        47.517ms ±19.230%  
+
+Finished bench:product:stream:partial_flatten in 1m 0.1s
+Starting bench:product:stream:partial_deep
+Label                                  import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream fast-glob {fixtures,out}/**     23.687ms ±24.412%   5.004ms ±28.341%  6.996 MiB ±0.212%  184 ±0.000%      69.033ms ±20.614%  
+stream node-fs-glob {fixtures,out}/**  0.280ms ±32.960%    6.012ms ±27.165%  5.666 MiB ±0.759%  184 ±0.000%      42.312ms ±16.708%  
+stream node-glob {fixtures,out}/**     6.099ms ±28.413%    4.669ms ±21.344%  6.860 MiB ±0.413%  184 ±0.000%      41.738ms ±13.709%  
+
+Finished bench:product:stream:partial_deep in 1m 2.1s
+Starting bench:product:stream
+Finished bench:product:stream in 1ms
+Completed bench:product:stream in 10m 46.6s

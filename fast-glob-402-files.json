@@ -1,0 +1,62 @@
+[
+  {
+    "sha": "8b3c45b0f055903045863b87fc444eb9b7e3524c",
+    "filename": "__snapshots__/unique.e2e.js",
+    "status": "added",
+    "additions": 29,
+    "deletions": 0,
+    "changes": 29,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/__snapshots__%2Funique.e2e.js",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/__snapshots__%2Funique.e2e.js",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/__snapshots__%2Funique.e2e.js?ref=18aefc1cf8ce3ef687f0827b96a1cb359fd342d4",
+    "patch": "@@ -0,0 +1,29 @@\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":false}} (sync) 1'] = [\n+  \"./file.md\",\n+  \"file.md\",\n+  \"file.md\"\n+]\n+\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":false}} (async) 1'] = [\n+  \"./file.md\",\n+  \"file.md\",\n+  \"file.md\"\n+]\n+\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":false}} (stream) 1'] = [\n+  \"./file.md\",\n+  \"file.md\",\n+  \"file.md\"\n+]\n+\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":true}} (sync) 1'] = [\n+  \"./file.md\"\n+]\n+\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":true}} (async) 1'] = [\n+  \"./file.md\"\n+]\n+\n+exports['Options Unique {\"pattern\":[\"./file.md\",\"file.md\",\"*\"],\"options\":{\"cwd\":\"fixtures\",\"unique\":true}} (stream) 1'] = [\n+  \"./file.md\"\n+]"
+  },
+  {
+    "sha": "cc32c76e851ea65ecfa3f3ec8f17e50d804b1bae",
+    "filename": "src/providers/filters/entry.spec.ts",
+    "status": "modified",
+    "additions": 12,
+    "deletions": 0,
+    "changes": 12,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Fproviders%2Ffilters%2Fentry.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Fproviders%2Ffilters%2Fentry.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.spec.ts?ref=18aefc1cf8ce3ef687f0827b96a1cb359fd342d4",
+    "patch": "@@ -86,6 +86,18 @@ describe('Providers \u2192 Filters \u2192 Entry', () => {\n \t\t\t\tassert.ok(!actual);\n \t\t\t});\n \n+\t\t\tit('should reject a duplicate entry when the two entries differ only by the leading dot segment', () => {\n+\t\t\t\tconst first = tests.entry.builder().path('file.txt').file().build();\n+\t\t\t\tconst second = tests.entry.builder().path('./file.txt').file().build();\n+\n+\t\t\t\tconst filter = getFilter({\n+\t\t\t\t\tpositive: ['*', './file.txt']\n+\t\t\t\t});\n+\n+\t\t\t\tassert.ok(filter(first));\n+\t\t\t\tassert.ok(!filter(second));\n+\t\t\t});\n+\n \t\t\tit('should accept a duplicate entry when an option is disabled', () => {\n \t\t\t\tconst filter = getFilter({\n \t\t\t\t\tpositive: ['**/*'],"
+  },
+  {
+    "sha": "5912b40fcdf03410cb0c11f60cf63d2d6c0c271f",
+    "filename": "src/providers/filters/entry.ts",
+    "status": "modified",
+    "additions": 11,
+    "deletions": 11,
+    "changes": 22,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.ts?ref=18aefc1cf8ce3ef687f0827b96a1cb359fd342d4",
+    "patch": "@@ -18,35 +18,37 @@ export default class EntryFilter {\n \t}\n \n \tprivate _filter(entry: Entry, positiveRe: PatternRe[], negativeRe: PatternRe[]): boolean {\n-\t\tif (this._settings.unique && this._isDuplicateEntry(entry)) {\n+\t\tconst filepath = utils.path.removeLeadingDotSegment(entry.path);\n+\n+\t\tif (this._settings.unique && this._isDuplicateEntry(filepath)) {\n \t\t\treturn false;\n \t\t}\n \n \t\tif (this._onlyFileFilter(entry) || this._onlyDirectoryFilter(entry)) {\n \t\t\treturn false;\n \t\t}\n \n-\t\tif (this._isSkippedByAbsoluteNegativePatterns(entry.path, negativeRe)) {\n+\t\tif (this._isSkippedByAbsoluteNegativePatterns(filepath, negativeRe)) {\n \t\t\treturn false;\n \t\t}\n \n \t\tconst isDirectory = entry.dirent.isDirectory();\n \n-\t\tconst isMatched = this._isMatchToPatterns(entry.path, positiveRe, isDirectory) && !this._isMatchToPatterns(entry.path, negativeRe, isDirectory);\n+\t\tconst isMatched = this._isMatchToPatterns(filepath, positiveRe, isDirectory) && !this._isMatchToPatterns(filepath, negativeRe, isDirectory);\n \n \t\tif (this._settings.unique && isMatched) {\n-\t\t\tthis._createIndexRecord(entry);\n+\t\t\tthis._createIndexRecord(filepath);\n \t\t}\n \n \t\treturn isMatched;\n \t}\n \n-\tprivate _isDuplicateEntry(entry: Entry): boolean {\n-\t\treturn this.index.has(entry.path);\n+\tprivate _isDuplicateEntry(filepath: string): boolean {\n+\t\treturn this.index.has(filepath);\n \t}\n \n-\tprivate _createIndexRecord(entry: Entry): void {\n-\t\tthis.index.set(entry.path, undefined);\n+\tprivate _createIndexRecord(filepath: string): void {\n+\t\tthis.index.set(filepath, undefined);\n \t}\n \n \tprivate _onlyFileFilter(entry: Entry): boolean {\n@@ -67,9 +69,7 @@ export default class EntryFilter {\n \t\treturn utils.pattern.matchAny(fullpath, patternsRe);\n \t}\n \n-\tprivate _isMatchToPatterns(entryPath: string, patternsRe: PatternRe[], isDirectory: boolean): boolean {\n-\t\tconst filepath = utils.path.removeLeadingDotSegment(entryPath);\n-\n+\tprivate _isMatchToPatterns(filepath: string, patternsRe: PatternRe[], isDirectory: boolean): boolean {\n \t\t// Trying to match files and directories by patterns.\n \t\tconst isMatched = utils.pattern.matchAny(filepath, patternsRe);\n "
+  },
+  {
+    "sha": "4ef974c47904c0058a5e8bf46981358f15d1dcd2",
+    "filename": "src/tests/e2e/options/unique.e2e.ts",
+    "status": "added",
+    "additions": 20,
+    "deletions": 0,
+    "changes": 20,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Ftests%2Fe2e%2Foptions%2Funique.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Ftests%2Fe2e%2Foptions%2Funique.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Foptions%2Funique.e2e.ts?ref=18aefc1cf8ce3ef687f0827b96a1cb359fd342d4",
+    "patch": "@@ -0,0 +1,20 @@\n+import * as runner from '../runner';\n+\n+runner.suite('Options Unique', {\n+\ttests: [\n+\t\t{\n+\t\t\tpattern: ['./file.md', 'file.md', '*'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tunique: false\n+\t\t\t}\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['./file.md', 'file.md', '*'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tunique: true\n+\t\t\t}\n+\t\t}\n+\t]\n+});"
+  },
+  {
+    "sha": "fc0a15a21b6da2dd29657abaae77517a67f84695",
+    "filename": "src/tests/e2e/runner.ts",
+    "status": "modified",
+    "additions": 15,
+    "deletions": 10,
+    "changes": 25,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Ftests%2Fe2e%2Frunner.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/18aefc1cf8ce3ef687f0827b96a1cb359fd342d4/src%2Ftests%2Fe2e%2Frunner.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Frunner.ts?ref=18aefc1cf8ce3ef687f0827b96a1cb359fd342d4",
+    "patch": "@@ -22,7 +22,7 @@ type Suite = {\n };\n \n type Test = {\n-\tpattern: Pattern;\n+\tpattern: Pattern | Pattern[];\n \toptions?: fg.Options;\n \t/**\n \t * Allow to run only one test case with debug information.\n@@ -48,10 +48,11 @@ export function suite(name: string, suite: Suite): void {\n \t\t\tconst title = getTestTitle(test);\n \t\t\tconst definition = getTestMochaDefinition(suite, test);\n \t\t\tconst transformers = getResultTransformers(suite, test);\n+\t\t\tconst patterns = getTestPatterns(test);\n \t\t\tconst options = getFastGlobOptions(suite, test);\n \n \t\t\tdefinition(`${title} (sync)`, () => {\n-\t\t\t\tlet actual = getFastGlobEntriesSync(test.pattern, options);\n+\t\t\t\tlet actual = getFastGlobEntriesSync(patterns, options);\n \n \t\t\t\tactual = transform(actual, transformers);\n \n@@ -60,7 +61,7 @@ export function suite(name: string, suite: Suite): void {\n \t\t\t});\n \n \t\t\tdefinition(`${title} (async)`, async () => {\n-\t\t\t\tlet actual = await getFastGlobEntriesAsync(test.pattern, options);\n+\t\t\t\tlet actual = await getFastGlobEntriesAsync(patterns, options);\n \n \t\t\t\tactual = transform(actual, transformers);\n \n@@ -69,7 +70,7 @@ export function suite(name: string, suite: Suite): void {\n \t\t\t});\n \n \t\t\tdefinition(`${title} (stream)`, async () => {\n-\t\t\t\tlet actual = await getFastGlobEntriesStream(test.pattern, options);\n+\t\t\t\tlet actual = await getFastGlobEntriesStream(patterns, options);\n \n \t\t\t\tactual = transform(actual, transformers);\n \n@@ -84,6 +85,10 @@ function getSuiteTests(tests: Test[] | Test[][]): Test[] {\n \treturn ([] as Test[]).concat(...tests);\n }\n \n+function getTestPatterns(test: Test): Pattern[] {\n+\treturn ([] as Pattern[]).concat(test.pattern);\n+}\n+\n function getTestTitle(test: Test): string {\n \t// Replacing placeholders to hide absolute paths from snapshots.\n \tconst replacements = {\n@@ -143,18 +148,18 @@ function getResultTransformers(suite: Suite, test: Test): TransformFunction[] {\n \treturn transformers;\n }\n \n-function getFastGlobEntriesSync(pattern: Pattern, options?: fg.Options): string[] {\n-\treturn fg.sync(pattern, options);\n+function getFastGlobEntriesSync(patterns: Pattern[], options?: fg.Options): string[] {\n+\treturn fg.sync(patterns, options);\n }\n \n-async function getFastGlobEntriesAsync(pattern: Pattern, options?: fg.Options): Promise<string[]> {\n-\treturn fg(pattern, options);\n+async function getFastGlobEntriesAsync(patterns: Pattern[], options?: fg.Options): Promise<string[]> {\n+\treturn fg(patterns, options);\n }\n \n-async function getFastGlobEntriesStream(pattern: Pattern, options?: fg.Options): Promise<string[]> {\n+async function getFastGlobEntriesStream(patterns: Pattern[], options?: fg.Options): Promise<string[]> {\n \tconst entries: string[] = [];\n \n-\tconst stream = fg.stream(pattern, options);\n+\tconst stream = fg.stream(patterns, options);\n \n \tawait new Promise((resolve, reject) => {\n \t\tstream.on('data', (entry: string) => entries.push(entry));"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+    "command": "npm run build",
+    "code": 0,
+    "seconds": 344.21
+  },
+  {
+    "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+    "command": "npm run test:e2e:sync",
+    "code": 1,
+    "seconds": 41.9
+  }
+]

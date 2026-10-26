@@ -1,0 +1,20 @@
+{
+  "checkedAt": "2026-10-26T18:20:00.011614+00:00",
+  "viewer": "jipeng6036-del",
+  "base": "bfe4a68733806774da2cc7a558d3f017cc471db7",
+  "openPrCount": 17,
+  "allOpenBodiesCommentsFilesRead": true,
+  "policies": [
+    {
+      "path": ".github/CONTRIBUTING.md",
+      "sha": "54514582645d4cab88f3efe67ca5263669c4a94f",
+      "sha256": "63ce8aa74fe39bfb6ae20328f942b474e3fe5a6ab01ba79fbd2d5fcd23384728"
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha": "c0b18dd13df9cd17edf0cd4aeed31c1e93afc20d",
+      "sha256": "0d24bd724886b0f7c78a61d63e6d53bf194b176afdd6e24681b6979b98577137"
+    }
+  ],
+  "note": "Raw evidence collected. Human/agent semantic review of actual bodies, claims and file patches must be completed before publication."
+}

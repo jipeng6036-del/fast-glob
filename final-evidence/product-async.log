@@ -1,0 +1,58 @@
+Using /ram/candidate/herebyfile.mjs to run bench:product:async
+Starting bench:product:async:flatten
+Label                 import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+--------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+async fast-glob *     26.053ms ±37.501%   4.200ms ±48.851%  7.407 MiB ±1.690%  6 ±0.000%        69.922ms ±34.260%  
+async tinyglobby *    9.099ms ±21.523%    4.156ms ±27.869%  5.815 MiB ±0.208%  6 ±0.000%        46.918ms ±20.266%  
+async node-fs-glob *  0.327ms ±46.854%    6.737ms ±34.905%  5.594 MiB ±5.255%  6 ±0.000%        41.183ms ±24.630%  
+async node-glob *     6.787ms ±36.840%    4.873ms ±29.598%  5.884 MiB ±1.208%  6 ±0.000%        44.337ms ±18.990%  
+
+Finished bench:product:async:flatten in 1m 21.7s
+Starting bench:product:async:extension_flatten
+Label                      import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+async fast-glob *.json     20.806ms ±18.127%   3.191ms ±19.511%  7.417 MiB ±1.172%  2 ±0.000%        54.125ms ±15.018%  
+async tinyglobby *.json    10.427ms ±27.716%   4.552ms ±42.667%  5.857 MiB ±2.815%  2 ±0.000%        55.565ms ±28.098%  
+async node-fs-glob *.json  0.348ms ±44.771%    6.835ms ±37.999%  5.846 MiB ±5.251%  2 ±0.000%        43.198ms ±29.057%  
+async node-glob *.json     7.264ms ±33.087%    5.326ms ±41.311%  5.864 MiB ±0.595%  2 ±0.000%        48.820ms ±23.363%  
+
+Finished bench:product:async:extension_flatten in 1m 21.8s
+Starting bench:product:async:deep
+Label                  import.time (time)  time (time)         memory (memory)     entries (value)  process.time (time)
+---------------------  ------------------  ------------------  ------------------  ---------------  -------------------
+async fast-glob **     20.773ms ±19.712%   44.970ms ±19.442%   10.750 MiB ±1.070%  13664 ±0.000%    99.915ms ±18.002%  
+async tinyglobby **    8.706ms ±15.579%    38.788ms ±17.357%   8.234 MiB ±0.702%   13664 ±0.000%    80.024ms ±15.104%  
+async node-fs-glob **  0.325ms ±42.013%    205.125ms ±28.193%  13.070 MiB ±3.367%  13664 ±0.000%    240.656ms ±26.715% 
+async node-glob **     7.127ms ±38.901%    128.517ms ±29.748%  22.815 MiB ±7.117%  13664 ±0.000%    177.505ms ±27.626% 
+
+Finished bench:product:async:deep in 3m 53.5s
+Starting bench:product:async:extension_deep
+Label                       import.time (time)  time (time)         memory (memory)     entries (value)  process.time (time)
+--------------------------  ------------------  ------------------  ------------------  ---------------  -------------------
+async fast-glob **/*.js     23.761ms ±25.788%   50.136ms ±23.686%   10.361 MiB ±0.332%  7412 ±0.000%     111.358ms ±21.554% 
+async tinyglobby **/*.js    9.933ms ±26.134%    44.810ms ±28.434%   8.959 MiB ±2.035%   7467 ±0.000%     94.187ms ±27.309%  
+async node-fs-glob **/*.js  0.291ms ±34.875%    173.088ms ±26.709%  10.961 MiB ±5.446%  7412 ±0.000%     206.106ms ±25.170% 
+async node-glob **/*.js     6.846ms ±31.135%    101.280ms ±23.636%  27.088 MiB ±2.993%  7412 ±0.000%     144.944ms ±21.255% 
+
+Finished bench:product:async:extension_deep in 3m 43.1s
+Starting bench:product:async:partial_flatten
+Label                                               import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+--------------------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+async fast-glob {fixtures,out}/{first,second}/*     19.925ms ±15.412%   5.200ms ±19.612%  7.681 MiB ±0.374%  2 ±0.000%        54.812ms ±13.221%  
+async tinyglobby {fixtures,out}/{first,second}/*    8.587ms ±16.290%    4.777ms ±37.718%  5.721 MiB ±0.175%  2 ±0.000%        45.117ms ±21.569%  
+async node-fs-glob {fixtures,out}/{first,second}/*  0.275ms ±23.767%    7.723ms ±24.797%  5.601 MiB ±0.463%  2 ±0.000%        37.713ms ±13.428%  
+async node-glob {fixtures,out}/{first,second}/*     6.088ms ±30.235%    5.504ms ±14.010%  6.323 MiB ±2.949%  2 ±0.000%        41.254ms ±12.313%  
+
+Finished bench:product:async:partial_flatten in 1m 11.3s
+Starting bench:product:async:partial_deep
+Label                                 import.time (time)  time (time)        memory (memory)    entries (value)  process.time (time)
+------------------------------------  ------------------  -----------------  -----------------  ---------------  -------------------
+async fast-glob {fixtures,out}/**     21.876ms ±23.198%   7.250ms ±31.040%   6.750 MiB ±0.210%  184 ±0.000%      61.883ms ±20.854%  
+async tinyglobby {fixtures,out}/**    8.739ms ±17.543%    5.393ms ±32.795%   5.918 MiB ±0.125%  184 ±0.000%      46.442ms ±15.794%  
+async node-fs-glob {fixtures,out}/**  0.321ms ±34.157%    12.937ms ±31.222%  5.662 MiB ±0.473%  184 ±0.000%      45.917ms ±20.910%  
+async node-glob {fixtures,out}/**     6.570ms ±31.534%    7.852ms ±23.825%   6.823 MiB ±1.171%  184 ±0.000%      45.731ms ±18.428%  
+
+Finished bench:product:async:partial_deep in 1m 20.8s
+Starting bench:product:async
+Finished bench:product:async in 1ms
+Completed bench:product:async in 12m 52.4s

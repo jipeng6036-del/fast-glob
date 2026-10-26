@@ -1,0 +1,14 @@
+{
+  "base": {
+    "files": 132,
+    "wrong": []
+  },
+  "candidate": {
+    "files": 132,
+    "wrong": []
+  },
+  "package": {
+    "sha256": "f310b714278332f5c77dd418aa63f193107c9a58545d516301bd89acb685be41",
+    "bytes": 25875
+  }
+}

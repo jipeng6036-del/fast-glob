@@ -1,0 +1,14 @@
+[
+  {
+    "sha": "1a5e4da31ae71d3e31b668ea621568f646298db5",
+    "filename": "package.json",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 1,
+    "changes": 2,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/e20be5dba84bc81e426b7506cce8c65b19ed64fb/package.json",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/e20be5dba84bc81e426b7506cce8c65b19ed64fb/package.json",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/package.json?ref=e20be5dba84bc81e426b7506cce8c65b19ed64fb",
+    "patch": "@@ -49,7 +49,7 @@\n     \"sinon\": \"^22.0.0\",\n     \"snap-shot-it\": \"^7.9.10\",\n     \"tinyglobby\": \"^0.2.17\",\n-    \"typescript\": \"^6.0.3\"\n+    \"typescript\": \"^7.0.2\"\n   },\n   \"dependencies\": {\n     \"@nodelib/fs.stat\": \"^4.0.0\","
+  }
+]

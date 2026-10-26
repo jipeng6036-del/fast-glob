@@ -1,0 +1,18 @@
+Using /ram/candidate/herebyfile.mjs to run bench:overhead:async
+Starting bench:overhead:async:flatten
+Label              import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-----------------  ------------------  ----------------  -----------------  ---------------  -------------------
+async fast-glob *  18.221ms ±11.844%   2.863ms ±11.748%  8.020 MiB ±2.621%  11 ±0.000%       49.060ms ±8.417%   
+async fs-walk *    9.405ms ±16.928%    1.017ms ±17.731%  5.680 MiB ±0.714%  11 ±0.000%       39.144ms ±10.209%  
+
+Finished bench:overhead:async:flatten in 35.7s
+Starting bench:overhead:async:deep
+Label               import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+------------------  ------------------  -----------------  ------------------  ---------------  -------------------
+async fast-glob **  19.237ms ±21.903%   44.719ms ±22.122%  11.653 MiB ±1.278%  15174 ±0.000%    96.245ms ±21.516%  
+async fs-walk **    9.612ms ±17.701%    30.604ms ±20.566%  9.673 MiB ±0.920%   15174 ±0.000%    72.857ms ±17.867%  
+
+Finished bench:overhead:async:deep in 1m 7s
+Starting bench:overhead:async
+Finished bench:overhead:async in 1ms
+Completed bench:overhead:async in 1m 42.8s

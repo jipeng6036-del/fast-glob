@@ -1,0 +1,26 @@
+[
+  {
+    "sha": "03fbe481321ba6ddf34b392e7e52b6f8c9f52ff3",
+    "filename": "src/index.spec.ts",
+    "status": "modified",
+    "additions": 2,
+    "deletions": 2,
+    "changes": 4,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/20ed023c9f3d9893504aa959e243fc5cdff8f953/src%2Findex.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/20ed023c9f3d9893504aa959e243fc5cdff8f953/src%2Findex.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Findex.spec.ts?ref=20ed023c9f3d9893504aa959e243fc5cdff8f953",
+    "patch": "@@ -258,9 +258,9 @@ describe('Package', () => {\n \tdescribe('posix', () => {\n \t\tdescribe('.escapePath', () => {\n \t\t\tit('should return escaped path', () => {\n-\t\t\t\tconst expected = '/directory/\\\\*\\\\*/\\\\*';\n+\t\t\t\tconst expected = '/directory\\\\, /\\\\*\\\\*/\\\\*';\n \n-\t\t\t\tconst actual = fg.posix.escapePath('/directory/*\\\\*/*');\n+\t\t\t\tconst actual = fg.posix.escapePath('/directory, /*\\\\*/*');\n \n \t\t\t\tassert.strictEqual(actual, expected);\n \t\t\t});"
+  },
+  {
+    "sha": "212d51a597fbf6701e453590a7c962f504c30ace",
+    "filename": "src/utils/path.ts",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 1,
+    "changes": 2,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/20ed023c9f3d9893504aa959e243fc5cdff8f953/src%2Futils%2Fpath.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/20ed023c9f3d9893504aa959e243fc5cdff8f953/src%2Futils%2Fpath.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.ts?ref=20ed023c9f3d9893504aa959e243fc5cdff8f953",
+    "patch": "@@ -10,7 +10,7 @@ const LEADING_DOT_SEGMENT_CHARACTERS_COUNT = 2; // ./ or .\\\\\n  * Posix: ()*?[]{|}, !+@ before (, ! at the beginning, \\\\ before non-special characters.\n  * Windows: (){}[], !+@ before (, ! at the beginning.\n  */\n-const POSIX_UNESCAPED_GLOB_SYMBOLS_RE = /(?<escape>\\\\?)(?<symbols>[()*?[\\]{|}]|^!|[!+@](?=\\()|\\\\(?![!()*+?@[\\]{|}]))/g;\n+const POSIX_UNESCAPED_GLOB_SYMBOLS_RE = /(?<escape>\\\\?)(?<symbols>[()*,?[\\]{|}]|^!|[!+@](?=\\()|\\\\(?![!()*+,?@[\\]{|}]))/g;\n const WINDOWS_UNESCAPED_GLOB_SYMBOLS_RE = /(?<escape>\\\\?)(?<symbols>[()[\\]{}]|^!|[!+@](?=\\())/g;\n /**\n  * The device path (\\\\.\\ or \\\\?\\)."
+  }
+]

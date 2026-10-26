@@ -1,0 +1,8 @@
+{
+  "tool": "codeql",
+  "available": false,
+  "source": null,
+  "configuredWorkflow": ".github/workflows/codeql.yml",
+  "hostedAction": "github/codeql-action@v4",
+  "queries": "security-and-quality"
+}

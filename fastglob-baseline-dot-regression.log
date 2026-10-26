@@ -1,0 +1,844 @@
+
+
+  Patterns with repeated leading dot segments (././)
+    1) {"pattern":"././fixtures/file.md","options":{}} (sync)
+    2) {"pattern":"././fixtures/file.md","options":{}} (async)
+    3) {"pattern":"././fixtures/file.md","options":{}} (stream)
+    4) {"pattern":"././fixtures/*.md","options":{}} (sync)
+    5) {"pattern":"././fixtures/*.md","options":{}} (async)
+    6) {"pattern":"././fixtures/*.md","options":{}} (stream)
+    7) {"pattern":"././fixtures/first/*/*.md","options":{}} (sync)
+    8) {"pattern":"././fixtures/first/*/*.md","options":{}} (async)
+    9) {"pattern":"././fixtures/first/*/*.md","options":{}} (stream)
+    10) {"pattern":"././fixtures/first/**/*.json","options":{}} (sync)
+    11) {"pattern":"././fixtures/first/**/*.json","options":{}} (async)
+    12) {"pattern":"././fixtures/first/**/*.json","options":{}} (stream)
+    13) {"pattern":"././file.md","options":{"cwd":"fixtures"}} (sync)
+    14) {"pattern":"././file.md","options":{"cwd":"fixtures"}} (async)
+    15) {"pattern":"././file.md","options":{"cwd":"fixtures"}} (stream)
+    16) {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (sync)
+    17) {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (async)
+    18) {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (stream)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (sync)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (async)
+    ✔ {"pattern":"././fixtures/*.md","options":{"ignore":["././fixtures/file.md"]}} (stream)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (sync)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (async)
+    ✔ {"pattern":["././fixtures/*.md","!././fixtures/file.md"],"options":{}} (stream)
+
+  Patterns with repeated leading dot segments (./././)
+    19) {"pattern":"./././fixtures/file.md","options":{}} (sync)
+    20) {"pattern":"./././fixtures/file.md","options":{}} (async)
+    21) {"pattern":"./././fixtures/file.md","options":{}} (stream)
+    22) {"pattern":"./././fixtures/*.md","options":{}} (sync)
+    23) {"pattern":"./././fixtures/*.md","options":{}} (async)
+    24) {"pattern":"./././fixtures/*.md","options":{}} (stream)
+    25) {"pattern":"./././fixtures/first/*/*.md","options":{}} (sync)
+    26) {"pattern":"./././fixtures/first/*/*.md","options":{}} (async)
+    27) {"pattern":"./././fixtures/first/*/*.md","options":{}} (stream)
+    28) {"pattern":"./././fixtures/first/**/*.json","options":{}} (sync)
+    29) {"pattern":"./././fixtures/first/**/*.json","options":{}} (async)
+    30) {"pattern":"./././fixtures/first/**/*.json","options":{}} (stream)
+    31) {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (sync)
+    32) {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (async)
+    33) {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (stream)
+    34) {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (sync)
+    35) {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (async)
+    36) {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (stream)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (sync)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (async)
+    ✔ {"pattern":"./././fixtures/*.md","options":{"ignore":["./././fixtures/file.md"]}} (stream)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (sync)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (async)
+    ✔ {"pattern":["./././fixtures/*.md","!./././fixtures/file.md"],"options":{}} (stream)
+
+
+  12 passing (38ms)
+  36 failing
+
+  1) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/file.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  2) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/file.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  3) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/file.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  4) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/*.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  5) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/*.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  6) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/*.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  7) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/*/*.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  8) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/*/*.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  9) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/*/*.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  10) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/**/*.json","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  11) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/**/*.json","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  12) Patterns with repeated leading dot segments (././)
+       {"pattern":"././fixtures/first/**/*.json","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  13) Patterns with repeated leading dot segments (././)
+       {"pattern":"././file.md","options":{"cwd":"fixtures"}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  14) Patterns with repeated leading dot segments (././)
+       {"pattern":"././file.md","options":{"cwd":"fixtures"}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  15) Patterns with repeated leading dot segments (././)
+       {"pattern":"././file.md","options":{"cwd":"fixtures"}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  16) Patterns with repeated leading dot segments (././)
+       {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  17) Patterns with repeated leading dot segments (././)
+       {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  18) Patterns with repeated leading dot segments (././)
+       {"pattern":"././../*.md","options":{"cwd":"fixtures/first"}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  19) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/file.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  20) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/file.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  21) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/file.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  22) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/*.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  23) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/*.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  24) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/*.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  25) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/*/*.md","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  26) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/*/*.md","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  27) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/*/*.md","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  28) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/**/*.json","options":{}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  29) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/**/*.json","options":{}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  30) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././fixtures/first/**/*.json","options":{}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './fixtures/first/nested/directory/file.json'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./fixtures/first/nested/directory/file.json"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  31) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  32) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  33) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././file.md","options":{"cwd":"fixtures"}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+  34) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (sync):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:20:17)
+      at process.processImmediate (node:internal/timers:574:21)
+
+  35) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (async):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:26:17)
+
+  36) Patterns with repeated leading dot segments (./././)
+       {"pattern":"./././../*.md","options":{"cwd":"fixtures/first"}} (stream):
+
+      AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
++ []
+- [
+-   './../file.md'
+- ]
+
+      + expected - actual
+
+      -[]
+      +[
+      +  "./../file.md"
+      +]
+      
+      at assertResult (file:///ram/base/out/tests/e2e/runner.js:137:16)
+      at Context.<anonymous> (file:///ram/base/out/tests/e2e/runner.js:32:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+
+

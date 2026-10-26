@@ -1,0 +1,38 @@
+[
+  {
+    "sha": "57b2f46fd787739b1f88ee131df38f1fae768c72",
+    "filename": "src/managers/tasks.spec.ts",
+    "status": "modified",
+    "additions": 26,
+    "deletions": 0,
+    "changes": 26,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Fmanagers%2Ftasks.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Fmanagers%2Ftasks.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fmanagers%2Ftasks.spec.ts?ref=deb9d90f5ee2ccc924c2077e60849df61a9d5d83",
+    "patch": "@@ -93,6 +93,32 @@ describe('Managers \u2192 Task', () => {\n \n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should preserve negative basename patterns when adding glob star', () => {\n+\t\t\tconst settings = new Settings({ baseNameMatch: true });\n+\t\t\tconst expected = [tests.task.builder().base('.').positive('**/*.txt').negative('**/a.txt').build()];\n+\n+\t\t\tconst actual = manager.generate(['*.txt', '!a.txt'], settings);\n+\n+\t\t\tassert.deepStrictEqual(actual, expected);\n+\t\t});\n+\n+\t\tit('should not create positive tasks from negative basename patterns', () => {\n+\t\t\tconst settings = new Settings({ baseNameMatch: true });\n+\n+\t\t\tconst actual = manager.generate(['!a.txt'], settings);\n+\n+\t\t\tassert.deepStrictEqual(actual, []);\n+\t\t});\n+\n+\t\tit('should preserve negated extglobs as positive basename patterns', () => {\n+\t\t\tconst settings = new Settings({ baseNameMatch: true });\n+\t\t\tconst expected = [tests.task.builder().base('.').positive('**/!(a).txt').build()];\n+\n+\t\t\tconst actual = manager.generate(['!(a).txt'], settings);\n+\n+\t\t\tassert.deepStrictEqual(actual, expected);\n+\t\t});\n \t});\n \n \tdescribe('.convertPatternsToTasks', () => {"
+  },
+  {
+    "sha": "3d4898d528a4e3b77b4351dc8271b3112331f031",
+    "filename": "src/managers/tasks.ts",
+    "status": "modified",
+    "additions": 9,
+    "deletions": 1,
+    "changes": 10,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Fmanagers%2Ftasks.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Fmanagers%2Ftasks.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fmanagers%2Ftasks.ts?ref=deb9d90f5ee2ccc924c2077e60849df61a9d5d83",
+    "patch": "@@ -49,7 +49,15 @@ function processPatterns(input: Pattern[], settings: Settings): Pattern[] {\n \t * in the application. Only on the input.\n \t */\n \tif (settings.baseNameMatch) {\n-\t\tpatterns = patterns.map((pattern) => pattern.includes('/') ? pattern : `**/${pattern}`);\n+\t\tpatterns = patterns.map((pattern) => {\n+\t\t\tif (pattern.includes('/')) {\n+\t\t\t\treturn pattern;\n+\t\t\t}\n+\n+\t\t\treturn utils.pattern.isNegativePattern(pattern)\n+\t\t\t\t? `!**/${utils.pattern.convertToPositivePattern(pattern)}`\n+\t\t\t\t: `**/${pattern}`;\n+\t\t});\n \t}\n \n \t/**"
+  },
+  {
+    "sha": "96e191e5d6f847a55bc9060d86fa55fcf7cd9a51",
+    "filename": "src/tests/e2e/options/base-name-match.e2e.ts",
+    "status": "modified",
+    "additions": 42,
+    "deletions": 0,
+    "changes": 42,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Ftests%2Fe2e%2Foptions%2Fbase-name-match.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/deb9d90f5ee2ccc924c2077e60849df61a9d5d83/src%2Ftests%2Fe2e%2Foptions%2Fbase-name-match.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Foptions%2Fbase-name-match.e2e.ts?ref=deb9d90f5ee2ccc924c2077e60849df61a9d5d83",
+    "patch": "@@ -23,5 +23,47 @@ runner.suite('Options MatchBase', {\n \t\t\t\tbaseNameMatch: true,\n \t\t\t},\n \t\t},\n+\t\t{\n+\t\t\tpattern: ['*.md', '!file.md'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tbaseNameMatch: true,\n+\t\t\t},\n+\t\t\texpected: () => ['third/library/a/book.md', 'third/library/b/book.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['*.md', '!*.md'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tbaseNameMatch: true,\n+\t\t\t},\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['*.md'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tbaseNameMatch: true,\n+\t\t\t\tignore: ['!file.md'],\n+\t\t\t},\n+\t\t\texpected: () => ['third/library/a/book.md', 'third/library/b/book.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['*.md'],\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tbaseNameMatch: true,\n+\t\t\t\tignore: ['file.md'],\n+\t\t\t},\n+\t\t\texpected: () => ['third/library/a/book.md', 'third/library/b/book.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: '!(file).md',\n+\t\t\toptions: {\n+\t\t\t\tcwd: 'fixtures',\n+\t\t\t\tbaseNameMatch: true,\n+\t\t\t},\n+\t\t\texpected: () => ['third/library/a/book.md', 'third/library/b/book.md'],\n+\t\t},\n \t],\n });"
+  }
+]

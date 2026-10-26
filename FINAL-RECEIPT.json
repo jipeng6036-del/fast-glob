@@ -1,0 +1,463 @@
+{
+  "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+  "base": "bfe4a68733806774da2cc7a558d3f017cc471db7",
+  "collectedAt": "2026-10-26T18:24:15.051643+00:00",
+  "sourceFiles": 132,
+  "linuxHistoricalResolutionAndDefaultBenchmarks": {
+    "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+    "updatedAt": "2026-10-26T18:23:24.797Z",
+    "warmup": 100,
+    "runs": 300,
+    "states": [
+      {
+        "id": "linux-22.13.0",
+        "command": "export PATH=/ram/node22min/node_modules/node/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+        "startedAt": "2026-10-26T17:39:27.133Z",
+        "version": "22.13.0",
+        "kind": "configured-ci",
+        "code": 0,
+        "finishedAt": "2026-10-26T17:39:46.667Z"
+      },
+      {
+        "id": "linux-22.23.4",
+        "command": "export PATH=/ram/runtime22/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+        "startedAt": "2026-10-26T17:39:46.670Z",
+        "version": "22.23.4",
+        "kind": "configured-ci",
+        "code": 0,
+        "finishedAt": "2026-10-26T17:40:03.351Z"
+      },
+      {
+        "id": "linux-24.14.0",
+        "command": "export PATH=/ram/runtime24/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+        "startedAt": "2026-10-26T17:40:03.353Z",
+        "version": "24.14.0",
+        "kind": "configured-ci",
+        "code": 0,
+        "finishedAt": "2026-10-26T17:40:18.683Z"
+      },
+      {
+        "id": "linux-26.12.1",
+        "command": "export PATH=/usr/local/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+        "startedAt": "2026-10-26T17:40:18.685Z",
+        "version": "26.12.1",
+        "kind": "configured-ci",
+        "code": 0,
+        "finishedAt": "2026-10-26T17:40:32.532Z"
+      },
+      {
+        "id": "product-async",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:async",
+        "startedAt": "2026-10-26T17:40:32.534Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T17:53:25.114Z"
+      },
+      {
+        "id": "product-stream",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:stream",
+        "startedAt": "2026-10-26T17:40:32.535Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T17:51:19.380Z"
+      },
+      {
+        "id": "product-sync",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:sync",
+        "startedAt": "2026-10-26T17:51:19.380Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T18:00:30.080Z"
+      },
+      {
+        "id": "regression-default-async",
+        "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+        "startedAt": "2026-10-26T17:53:25.114Z",
+        "kind": "configured-benchmark",
+        "options": "{}",
+        "code": 0,
+        "finishedAt": "2026-10-26T17:58:42.054Z"
+      },
+      {
+        "id": "regression-default-stream",
+        "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+        "startedAt": "2026-10-26T17:58:42.055Z",
+        "kind": "configured-benchmark",
+        "options": "{}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:04:11.106Z"
+      },
+      {
+        "id": "regression-default-sync",
+        "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+        "startedAt": "2026-10-26T18:00:30.080Z",
+        "kind": "configured-benchmark",
+        "options": "{}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:05:04.501Z"
+      },
+      {
+        "id": "regression-object-async",
+        "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+        "startedAt": "2026-10-26T18:04:11.107Z",
+        "kind": "configured-benchmark",
+        "options": "{\"objectMode\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:09:37.296Z"
+      },
+      {
+        "id": "regression-object-stream",
+        "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+        "startedAt": "2026-10-26T18:05:04.501Z",
+        "kind": "configured-benchmark",
+        "options": "{\"objectMode\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:10:50.668Z"
+      },
+      {
+        "id": "regression-object-sync",
+        "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+        "startedAt": "2026-10-26T18:09:37.297Z",
+        "kind": "configured-benchmark",
+        "options": "{\"objectMode\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:14:15.736Z"
+      },
+      {
+        "id": "regression-absolute-async",
+        "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+        "startedAt": "2026-10-26T18:10:50.668Z",
+        "kind": "configured-benchmark",
+        "options": "{\"absolute\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:16:20.992Z"
+      },
+      {
+        "id": "regression-absolute-stream",
+        "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+        "startedAt": "2026-10-26T18:14:15.736Z",
+        "kind": "configured-benchmark",
+        "options": "{\"absolute\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:20:03.867Z"
+      },
+      {
+        "id": "regression-absolute-sync",
+        "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+        "startedAt": "2026-10-26T18:16:20.992Z",
+        "kind": "configured-benchmark",
+        "options": "{\"absolute\":true}",
+        "code": 0,
+        "finishedAt": "2026-10-26T18:21:22.063Z"
+      },
+      {
+        "id": "overhead-async",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:async",
+        "startedAt": "2026-10-26T18:20:03.867Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T18:21:46.818Z"
+      },
+      {
+        "id": "overhead-stream",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:stream",
+        "startedAt": "2026-10-26T18:21:22.063Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T18:23:22.460Z"
+      },
+      {
+        "id": "overhead-sync",
+        "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:sync",
+        "startedAt": "2026-10-26T18:21:46.818Z",
+        "kind": "configured-benchmark",
+        "options": null,
+        "code": 0,
+        "finishedAt": "2026-10-26T18:23:24.797Z"
+      }
+    ]
+  },
+  "freshStandardInstall": [
+    {
+      "name": "base",
+      "command": "npm install",
+      "startedAt": "2026-10-26T17:54:02.163Z",
+      "finishedAt": "2026-10-26T17:54:40.297Z",
+      "code": 0,
+      "node": "v26.12.1",
+      "emptyCache": true,
+      "noLock": true,
+      "dependencyTreeCode": 0
+    },
+    {
+      "name": "candidate",
+      "command": "npm install",
+      "startedAt": "2026-10-26T17:54:40.551Z",
+      "finishedAt": "2026-10-26T17:55:17.390Z",
+      "code": 0,
+      "node": "v26.12.1",
+      "emptyCache": true,
+      "noLock": true,
+      "dependencyTreeCode": 0
+    }
+  ],
+  "freshLinuxGates": [
+    {
+      "version": "22.13.0",
+      "command": "export PATH=/ram/node22min/node_modules/node/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:57:20.871Z"
+    },
+    {
+      "version": "22.23.4",
+      "command": "export PATH=/ram/runtime22/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:57:36.299Z"
+    },
+    {
+      "version": "24.14.0",
+      "command": "export PATH=/ram/runtime24/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:57:51.784Z"
+    },
+    {
+      "version": "26.12.1",
+      "command": "export PATH=/usr/local/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:58:05.648Z"
+    }
+  ],
+  "freshWindowsGates": [
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm install",
+      "code": 0,
+      "seconds": 421.45
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run build",
+      "code": 0,
+      "seconds": 70.37
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:sync",
+      "code": 0,
+      "seconds": 3.31
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:async",
+      "code": 0,
+      "seconds": 3.46
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:stream",
+      "code": 0,
+      "seconds": 3.13
+    }
+  ],
+  "benchmarkDependencyEquivalence": {
+    "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+    "totalPackages": 405,
+    "unchangedPackages": 393,
+    "changedLintPackages": [
+      "node_modules/@typescript-eslint/eslint-plugin",
+      "node_modules/@typescript-eslint/parser",
+      "node_modules/@typescript-eslint/project-service",
+      "node_modules/@typescript-eslint/scope-manager",
+      "node_modules/@typescript-eslint/tsconfig-utils",
+      "node_modules/@typescript-eslint/type-utils",
+      "node_modules/@typescript-eslint/types",
+      "node_modules/@typescript-eslint/typescript-estree",
+      "node_modules/@typescript-eslint/utils",
+      "node_modules/@typescript-eslint/visitor-keys",
+      "node_modules/baseline-browser-mapping",
+      "node_modules/typescript-eslint"
+    ],
+    "comparedFiles": 12273,
+    "wrong": []
+  },
+  "compiledEquivalence": {
+    "files": 174,
+    "diff": []
+  },
+  "windowsHistoricalResolutionBuild": {
+    "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+    "command": "npm run build",
+    "code": 0,
+    "seconds": 344.21
+  },
+  "windowsHistoricalResolutionE2E": [
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:sync",
+      "code": 0,
+      "seconds": 3.94
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:async",
+      "code": 0,
+      "seconds": 3.97
+    },
+    {
+      "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+      "command": "npm run test:e2e:stream",
+      "code": 0,
+      "seconds": 6.55
+    }
+  ],
+  "packageSha256": "f310b714278332f5c77dd418aa63f193107c9a58545d516301bd89acb685be41",
+  "packageFiles": 59,
+  "realFsPackageCases": {
+    "Linux26": 48,
+    "Windows24": 48
+  },
+  "initialWindowsFinalTimeout": "Retained in windows-final-test-e2e-sync.log; exact unchanged default-timeout rerun passed; cause not established.",
+  "localMacOS": "not available; upstream CI only",
+  "evidence": [
+    {
+      "path": "final-evidence/after-22.13.0-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/after-22.23.4-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/after-24.14.0-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/after-26.12.1-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/after-benchmarks-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/before-manifest.json",
+      "bytes": 29516,
+      "sha256": "d62f4dd6ade8c62762adcaf81673f196b5b26bcb24c6aecf96d1db54748997d9"
+    },
+    {
+      "path": "final-evidence/done.json",
+      "bytes": 113,
+      "sha256": "550f8561dd19abb00570caddb1bb89bcedd1143ea7ad43454a3e34529a33b822"
+    },
+    {
+      "path": "final-evidence/linux-22.13.0.log",
+      "bytes": 152674,
+      "sha256": "6b8bc45c3b2fb9b2f8add3a61354dd0ffbe4781bd192fed5474d202018a241f8"
+    },
+    {
+      "path": "final-evidence/linux-22.23.4.log",
+      "bytes": 152707,
+      "sha256": "5de0d0489a5f4239de79c87d64be652e4c7f7d71ce3f4bce9348e0a89ff7560b"
+    },
+    {
+      "path": "final-evidence/linux-24.14.0.log",
+      "bytes": 152515,
+      "sha256": "663c43336c09888939509929cfcb046fe99817906b4285c8c04df95fae288288"
+    },
+    {
+      "path": "final-evidence/linux-26.12.1.log",
+      "bytes": 152431,
+      "sha256": "074fdfeba24ee846bd4e57cce1f89cdbfc203fb1d9720d529be590301052159f"
+    },
+    {
+      "path": "final-evidence/overhead-async.log",
+      "bytes": 1276,
+      "sha256": "789bd28eed20f26ea3f3d679641008da43b6b4a0762ef8c1b61bbe04882841b7"
+    },
+    {
+      "path": "final-evidence/overhead-stream.log",
+      "bytes": 1294,
+      "sha256": "780189805870e3880a0ca0d0e3141b1f687a3fc6deeea7fe5119e7336838a513"
+    },
+    {
+      "path": "final-evidence/overhead-sync.log",
+      "bytes": 1260,
+      "sha256": "ba1eba3d558f57f14fd6052b837ae6f93aed5ce80ceb5c4ea02980f6e74891fd"
+    },
+    {
+      "path": "final-evidence/product-async.log",
+      "bytes": 5433,
+      "sha256": "42d69eacb85aaa0cd98432f3d0b61d5f5702690ab8a9d6891fdf74166eede345"
+    },
+    {
+      "path": "final-evidence/product-stream.log",
+      "bytes": 4679,
+      "sha256": "e3a34cca0aff57bf0790c311334debf6a4527a33db1c0adad32fd0010913c486"
+    },
+    {
+      "path": "final-evidence/product-sync.log",
+      "bytes": 5364,
+      "sha256": "ebb8e555e7b8f9a67c0c4ad1c99516171ba4a7fc869a06f43af73fb1f1b703fa"
+    },
+    {
+      "path": "final-evidence/regression-absolute-async.log",
+      "bytes": 3780,
+      "sha256": "f20f1219fbeb9928317282b79bf37411fe68e0885a49c2fb7447f194b5408433"
+    },
+    {
+      "path": "final-evidence/regression-absolute-stream.log",
+      "bytes": 3812,
+      "sha256": "cd4a9b2a08c0d9e78b1147e7440527a82d26e607880993cf103c988d726f3ec2"
+    },
+    {
+      "path": "final-evidence/regression-absolute-sync.log",
+      "bytes": 3734,
+      "sha256": "364c09e0b625bf894cc15f926b28193542980307ca81b41c2f344310bce2d3cc"
+    },
+    {
+      "path": "final-evidence/regression-default-async.log",
+      "bytes": 3778,
+      "sha256": "6af6337f32067c5f356a8bca1c1a16a71a71ad76ccf18f266796cbac5da7fcb3"
+    },
+    {
+      "path": "final-evidence/regression-default-stream.log",
+      "bytes": 3818,
+      "sha256": "6ed728158de5092dab49196664bb89880e7af68a05c0c9c1f72d4b7cf2949fdf"
+    },
+    {
+      "path": "final-evidence/regression-default-sync.log",
+      "bytes": 3728,
+      "sha256": "f691ded0ef15639ffc7bb298f7485685ebaf6faa64dd5b2cac34bc30b8e3871d"
+    },
+    {
+      "path": "final-evidence/regression-object-async.log",
+      "bytes": 3774,
+      "sha256": "ffc38079b6c40a053dd4dc52a0beca311c8845e439261078faaa08bba5db3f70"
+    },
+    {
+      "path": "final-evidence/regression-object-stream.log",
+      "bytes": 3818,
+      "sha256": "2d32e43a7d57639bfe916a24851bc7fb235d5095c5d2a569914bd4317f2f664c"
+    },
+    {
+      "path": "final-evidence/regression-object-sync.log",
+      "bytes": 3730,
+      "sha256": "b8aff68ee510f2b6789434b1fc8f54421366990ca95ab204e042b4738c567fb7"
+    },
+    {
+      "path": "final-evidence/status.json",
+      "bytes": 7072,
+      "sha256": "c3b1fdef44302e63cb8d8b404615d734059f64dedde8f8332d3348f45566e6e8"
+    }
+  ]
+}

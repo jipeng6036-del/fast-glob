@@ -1,0 +1,50 @@
+[
+  {
+    "sha": "c7aeecb922cff63eb71c6647e8790ddec70194c4",
+    "filename": "README.md",
+    "status": "modified",
+    "additions": 4,
+    "deletions": 4,
+    "changes": 8,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/52d521f9e6ffc62cfa6369acd73fe9668e842045/README.md",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/52d521f9e6ffc62cfa6369acd73fe9668e842045/README.md",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/README.md?ref=52d521f9e6ffc62cfa6369acd73fe9668e842045",
+    "patch": "@@ -79,7 +79,7 @@ This package provides methods for traversing the file system and returning pathn\n \n There is more than one form of syntax: basic and advanced. Below is a brief overview of the supported features. Also pay attention to our [FAQ](#faq).\n \n-> :book: This package uses [`picomatch`][picomatch] for pattern matching and [`braces`][braces] for brace expansion.\n+> :book: This package uses [`picomatch`][picomatch] for pattern matching and [`brace-expansion`][brace_expansion] for brace expansion.\n \n ### Basic syntax\n \n@@ -101,7 +101,7 @@ Some examples:\n * [Escapes characters][picomatch_matching_special_characters_as_literals] (`\\\\`) \u2014 matching special characters (`$^*+?()[]`) as literals.\n * [POSIX character classes][picomatch_posix_brackets] (`[[:digit:]]`).\n * [Extended globs][picomatch_extglobs] (`?(pattern-list)`).\n-* [Bash style brace expansions][braces] (`{}`).\n+* [Bash style brace expansions][brace_expansion] (`{}`).\n * [Regexp character classes][picomatch_basic_globbing] (`[1-5]`).\n * [Regex groups][regular_expressions_brackets] (`(a|b)`).\n \n@@ -542,7 +542,7 @@ If `true` and similar entries are found, the result is the first found.\n \n Enables Bash-like brace expansion.\n \n-> :1234: [Syntax description][bash_hackers_syntax_expansion_brace] or more [detailed description][braces].\n+> :1234: [Syntax description][bash_hackers_syntax_expansion_brace] or more [detailed description][brace_expansion].\n \n ```js\n dir/\n@@ -787,7 +787,7 @@ See the [Releases section of our GitHub project][github_releases] for changelog\n This software is released under the terms of the MIT license.\n \n [bash_hackers_syntax_expansion_brace]: https://wiki.bash-hackers.org/syntax/expansion/brace\n-[braces]: https://github.com/micromatch/braces\n+[brace_expansion]: https://github.com/juliangruber/brace-expansion\n [github_releases]: https://github.com/mrmlnc/fast-glob/releases\n [glob_definition]: https://en.wikipedia.org/wiki/Glob_(programming)\n [glob_linux_man]: http://man7.org/linux/man-pages/man3/glob.3.html"
+  },
+  {
+    "sha": "7cb4a789f6668411237dffd3b46f365ff2744968",
+    "filename": "package.json",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 2,
+    "changes": 3,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/52d521f9e6ffc62cfa6369acd73fe9668e842045/package.json",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/52d521f9e6ffc62cfa6369acd73fe9668e842045/package.json",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/package.json?ref=52d521f9e6ffc62cfa6369acd73fe9668e842045",
+    "patch": "@@ -30,7 +30,6 @@\n   ],\n   \"devDependencies\": {\n     \"@nodelib/fs.macchiato\": \"^3.0.0\",\n-    \"@types/braces\": \"^3.0.5\",\n     \"@types/glob-parent\": \"^5.1.3\",\n     \"@types/merge2\": \"^1.4.4\",\n     \"@types/mocha\": \"^10.0.10\",\n@@ -54,7 +53,7 @@\n   \"dependencies\": {\n     \"@nodelib/fs.stat\": \"^4.0.0\",\n     \"@nodelib/fs.walk\": \"^3.0.1\",\n-    \"braces\": \"^3.0.3\",\n+    \"brace-expansion\": \"^5.0.12\",\n     \"glob-parent\": \"^6.0.2\",\n     \"merge2\": \"^1.4.1\",\n     \"picomatch\": \"^4.0.7\""
+  },
+  {
+    "sha": "7b3c0ba18c5b5c19c4d7bfd8f4c3add2a6bdd3de",
+    "filename": "src/utils/pattern.spec.ts",
+    "status": "modified",
+    "additions": 17,
+    "deletions": 0,
+    "changes": 17,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/52d521f9e6ffc62cfa6369acd73fe9668e842045/src%2Futils%2Fpattern.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/52d521f9e6ffc62cfa6369acd73fe9668e842045/src%2Futils%2Fpattern.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpattern.spec.ts?ref=52d521f9e6ffc62cfa6369acd73fe9668e842045",
+    "patch": "@@ -422,6 +422,12 @@ describe('Utils \u2192 Pattern', () => {\n \t\t\tassert.deepStrictEqual(actual, ['a/{b}']);\n \t\t});\n \n+\t\tit('should not expand separators inside quotes', () => {\n+\t\t\tconst actual = util.expandBraceExpansion('a/{\"b,c\",d}');\n+\n+\t\t\tassert.deepStrictEqual(actual, ['a/d', 'a/b,c']);\n+\t\t});\n+\n \t\tit('should expand numeric ranges', () => {\n \t\t\tconst expected = ['a/01', 'a/02', 'a/03'];\n \n@@ -461,6 +467,17 @@ describe('Utils \u2192 Pattern', () => {\n \n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should preserve escaped brace expansion characters', () => {\n+\t\t\tassert.deepStrictEqual(util.expandBraceExpansion(String.raw`a/{b\\,c,d}`), ['a/d', String.raw`a/b\\,c`]);\n+\t\t\tassert.deepStrictEqual(util.expandBraceExpansion(String.raw`a/\\{b,c}/d`), [String.raw`a/\\{b,c}/d`]);\n+\t\t});\n+\n+\t\tit('should not exhaust the stack for deeply nested patterns', () => {\n+\t\t\tconst pattern = `${'{'.repeat(4500)}a,b${'}'.repeat(4500)}`;\n+\n+\t\t\tassert.deepStrictEqual(util.expandBraceExpansion(pattern), [pattern]);\n+\t\t});\n \t});\n \n \tdescribe('.getPatternParts', () => {"
+  },
+  {
+    "sha": "4aeccc8fcdd03f02089876c5ba5db4ef2544150e",
+    "filename": "src/utils/pattern.ts",
+    "status": "modified",
+    "additions": 66,
+    "deletions": 9,
+    "changes": 75,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/52d521f9e6ffc62cfa6369acd73fe9668e842045/src%2Futils%2Fpattern.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/52d521f9e6ffc62cfa6369acd73fe9668e842045/src%2Futils%2Fpattern.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpattern.ts?ref=52d521f9e6ffc62cfa6369acd73fe9668e842045",
+    "patch": "@@ -1,12 +1,13 @@\n import * as path from 'node:path';\n-import braces from 'braces';\n+import { expand as expandBraces } from 'brace-expansion';\n import globParent from 'glob-parent';\n import picomatch from 'picomatch';\n import type { MatcherOptions, Pattern, PatternRe } from '../types/index.js';\n import { IS_WINDOWS_PLATFORM } from './path.js';\n \n const GLOBSTAR = '**';\n const ESCAPE_SYMBOL = '\\\\';\n+const BRACE_EXPANSION_LITERAL_PREFIX = '\\0fast_glob_brace_literal_';\n \n const COMMON_GLOB_SYMBOLS_RE = /[*?]|^!/;\n const REGEX_CHARACTER_CLASS_SYMBOLS_RE = /\\[[^[]*\\]/;\n@@ -169,19 +170,75 @@ export function expandBraceExpansion(pattern: Pattern): Pattern[] {\n \t\treturn [pattern];\n \t}\n \n-\tconst patterns = braces(pattern, {\n-\t\texpand: true,\n-\t\tnodupes: true,\n-\t\t// @ts-expect-error The noempty option needs to be added to @types/braces.\n-\t\tnoempty: true,\n-\t\tkeepEscaping: true,\n-\t});\n+\tconst [protectedPattern, literals] = protectBraceExpansionLiterals(pattern);\n+\tconst patterns = expandBraces(protectedPattern).map((expandedPattern) => restoreBraceExpansionLiterals(expandedPattern, literals));\n+\tconst uniquePatterns = [...new Set(patterns)].filter(Boolean);\n \n \t/**\n \t * Sort the patterns by length so that the same depth patterns are processed side by side.\n \t * `a/{b,}/{c,}/*` \u2013 `['a///*', 'a/b//*', 'a//c/*', 'a/b/c/*']`\n \t */\n-\treturn patterns.toSorted((a, b) => a.length - b.length);\n+\treturn uniquePatterns.toSorted((a, b) => a.length - b.length);\n+}\n+\n+function protectBraceExpansionLiterals(pattern: Pattern): [Pattern, string[]] {\n+\tconst literals: string[] = [];\n+\tlet protectedPattern = '';\n+\tlet index = 0;\n+\n+\tconst addLiteral = (literal: string): void => {\n+\t\tprotectedPattern += `${BRACE_EXPANSION_LITERAL_PREFIX}${literals.length}\\0`;\n+\t\tliterals.push(literal);\n+\t};\n+\n+\twhile (index < pattern.length) {\n+\t\tconst character = pattern[index];\n+\n+\t\tif (character === ESCAPE_SYMBOL) {\n+\t\t\taddLiteral(pattern.slice(index, index + 2));\n+\t\t\tindex += 2;\n+\t\t\tcontinue;\n+\t\t}\n+\n+\t\tif (['\"', '\\'', '`'].includes(character)) {\n+\t\t\tconst [value, nextIndex] = readQuotedBraceExpansionLiteral(pattern, index + 1, character);\n+\n+\t\t\tindex = nextIndex;\n+\t\t\taddLiteral(value);\n+\t\t\tcontinue;\n+\t\t}\n+\n+\t\tprotectedPattern += character;\n+\t\tindex++;\n+\t}\n+\n+\treturn [protectedPattern, literals];\n+}\n+\n+function readQuotedBraceExpansionLiteral(pattern: Pattern, index: number, quote: string): [string, number] {\n+\tlet value = '';\n+\n+\twhile (index < pattern.length) {\n+\t\tconst character = pattern[index++];\n+\n+\t\tif (character === ESCAPE_SYMBOL && index < pattern.length) {\n+\t\t\tvalue += character + pattern[index++];\n+\t\t} else if (character === quote) {\n+\t\t\treturn [value, index];\n+\t\t} else {\n+\t\t\tvalue += character;\n+\t\t}\n+\t}\n+\n+\treturn [value, index];\n+}\n+\n+function restoreBraceExpansionLiterals(pattern: Pattern, literals: string[]): Pattern {\n+\tfor (const [index, literal] of literals.entries()) {\n+\t\tpattern = pattern.replaceAll(`${BRACE_EXPANSION_LITERAL_PREFIX}${index}\\0`, () => literal);\n+\t}\n+\n+\treturn pattern;\n }\n \n export function getPatternParts(pattern: Pattern, options: MatcherOptions): Pattern[] {"
+  }
+]

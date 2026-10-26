@@ -1,0 +1,488 @@
+{
+  "data": {
+    "viewer": {
+      "login": "jipeng6036-del"
+    },
+    "repository": {
+      "nameWithOwner": "mrmlnc/fast-glob",
+      "isArchived": false,
+      "stargazerCount": 2827,
+      "licenseInfo": {
+        "spdxId": "MIT"
+      },
+      "defaultBranchRef": {
+        "name": "master",
+        "target": {
+          "oid": "bfe4a68733806774da2cc7a558d3f017cc471db7",
+          "committedDate": "2026-10-06T10:04:20Z"
+        }
+      },
+      "owner": {
+        "__typename": "User",
+        "login": "mrmlnc"
+      },
+      "pullRequests": {
+        "totalCount": 17,
+        "pageInfo": {
+          "hasNextPage": false,
+          "endCursor": "Y3Vyc29yOnYyOpHPAAAAASnBjF8="
+        },
+        "nodes": [
+          {
+            "number": 374,
+            "title": "settings: Add uniqueBy function",
+            "body": "### What is the purpose of this pull request?\r\n\r\nI've been investigating fast-glob for usage in gulp via glob-stream and I noticed you had a `unique` setting, but not a way to configure the uniqueness value. We provide a `uniqueBy` configuration that we passed into a `unique-stream` to deduplicate values. However, if fast-glob provides that functionality, we can drop `unique-stream` and `pumpify` dependencies which would be a huge performance win!\r\n\r\n### What changes did you make? (Give an overview)\r\n\r\nI added a `uniqueBy` option that is used to pluck the property to use for duplicate entries. This defaults to plucking `entry.path` by default.\r\n",
+            "author": {
+              "login": "phated"
+            },
+            "headRefOid": "d93ba2f1987ecd97496976607b8304fc895ec6e9",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/374",
+            "comments": {
+              "totalCount": 0,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": []
+            }
+          },
+          {
+            "number": 393,
+            "title": "ISSUE-47: Ability to include pattern base directory to the result",
+            "body": "\ud83e\uddd1\u200d\ud83c\udfed Work in progress.\r\n\r\n### What is the purpose of this pull request?\r\n\r\nThe pull request addressed to #47 and adds a setting that allows including the pattern's base directory in the results.\r\n\r\n### What changes did you make? (Give an overview)\r\n\r\n\u2026",
+            "author": {
+              "login": "mrmlnc"
+            },
+            "headRefOid": "89ca5627580e28402121c33403bd545c2c998812",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/393",
+            "comments": {
+              "totalCount": 0,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": []
+            }
+          },
+          {
+            "number": 460,
+            "title": "fix: escape comma",
+            "body": "### What is the purpose of this pull request?\n\n`escape` doesn't currently escape commas, meaning that paths containing commas can unexpectedly change the glob pattern.\n\n### What changes did you make? (Give an overview)\n\nI changed the regex to handle commas.",
+            "author": {
+              "login": "mertalev"
+            },
+            "headRefOid": "20ed023c9f3d9893504aa959e243fc5cdff8f953",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/460",
+            "comments": {
+              "totalCount": 2,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tell me a little bit more about the problem. In which cases does the comma break the pattern?\r\n\r\nThe current test checks a hypothetical case. I would like the tests in `utils/path.spec.ts` to check the real case.",
+                  "author": {
+                    "login": "mrmlnc"
+                  }
+                },
+                {
+                  "body": "@mertalev are you referring to this PR of mine in immich? https://github.com/immich-app/immich/pull/13259\r\n\r\nIn that case, we were able to use the escape path function to solve this. (the relevant change is in the bottom of the storage repository)\r\n\r\nMore serious seems to be the lack of escaping characters like \" ' ` which we solved by manually escaping it after running escapePath: https://github.com/immich-app/immich/pull/14856\r\n\r\nWe have to do escapePath(pathToCrawl).replaceAll('\"', '[\"]').replaceAll(\"'\", \"[']\").replaceAll('`', '[`]') to make it work",
+                  "author": {
+                    "login": "etnoy"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 508,
+            "title": "fix: keep question mark segments out of the base directory (#380)",
+            "body": "### What is the purpose of this pull request?\n\nFixes #380: patterns with `?` in a directory segment can start traversal from a literal, nonexistent directory and return no matches.\n\n```js\nfg.sync('?/test'); // [] instead of ['a/test']\nfg.sync('fi?st/file.md', { cwd: 'fixtures' }); // [] instead of ['first/file.md']\n```\n\n### What changes did you make?\n\nNormalize unescaped `?` to `*` only for `glob-parent`'s base extraction. The original pattern is still used for matching, so `?` continues to match exactly one character. Escaped characters and Windows device prefixes are preserved. `glob-parent` continues to handle roots, other wildcard segments, and unescaping.\n\n### Why adapt this in fast-glob?\n\n`is-glob` deliberately excludes bare `?` in strict mode, while fast-glob documents it as a wildcard. The existing upstream proposal, [micromatch/is-glob#12](https://github.com/micromatch/is-glob/pull/12), remains open. Its maintainer [explicitly directed the fix toward del or fast-glob](https://github.com/micromatch/is-glob/pull/12#issuecomment-801495613), preserving that strict-mode behavior. The related discussion is [gulpjs/glob-parent#39](https://github.com/gulpjs/glob-parent/issues/39).\n\nWith the current dependencies (`glob-parent` 6.0.2 and `is-glob` 4.0.3), `isGlob('?/test')` is still false and `globParent('?/test')` is still `'?'`. This adapter aligns traversal with fast-glob's matching semantics without changing either dependency's public behavior.\n\n### Validation\n\nAdded unit coverage for leading and nested `?` segments, escaping, absolute roots, earlier wildcard segments, escaped backslashes, and Windows device prefixes. Added end-to-end cases for sync, async, and stream matching against existing fixtures.\n\nUpdated against current master and ran `npm run build` and `SNAPSHOT_SKIP_PRUNING=1 npm run test:e2e` on macOS. Build, lint, unit tests, and all enabled end-to-end tests pass. Windows-only filesystem cases remain for upstream CI.\n\nCloses #380.\n",
+            "author": {
+              "login": "maximilliangrand"
+            },
+            "headRefOid": "755a41e369f87ff3a972ad773939f029a21846dd",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/508",
+            "comments": {
+              "totalCount": 2,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                },
+                {
+                  "body": "Why not fix this issue in `glob-parent` / `is-glob`, which is referenced by the original issue?",
+                  "author": {
+                    "login": "mrmlnc"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 514,
+            "title": "build(deps-dev): bump typescript from 6.0.3 to 7.0.2",
+            "body": "Bumps [typescript](https://github.com/microsoft/TypeScript) from 6.0.3 to 7.0.2.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a href=\"https://github.com/microsoft/TypeScript/releases\">typescript's releases</a>.</em></p>\n<blockquote>\n<h2>TypeScript 7.0.2</h2>\n<p><a href=\"https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/\">https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/</a></p>\n<p>This tag was originally released at: <a href=\"https://github.com/microsoft/typescript-go/releases/tag/typescript%2Fv7.0.2\">https://github.com/microsoft/typescript-go/releases/tag/typescript%2Fv7.0.2</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/1e4744d68260a7cb91b62b12edc3f6a2187faaf1\"><code>1e4744d</code></a> Merge branch 'main' into ts7-release</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/a5a219c3b5da0db4fa0ecf6c0b1f588c9af9c669\"><code>a5a219c</code></a><code>microsoft/typescript-go#4558</code></li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/ecfe30dce91368d52c9a49b6095bb0b673a238f8\"><code>ecfe30d</code></a> Update status localization</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/5de25b5f8fec2ca35eadaed041f1f06d2e214895\"><code>5de25b5</code></a> Hide executable name in TypeScript status</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/d7ce74a75da2b80e8201506a1599c06549432b93\"><code>d7ce74a</code></a> Show bundled TypeScript version for packaged servers</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/29be66a607707f90d7a53103a4469bb3015a4d54\"><code>29be66a</code></a> Correct TS 7 release version to 7.0.2</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/ed2bd1bfa4aac5211ce4bc58fcd1313c7eddc8ff\"><code>ed2bd1b</code></a> Merge branch 'main' into ts7-release</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/887307575c58ea640dbeba3b4e8fdb6347cd3044\"><code>8873075</code></a> Bump the github-actions group across 1 directory with 3 updates (microsoft/ty...</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/9427131ae2d4e230a90ee8a09daac4e75da3e311\"><code>9427131</code></a> Set up stable / nightly extension split, other prep (microsoft/typescript-go#...</li>\n<li><a href=\"https://github.com/microsoft/TypeScript/commit/d4eaca5460a1f5f02a829e62706794b0a6fb903e\"><code>d4eaca5</code></a><code>microsoft/typescript-go#4549</code></li>\n<li>Additional commits viewable in <a href=\"https://github.com/microsoft/TypeScript/compare/v6.0.3...v7.0.2\">compare view</a></li>\n</ul>\n</details>\n<details>\n<summary>Maintainer changes</summary>\n<p>This version was pushed to npm by <a href=\"https://www.npmjs.com/~microsoft1es\">microsoft1es</a>, a new releaser for typescript since your current version.</p>\n</details>\n<br />\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=typescript&package-manager=npm_and_yarn&previous-version=6.0.3&new-version=7.0.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nYou can trigger a rebase of this PR by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)\n\n\n</details>\n\n> **Note**\n> Automatic rebases have been disabled on this pull request as it has been open for over 30 days.\n",
+            "author": {
+              "login": "dependabot"
+            },
+            "headRefOid": "e20be5dba84bc81e426b7506cce8c65b19ed64fb",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/514",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 516,
+            "title": "fix: use basename for `name` field of static-pattern entries in object mode",
+            "body": "\n## Problem\n\nFixes #487.\n\nWith `objectMode: true`, entries produced from a **static** pattern (e.g. `./package.json`)\nexpose `name` equal to the whole pattern string, while entries produced from a **dynamic**\npattern (e.g. `./*.json`) expose `name` equal to the real basename, as documented in the\nREADME (\"name (`string`) \u2014 the last part of the path (basename)\"). This makes the shape of\nthe returned entry, and of `entry.dirent.name`, inconsistent depending on how a match was\nfound, even though both point at the same file.\n\nEmpirical reproduction (Node v22.23.1, built `out/`, see counterfactual section below):\n\n```\nSTATIC (./package.json):\n[ { name: './package.json', path: './package.json', dirent: DirentFromStats { name: './package.json', ... } } ]\n\nDYNAMIC (./*.json) -> package.json entry:\n[ { dirent: Dirent { name: 'package.json', ... }, name: 'package.json', path: 'package.json' } ]\n```\n\n## Root cause\n\n`src/readers/reader.ts:35-41`, `Reader#_makeEntry`:\n\n```ts\nprotected _makeEntry(stats: FsStats, pattern: Pattern): Entry {\n\tconst entry: Entry = {\n\t\tname: pattern,\n\t\tpath: pattern,\n\t\tdirent: utils.fs.createDirentFromStats(pattern, stats),\n\t};\n\t...\n```\n\nThis method backs the static-pattern path only (`ReaderStream#static` in\n`src/readers/stream.ts`, used by both `ReaderSync#static` and `ReaderAsync#static`). It uses\nthe raw `pattern` string for both `name` and the synthetic `Dirent`'s `name`, instead of\nderiving the basename. The dynamic path (`Reader#dynamic`) delegates to `@nodelib/fs.walk`,\nwhich already returns real `fs.Dirent` entries with a correct basename `name`, so the two\ncode paths silently diverged.\n\n## Fix\n\n`src/readers/reader.ts`: derive the basename once with `path.basename(pattern)` and use it\nfor both `entry.name` and the name passed into `createDirentFromStats`. `entry.path` is left\nuntouched (still the full pattern, matching existing behavior and the dynamic path's `path`\nsemantics).\n\n```ts\nprotected _makeEntry(stats: FsStats, pattern: Pattern): Entry {\n\tconst name = path.basename(pattern);\n\tconst entry: Entry = {\n\t\tname,\n\t\tpath: pattern,\n\t\tdirent: utils.fs.createDirentFromStats(name, stats),\n\t};\n\t...\n```\n\nNo changes to `src/utils/fs.ts`: `createDirentFromStats(name, stats)` was already generic;\nonly the caller passed the wrong value.\n\n## Test\n\nAdded a regression test in `src/readers/reader.spec.ts` (`.makeEntry` suite) using a pattern\nwith a directory part (`./directory/config.json`), asserting `entry.name` and\n`entry.dirent.name` are the basename `config.json` while `entry.path` stays the full pattern.\nThe pre-existing test in the same suite uses a bare `config.json` pattern (no directory\ncomponent), so it does not change under the fix (basename of a bare filename is itself) and\nstill passes.\n",
+            "author": {
+              "login": "dualfroz"
+            },
+            "headRefOid": "e48054e0d4a9399071e03a60205914a952f53418",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/516",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 517,
+            "title": "fix: require directories for static patterns with a trailing slash",
+            "body": "### What is the purpose of this pull request?\r\n\r\nFixes #458.\r\n\r\nWhen `file.md` is a regular file, `globSync('file.md/', {onlyFiles: false})` currently returns `['file.md/']`, while the dynamic pattern `'*.md/'` correctly returns `[]`. The same inconsistency affects the async and stream APIs and also reproduces on macOS.\r\n\r\n### What changes did you make? (Give an overview)\r\n\r\nStatic readers resolve the filesystem path before statting it, which removes the trailing slash, but retain the original pattern as the entry path. Reject non-directory entries whose paths end in `/` before matching patterns. This preserves directory matches and allows a separate ordinary file pattern in the same request to match normally.\r\n\r\nAdd two filter tests and ten end-to-end cases exercised through sync, async and stream APIs. They cover the reported failure, custom `cwd`, dynamic-pattern consistency, directories, mixed patterns, disabled deduplication, and negative/ignore patterns.\r\n\r\nChecked related open and closed PRs before implementation; prior trailing-slash changes do not cover this static-file case. Open #516 changes static entry names and does not overlap this filter fix.\r\n\r\nValidation on macOS with Node.js 24.19.0:\r\n\r\n- Before the fix: the new file filter test and 18 new end-to-end checks fail for the reported behavior.\r\n- `npm run build`: passes, including compile, lint and 279 unit tests.\r\n- `SNAPSHOT_SKIP_PRUNING=1 npm run test:e2e`: 1,401 pass; 9 existing platform-specific skips, unchanged from baseline.\r\n- `git diff --check`: passes.\r\n\r\nPrepared and independently reviewed with Codex; validation was run locally.\r\n",
+            "author": {
+              "login": "Jerry-val"
+            },
+            "headRefOid": "3d11daf1cfaf472076c7517f5a1394ab635bf7bd",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/517",
+            "comments": {
+              "totalCount": 2,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                },
+                {
+                  "body": "Validated this PR's exact head, `3d11daf1cfaf472076c7517f5a1394ab635bf7bd`, on Windows with Node 24.20.0:\n\n- `npm run build` passes (compile, lint, **279 unit tests**).\n- `SNAPSHOT_SKIP_PRUNING=1 npm run test:e2e -- --reporter dot` passes: **1,401 passing, 9 platform-conditioned pending**.\n- `file.md/` and `*.md/` both return `[]` through sync, async and stream APIs; `first/` still returns the directory. The PR's mixed-pattern and ignore cases pass as well.\n\nI also reproduced the original mismatch on current master before testing this head. The shared-filter check addresses it in all three APIs without changing the ordinary file-pattern match.\n\nThis adds native Windows validation to the macOS results in the description. No source changes were made to this PR for this validation; dependencies were installed locally, and no credentials are part of the test data. Validation and this note were prepared with Codex assistance.\n",
+                  "author": {
+                    "login": "Dcastroro"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 523,
+            "title": "fix: handle Windows rooted negative patterns",
+            "body": "### What is the purpose of this pull request?\n\nFix Windows rooted absolute exclusions so matching positive and negative patterns cancel with or without a drive letter. Fixes #486.\n\n### What changes did you make? (Give an overview)\n\nResolve only the root of single-slash Windows negative patterns against `cwd`, preserving glob syntax and explicit drive/UNC roots. Add regression coverage and clarify the Windows pattern documentation.\n\nValidation was local to Windows with Node.js 26.3.0. Linux/macOS, other Node.js versions, and physically mounted secondary drives or UNC shares were not exercised.\n\n<details>\n<summary>Implementation and validation</summary>\n\nAbsolute negative patterns were compiled without a drive while candidate paths were resolved to drive-qualified paths. Prefixing only the escaped filesystem root reconciles these forms without passing glob expressions through `path.resolve`.\n\nThe public `globSync` reproduction returned the fixture before the fix and returns `[]` after it; the drive-qualified control returns `[]` in both cases. Before the fix, 7 new unit checks and 54 new sync/async/stream checks failed.\n\n- `npm run build`: passes compilation/type checking, lint, and 292 unit tests.\n- `SNAPSHOT_SKIP_PRUNING=1 npm run test:e2e -- --reporter dot`: 1,449 passing; 9 existing platform-specific pending cases.\n- Focused entry-filter and absolute-option suites: 40 and 120 passing respectively, including 12 new unit tests and 69 new public API checks.\n- `git diff --check`: passes.\n\nCoverage includes rooted and drive-qualified positives, negative patterns and `ignore`, relative/absolute/URL `cwd`, relative exclusions, nonmatches, output and case settings, hidden files, trailing directory slashes, braces, extglobs, character classes, escaping, and parent segments. Synthetic entry-filter cases exercise distinct drives, literal UNC share metacharacters, explicit UNC roots, and device-drive roots without accessing other drives or network shares.\n\n</details>",
+            "author": {
+              "login": "LeulTew"
+            },
+            "headRefOid": "2a2420ed246f0b112b9f2443ff8d16d6d5a6455d",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/523",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "This pull request does not currently match the merge queue conditions, so it cannot be queued from here. The box comes back if it matches again. <!-- mergify:queue-control-withdrawn:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 526,
+            "title": "fix: escape double quotes in POSIX paths",
+            "body": "### What is the purpose of this pull request?\n\nMake `posix.escapePath` and `posix.convertPathToPattern` usable for directories containing double quotes. For example, `posix.escapePath('\"path') + '/*.txt'` currently returns no files from `\"path`, because the quote is left unescaped and interpreted by the glob parser.\n\nRelated to #494. This provides a fix through the path-escaping APIs; it does not change the interpretation of raw glob patterns.\n\n### What changes did you make? (Give an overview)\n\n- Escape POSIX double quotes and preserve already-escaped quotes.\n- Document the additional escaped character.\n- Add helper regression assertions and actual-filesystem tests covering leading, embedded, and paired quotes through sync, async, and stream APIs. Filesystem cases skip Windows because double quotes are invalid in Windows filenames.\n\nValidation: five regressions failed before the fix. `npm run build` passes (TypeScript, ESLint, 281 unit tests); `npm run test:e2e` passes with 1,386 tests and 9 platform-dependent pending tests on macOS / Node 22.22.2.\n\nAI-assisted implementation and testing.\n",
+            "author": {
+              "login": "saitakarcesme"
+            },
+            "headRefOid": "8151ca4a50fe0e677f3f54c08d41a316cd97ede1",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/526",
+            "comments": {
+              "totalCount": 3,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                },
+                {
+                  "body": "A quick follow-up: the CI, Benchmark and CodeQL workflow runs are still marked action_required. Could a maintainer approve the fork workflow runs when convenient so this change can be validated? Follow-up prepared with Codex assistance.",
+                  "author": {
+                    "login": "saitakarcesme"
+                  }
+                },
+                {
+                  "body": "CI follow-up: [CI](https://github.com/mrmlnc/fast-glob/actions/runs/35798760807), [Benchmark](https://github.com/mrmlnc/fast-glob/actions/runs/35798760699), [CodeQL](https://github.com/mrmlnc/fast-glob/actions/runs/35798760920) \u2014 status: `action_required` on the current head `8151ca4`. These fork workflow runs have not started. Could a maintainer approve them so the change can be validated?\n\nStatus checked and follow-up prepared with Codex assistance.",
+                  "author": {
+                    "login": "saitakarcesme"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 527,
+            "title": "fix: read the root of a drive for patterns like C:/* on Windows",
+            "body": "### What is the purpose of this pull request?\n\nFixes #375. On Windows, a pattern for the root of a drive, such as `C:/*`, lists the current working directory instead of the drive root.\n\n`glob-parent` returns `C:` as the base directory of `C:/*` (gulpjs/glob-parent#63). Windows resolves a drive letter without a separator to the current directory on that drive, so `path.resolve(cwd, 'C:')` is the cwd. The entries found there are then reported under the drive, for example `C:/src` for the repository's own `src` directory. `C:/./*` already works because its base is `C:/.`.\n\n### What changes did you make? (Give an overview)\n\n- `groupPatternsByBaseDirectory` now keeps the trailing slash when the base is a bare drive letter taken from a `X:/\u2026` pattern, so the base of `C:/*` is `C:/`, the same way `/*` gets `/`. This only applies on Windows. On other platforms `C:` is an ordinary relative directory name, so nothing changes there.\n- The check is a small helper in `utils/path` next to `appendTrailingSeparatorToDeviceRoot`, and it runs after `getBaseDirectory` rather than inside it.\n- Tests:\n  - A unit test for the helper.\n  - A grouping test in `managers/tasks.spec.ts`.\n  - A `globSync` test that uses a custom `fs.readdirSync` to check that the drive root is the directory being read.\n",
+            "author": {
+              "login": "SulimanAbdulrazzaq"
+            },
+            "headRefOid": "6e02db4ec6364a898bcc3127c05c78840d8941c4",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/527",
+            "comments": {
+              "totalCount": 3,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                },
+                {
+                  "body": "@mrmlnc when you have a moment, could you approve the workflow runs on this one? It fixes #375: on Windows, a pattern for the root of a drive such as `C:/*` lists the current working directory instead of the drive root. CI, Benchmark and CodeQL are waiting for approval, and the branch has no conflicts.\n",
+                  "author": {
+                    "login": "SulimanAbdulrazzaq"
+                  }
+                },
+                {
+                  "body": "@mrmlnc when you have a moment, could one of you approve the workflow runs and take a look at this one? No checks have run on the current head yet.",
+                  "author": {
+                    "login": "SulimanAbdulrazzaq"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 529,
+            "title": "fix: retain patterns rooted at __proto__",
+            "body": "`__proto__/*` and `__proto__/file.md` currently produce no tasks, so existing files disappear from sync, async and stream results. Group patterns in a `Map`, then return a plain object with `Object.fromEntries`; this keeps the existing return shape while treating `__proto__` as an own key.\n\nAdd grouping and filesystem regressions for static/dynamic patterns, repeated groups, mixed bases, ignores, a global-pattern control and other prototype property names. Before the fix, 16 cases fail; afterward all pass.\n\nValidation on Windows with Node 24.19.0: TypeScript and ESLint pass; 281 unit tests and 1,401 e2e tests pass, with nine existing pending cases.\n\nFixes #528.\n",
+            "author": {
+              "login": "Strohutt"
+            },
+            "headRefOid": "5ef7f2d38e0042719e602c79f1cea42f530ebe48",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/529",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 531,
+            "title": "fix(path): convert Windows separators before plain at-signs",
+            "body": "### What is the purpose of this pull request?\n\nFixes #452. Windows paths such as `node_modules\\@vitest\\coverage-v8\\dist` now convert the separator before `@` to `/`, so the resulting pattern can find scoped packages.\n\n### What changes did you make? (Give an overview)\n\nDistinguish a separator before a plain `@` from an explicitly escaped at-sign or extglob operator, with regression tests for the public converters and Windows path forms.\n\n`npm run build` and `npm run test:e2e` pass on Linux. Native Windows E2E was not run locally.\n",
+            "author": {
+              "login": "Boulea7"
+            },
+            "headRefOid": "2c569c53caf587c7f918df8b22ef9a6372fd353b",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/531",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 536,
+            "title": "refactor: replace braces with brace-expansion",
+            "body": "Closes #532\n\n### What is the purpose of this pull request?\n\nContinue the dependency simplification started in #534 by removing the remaining direct `braces` dependency from the v4 branch.\n\nThis does not take a position on the disputed advisory. It gives downstream users a practical path that no longer includes `braces`, while also avoiding stack exhaustion for deeply nested brace patterns.\n\nRelated context:\n\n- #532\n- https://github.com/micromatch/braces/issues/73\n- https://github.com/github/advisory-database/pull/10132\n\n### What changes did you make? (Give an overview)\n\n- Replace `braces@3` with `brace-expansion@5`.\n- Add a small compatibility adapter for fast-glob's existing quote and escaping behaviour.\n- Preserve deduplication, empty-result filtering and length-based ordering.\n- Add regression coverage for quoted separators, escaped brace characters and a 4,500-level nested pattern.\n- Update the README dependency references.\n\n### Verification\n\n- `npm run build` \u2014 291 passing\n- `npm run test:e2e` \u2014 1,380 passing, 9 pending\n- `npm pack --dry-run`\n- Production dependency tree contains `brace-expansion@5.0.12` and `picomatch@4.0.7`, with no `braces` or `micromatch`\n\n",
+            "author": {
+              "login": "az-catch"
+            },
+            "headRefOid": "52d521f9e6ffc62cfa6369acd73fe9668e842045",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/536",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 537,
+            "title": "build(deps-dev): bump @types/node from 22.20.5 to 24.19.2",
+            "body": "Bumps [@types/node](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/node) from 22.20.5 to 24.19.2.\n<details>\n<summary>Commits</summary>\n<ul>\n<li>See full diff in <a href=\"https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/node\">compare view</a></li>\n</ul>\n</details>\n<br />\n\n<details>\n<summary>Most Recent Ignore Conditions Applied to This Pull Request</summary>\n\n| Dependency Name | Ignore Conditions |\n| --- | --- |\n| @types/node | [>= 26.a, < 27] |\n| @types/node | [>= 25.a, < 26] |\n</details>\n\n\n[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=@types/node&package-manager=npm_and_yarn&previous-version=22.20.5&new-version=24.19.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all of the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)\n\n\n</details>",
+            "author": {
+              "login": "dependabot"
+            },
+            "headRefOid": "95ba3f01ef89b9e586f7fdf578ab8f8fca5a297a",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/537",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 539,
+            "title": "fix: match relative exclusions against cwd-relative paths",
+            "body": "### What is the purpose of this pull request?\n\nFixes #538. An absolute positive pattern currently makes relative exclusions match the full entry path. For example, with `cwd` beneath `build.local`, `ignore: ['**/*.local/**']` can discard a file merely because that ancestor matches. Conversely, an exclusion such as `first/file.md` fails to exclude the corresponding absolute entry.\n\n### What changes did you make? (Give an overview)\n\n- Match relative negative patterns against paths relative to `cwd`, preserving forward-slash matching on Windows.\n- Apply the same distinction during directory traversal, so a matching ancestor does not prune otherwise valid descendants.\n- Keep absolute exclusions separate. Avoid path conversion when the relevant exclusion list is empty.\n- Add four path helper tests and nine end-to-end scenarios, each exercised through sync, async and stream APIs. They cover matching ancestors, exclusions inside `cwd`, absolute exclusions, mixed positive patterns, directory trailing slashes and relative-path controls.\n\nValidation on Node.js 24.20.0:\n\n- On the unchanged base `bfe4a68`, the 27 end-to-end checks report **18 failures and 9 passes**; after the fix, all 27 pass.\n- Native Windows: `npm run build` passes compilation, ESLint and **292 unit tests**; `npm run test:e2e` reports **1,407 passing, 9 pending**.\n- Linux (WSL Ubuntu 24.04): the same build and full end-to-end commands pass with the same counts. The nine pending cases are existing platform-specific cases.\n- `git diff --check` passes. No dependency, workflow or security-check changes. No macOS or other Node.js versions tested locally.\n\nThis covers the remaining relative-negative case after #449. Open #523 concerns Windows rooted absolute patterns; its implementation does not normalize relative negatives. #517 addresses trailing slashes on static positive patterns and is also separate.\n\nAI assistance was used for investigation, implementation and validation. Tests use the repository's existing local fixtures; no credentials or external service calls were added.\n",
+            "author": {
+              "login": "Dcastroro"
+            },
+            "headRefOid": "073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/539",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 540,
+            "title": "fix(readers): use the basename as the name of static entries",
+            "body": "### What is the purpose of this pull request?\n\nFixes #487.\n\nWith `objectMode` (or `stats`), an entry found by a static pattern uses the whole pattern as its `name` and `dirent.name`. The README documents `name` as \"the last part of the path (basename)\", and dynamic patterns already return the basename:\n\n```js\nfg.globSync('packages/a/package.json', { objectMode: true })[0].name; // 'packages/a/package.json'\nfg.globSync('packages/*/package.json', { objectMode: true })[0].name; // 'package.json'\n```\n\nAn absolute static pattern returns the whole absolute path as the name.\n\n### What changes did you make? (Give an overview)\n\n`Reader._makeEntry` now uses `path.basename(pattern)` for `name` and for the name of the `DirentFromStats`. `path` is unchanged, so string results and the `absolute`, `markDirectories`, `stats` and filter behavior stay the same; the library code does not read `entry.name`. A static pattern for the filesystem root (`/`) now gets an empty name, which is what `path.basename('/')` returns.\n\nTests: a `Reader` unit test with a nested pattern, and `globSync`, `glob` and `globStream` tests in `src/index.spec.ts` that compare static and dynamic matches of `fixtures/first/file.md`. All four fail without the change.\n\nLint, compile, unit tests and the sync, async and stream e2e suites pass on Linux with Node 22.13.0, 22, 24 and 26. A fresh `npm install` currently resolves `@types/sinon` 22.0.1 (published 2026-10-21), which makes `tsc` fail on `master` as well (`SinonStub` is no longer exported; 24 errors in the reader and provider specs), so I ran the checks with `@types/sinon@22.0.0`. On macOS (Node 26) I ran lint, the unit tests and the e2e suites except the root-pattern suite. I did not run anything on Windows.\n",
+            "author": {
+              "login": "mkantautas"
+            },
+            "headRefOid": "5d40c3d6d1e4c21915ee855bff5da62ffb97cfef",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/540",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "number": 541,
+            "title": "Preserve negative basename patterns with baseNameMatch",
+            "body": "### What is the purpose of this pull request?\n\nPreserve negative patterns when `baseNameMatch` adds a globstar prefix. Given `a.txt`, `b.txt`, `nested/a.txt` and `nested/b.txt`, this call currently returns all four files:\n\n```js\nfg.globSync(['*.txt', '!a.txt'], { cwd, baseNameMatch: true });\n```\n\nIt should return only `b.txt` and `nested/b.txt`, matching `ignore: ['a.txt']`. The same bug affects the async and stream APIs, and negated entries in `ignore`.\n\n### What changes did you make? (Give an overview)\n\n`processPatterns` currently rewrites `!a.txt` to `**/!a.txt` before positive/negative pattern partitioning, so it becomes a positive pattern. Keep the negation before the inserted prefix (`!**/a.txt`) using the existing polarity helpers. Patterns with slashes and positive negated extglobs such as `!(file).md` keep their existing behavior.\n\nAdd task-generation checks and five filesystem scenarios exercised through sync, async and stream APIs. They cover an exact basename exclusion, a wildcard exclusion, both forms of `ignore`, and a negated-extglob control. On unchanged master `bfe4a68`, the targeted tests report 11 failures and 39 passes; with the patch, all 50 pass.\n\nValidation on native Windows, Node 24.11.0:\n\n- `npm run build`: compilation, ESLint and 291 unit tests pass.\n- `npm run test:e2e`: 1,395 pass, with nine existing pending cases.\n- `git diff --check`: clean.\n\nA fresh install currently resolves `@types/sinon` 22.0.1, which produces 24 existing compilation errors in the unmodified reader/provider tests. I verified with `npm install --no-save --package-lock=false @types/sinon@22.0.0`, within the declared version range. No dependency or workflow changes are included. This baseline issue is also documented in #540; the default fresh-install CI may need that independent fix.\n\nAI assistance: OpenAI Codex investigated, implemented and tested this contribution at the account owner's request. No independent human review is claimed.\n",
+            "author": {
+              "login": "KennyMcSimpson"
+            },
+            "headRefOid": "deb9d90f5ee2ccc924c2077e60849df61a9d5d83",
+            "baseRefName": "master",
+            "url": "https://github.com/mrmlnc/fast-glob/pull/541",
+            "comments": {
+              "totalCount": 1,
+              "pageInfo": {
+                "hasNextPage": false
+              },
+              "nodes": [
+                {
+                  "body": "Tick the box to add this pull request to the merge queue (same as `@mergifyio queue`).\n\n- [ ] Queue this pull request <!-- mergify:queue-control:queue -->",
+                  "author": {
+                    "login": "mergify"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

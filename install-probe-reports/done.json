@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "name": "base",
+      "command": "npm install",
+      "startedAt": "2026-10-26T17:54:02.163Z",
+      "finishedAt": "2026-10-26T17:54:40.297Z",
+      "code": 0,
+      "node": "v26.12.1",
+      "emptyCache": true,
+      "noLock": true,
+      "dependencyTreeCode": 0
+    },
+    {
+      "name": "candidate",
+      "command": "npm install",
+      "startedAt": "2026-10-26T17:54:40.551Z",
+      "finishedAt": "2026-10-26T17:55:17.390Z",
+      "code": 0,
+      "node": "v26.12.1",
+      "emptyCache": true,
+      "noLock": true,
+      "dependencyTreeCode": 0
+    }
+  ],
+  "finishedAt": "2026-10-26T17:55:17.767Z"
+}

@@ -1,0 +1,18 @@
+Using /ram/candidate/herebyfile.mjs to run bench:overhead:stream
+Starting bench:overhead:stream:flatten
+Label               import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream fast-glob *  19.702ms ±22.478%   1.935ms ±23.744%  7.561 MiB ±0.879%  11 ±0.000%       53.808ms ±20.229%  
+stream fs-walk *    9.383ms ±27.960%    1.530ms ±40.366%  5.877 MiB ±4.816%  11 ±0.000%       48.661ms ±22.103%  
+
+Finished bench:overhead:stream:flatten in 40.1s
+Starting bench:overhead:stream:deep
+Label                import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+-------------------  ------------------  -----------------  ------------------  ---------------  -------------------
+stream fast-glob **  23.111ms ±23.990%   59.815ms ±23.509%  10.253 MiB ±0.950%  15174 ±0.000%    123.210ms ±20.968% 
+stream fs-walk **    7.123ms ±24.912%    34.798ms ±10.600%  9.762 MiB ±0.430%   15174 ±0.000%    73.796ms ±9.357%   
+
+Finished bench:overhead:stream:deep in 1m 20.1s
+Starting bench:overhead:stream
+Finished bench:overhead:stream in 1ms
+Completed bench:overhead:stream in 2m 0.3s

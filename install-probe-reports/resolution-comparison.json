@@ -1,0 +1,338 @@
+{
+  "oldCount": 793,
+  "freshBaseCount": 793,
+  "freshCandidateCount": 793,
+  "baseCandidateDiff": [],
+  "oldFreshDiff": [
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/@stylistic/eslint-plugin/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/types/-/types-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/types/-/types-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/utils/-/utils-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils/@typescript-eslint/scope-manager",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/scope-manager/-/scope-manager-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils/@typescript-eslint/scope-manager/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils/@typescript-eslint/scope-manager/@typescript-eslint/visitor-keys",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-import-x/@typescript-eslint/utils/@typescript-eslint/typescript-estree",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-jsdoc/@es-joy/jsdoccomment/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/eslint-plugin-unicorn/browserslist/baseline-browser-mapping",
+      "old": {
+        "version": "2.11.32",
+        "resolved": "https://registry.npmjs.org/baseline-browser-mapping/-/baseline-browser-mapping-2.11.32.tgz"
+      },
+      "fresh": {
+        "version": "2.11.33",
+        "resolved": "https://registry.npmjs.org/baseline-browser-mapping/-/baseline-browser-mapping-2.11.33.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/typescript-eslint/-/typescript-eslint-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/parser",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/scope-manager",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/type-utils",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/type-utils/-/type-utils-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/type-utils/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/type-utils/@typescript-eslint/typescript-estree",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/type-utils/@typescript-eslint/utils",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/utils",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/visitor-keys",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/visitor-keys/-/visitor-keys-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/eslint-plugin/@typescript-eslint/visitor-keys/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/parser",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/parser/-/parser-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/parser/@typescript-eslint/scope-manager",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/parser/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/parser/@typescript-eslint/typescript-estree",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/parser/@typescript-eslint/visitor-keys",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/project-service",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/project-service/-/project-service-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/project-service/@typescript-eslint/tsconfig-utils",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/project-service/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/tsconfig-utils",
+      "old": {
+        "version": "8.72.0",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.72.0.tgz"
+      },
+      "fresh": {
+        "version": "8.72.1",
+        "resolved": "https://registry.npmjs.org/@typescript-eslint/tsconfig-utils/-/tsconfig-utils-8.72.1.tgz"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/types",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/typescript-estree/@typescript-eslint/visitor-keys",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    },
+    {
+      "path": "/eslint-config-mrmlnc/eslint-config-xo/typescript-eslint/@typescript-eslint/utils",
+      "old": {
+        "version": "8.72.0"
+      },
+      "fresh": {
+        "version": "8.72.1"
+      }
+    }
+  ]
+}

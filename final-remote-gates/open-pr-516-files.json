@@ -1,0 +1,26 @@
+[
+  {
+    "sha": "1f143527fe43088c4859b0851eefdfc063a8513d",
+    "filename": "src/readers/reader.spec.ts",
+    "status": "modified",
+    "additions": 12,
+    "deletions": 0,
+    "changes": 12,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/e48054e0d4a9399071e03a60205914a952f53418/src%2Freaders%2Freader.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/e48054e0d4a9399071e03a60205914a952f53418/src%2Freaders%2Freader.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Freaders%2Freader.spec.ts?ref=e48054e0d4a9399071e03a60205914a952f53418",
+    "patch": "@@ -85,6 +85,18 @@ describe('Readers \u2192 Reader', () => {\n \n \t\t\tassert.ok(actual.stats);\n \t\t});\n+\n+\t\tit('should return created entry with basename as `name` for a pattern with a directory part', () => {\n+\t\t\tconst reader = getReader();\n+\t\t\tconst pattern = './directory/config.json';\n+\t\t\tconst stats = new Stats({ mode: StatsMode.File });\n+\n+\t\t\tconst actual = reader.makeEntry(stats, pattern);\n+\n+\t\t\tassert.strictEqual(actual.name, 'config.json');\n+\t\t\tassert.strictEqual(actual.path, pattern);\n+\t\t\tassert.strictEqual(actual.dirent.name, 'config.json');\n+\t\t});\n \t});\n \n \tdescribe('.isFatalError', () => {"
+  },
+  {
+    "sha": "dfaec0d85e5b37892d8681eab0183d31475b5a6b",
+    "filename": "src/readers/reader.ts",
+    "status": "modified",
+    "additions": 3,
+    "deletions": 2,
+    "changes": 5,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/e48054e0d4a9399071e03a60205914a952f53418/src%2Freaders%2Freader.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/e48054e0d4a9399071e03a60205914a952f53418/src%2Freaders%2Freader.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Freaders%2Freader.ts?ref=e48054e0d4a9399071e03a60205914a952f53418",
+    "patch": "@@ -33,10 +33,11 @@ export abstract class Reader<T> {\n \t}\n \n \tprotected _makeEntry(stats: FsStats, pattern: Pattern): Entry {\n+\t\tconst name = path.basename(pattern);\n \t\tconst entry: Entry = {\n-\t\t\tname: pattern,\n+\t\t\tname,\n \t\t\tpath: pattern,\n-\t\t\tdirent: utils.fs.createDirentFromStats(pattern, stats),\n+\t\t\tdirent: utils.fs.createDirentFromStats(name, stats),\n \t\t};\n \n \t\tif (this.#settings.stats) {"
+  }
+]

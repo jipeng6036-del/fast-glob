@@ -1,0 +1,50 @@
+[
+  {
+    "sha": "4fe85c0a9f5dbe0b59f096d925287d1c226b5688",
+    "filename": "README.md",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 1,
+    "changes": 2,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/README.md",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/README.md",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/README.md?ref=8151ca4a50fe0e677f3f54c08d41a316cd97ede1",
+    "patch": "@@ -257,7 +257,7 @@ See [Options](#options-3) section.\n Returns the path with escaped special characters depending on the platform.\n \n * Posix:\n-  * `*?|(){}[]`;\n+  * `*?|(){}[]\"`;\n   * `!` at the beginning of line;\n   * `@+!` before the opening parenthesis;\n   * `\\\\` before non-special characters;"
+  },
+  {
+    "sha": "491c18370984de31cd225881c71728db7adba0cc",
+    "filename": "src/tests/e2e/quoted-path.e2e.ts",
+    "status": "added",
+    "additions": 44,
+    "deletions": 0,
+    "changes": 44,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Ftests%2Fe2e%2Fquoted-path.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Ftests%2Fe2e%2Fquoted-path.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Fquoted-path.e2e.ts?ref=8151ca4a50fe0e677f3f54c08d41a316cd97ede1",
+    "patch": "@@ -0,0 +1,44 @@\n+import * as assert from 'node:assert';\n+import * as fs from 'node:fs/promises';\n+import * as os from 'node:os';\n+import * as path from 'node:path';\n+import {\n+\tafter,\n+\tbefore,\n+\tdescribe,\n+\tit,\n+} from 'mocha';\n+import * as fg from '../../index.js';\n+\n+// Double quotes are not valid filename characters on Windows.\n+(os.platform() === 'win32' ? describe.skip : describe)('Escaped POSIX double quotes', () => {\n+\tlet cwd: string;\n+\n+\tbefore(async () => {\n+\t\tcwd = await fs.mkdtemp(path.join(os.tmpdir(), 'fast-glob-quotes-'));\n+\t\tawait Promise.all(['\"path', 'pa\"th', '\"path\"'].map(async (directory) => {\n+\t\t\tawait fs.mkdir(path.join(cwd, directory));\n+\t\t\tawait fs.writeFile(path.join(cwd, directory, 'file.txt'), '');\n+\t\t}));\n+\t});\n+\n+\tafter(async () => {\n+\t\tawait fs.rm(cwd, { recursive: true, force: true });\n+\t});\n+\n+\tfor (const directory of ['\"path', 'pa\"th', '\"path\"']) {\n+\t\tfor (const [name, escape] of Object.entries(fg.posix)) {\n+\t\t\t// The setup hook initializes cwd before any test runs.\n+\t\t\t// eslint-disable-next-line @typescript-eslint/no-loop-func\n+\t\t\tit(`should match ${directory} using ${name}`, async () => {\n+\t\t\t\tconst pattern = `${escape(directory)}/*.txt`;\n+\t\t\t\tconst expected = [`${directory}/file.txt`];\n+\n+\t\t\t\tassert.deepStrictEqual(fg.globSync(pattern, { cwd }), expected);\n+\t\t\t\tassert.deepStrictEqual(await fg.glob(pattern, { cwd }), expected);\n+\t\t\t\tconst entries: unknown[] = await Array.fromAsync(fg.globStream(pattern, { cwd }));\n+\t\t\t\tassert.deepStrictEqual(entries, expected);\n+\t\t\t});\n+\t\t}\n+\t}\n+});"
+  },
+  {
+    "sha": "c10008d32811c84a8913e654c570c740eb907835",
+    "filename": "src/utils/path.spec.ts",
+    "status": "modified",
+    "additions": 10,
+    "deletions": 0,
+    "changes": 10,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Futils%2Fpath.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Futils%2Fpath.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.spec.ts?ref=8151ca4a50fe0e677f3f54c08d41a316cd97ede1",
+    "patch": "@@ -66,6 +66,16 @@ describe('Utils \u2192 Path', () => {\n \t\t});\n \t});\n \n+\tdescribe('POSIX double quotes', () => {\n+\t\tit('should escape double quotes without double-escaping existing escapes', () => {\n+\t\t\tassert.strictEqual(util.escapePosixPath('\"path'), String.raw`\\\"path`);\n+\t\t\tassert.strictEqual(util.escapePosixPath('pa\"th'), String.raw`pa\\\"th`);\n+\t\t\tassert.strictEqual(util.escapePosixPath('\"path\"'), String.raw`\\\"path\\\"`);\n+\t\t\tassert.strictEqual(util.escapePosixPath(String.raw`\\\"path`), String.raw`\\\"path`);\n+\t\t\tassert.strictEqual(util.convertPosixPathToPattern('\"path'), String.raw`\\\"path`);\n+\t\t});\n+\t});\n+\n \tdescribe('.escapeWindowsPattern', () => {\n \t\tit('should return pattern with escaped glob symbols', () => {\n \t\t\tassert.strictEqual(util.escapeWindowsPath('!abc'), String.raw`\\!abc`);"
+  },
+  {
+    "sha": "463b04c09680b5d05b679b80e4f9d78bef1b90c7",
+    "filename": "src/utils/path.ts",
+    "status": "modified",
+    "additions": 2,
+    "deletions": 2,
+    "changes": 4,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Futils%2Fpath.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/8151ca4a50fe0e677f3f54c08d41a316cd97ede1/src%2Futils%2Fpath.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.ts?ref=8151ca4a50fe0e677f3f54c08d41a316cd97ede1",
+    "patch": "@@ -6,10 +6,10 @@ const IS_WINDOWS_PLATFORM = os.platform() === 'win32';\n const LEADING_DOT_SEGMENT_CHARACTERS_COUNT = 2; // ./ or .\\\\\n /**\n  * All non-escaped special characters.\n- * Posix: ()*?[]{|}, !+@ before (, ! at the beginning, \\\\ before non-special characters.\n+ * Posix: ()*?[]{|}\", !+@ before (, ! at the beginning, \\\\ before non-special characters.\n  * Windows: (){}[], !+@ before (, ! at the beginning.\n  */\n-const POSIX_UNESCAPED_GLOB_SYMBOLS_RE = /\\\\?(?<symbols>[()*?[\\]{|}]|^!|[!+@](?=\\()|\\\\(?![!()*+?@[\\]{|}]))/g;\n+const POSIX_UNESCAPED_GLOB_SYMBOLS_RE = /\\\\?(?<symbols>[\"()*?[\\]{|}]|^!|[!+@](?=\\()|\\\\(?![!\"()*+?@[\\]{|}]))/g;\n const WINDOWS_UNESCAPED_GLOB_SYMBOLS_RE = /\\\\?(?<symbols>[()[\\]{}]|^!|[!+@](?=\\())/g;\n /**\n  * The device path (\\\\.\\ or \\\\?\\)."
+  }
+]

@@ -1,0 +1,46 @@
+Using /ram/candidate/herebyfile.mjs to run bench:regression:stream
+Starting bench:regression:stream:flatten
+Label              import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-----------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream current *   20.443ms ±22.962%   4.859ms ±24.366%  7.535 MiB ±0.186%  6 ±0.000%        56.607ms ±21.386%  
+stream previous *  14.196ms ±15.398%   4.380ms ±15.247%  6.893 MiB ±0.171%  6 ±0.000%        46.138ms ±10.104%  
+
+Finished bench:regression:stream:flatten in 41.2s
+Starting bench:regression:stream:extension_flatten
+Label                   import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+----------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream current *.json   20.308ms ±17.211%   4.920ms ±18.775%  7.525 MiB ±0.180%  2 ±0.000%        55.543ms ±14.074%  
+stream previous *.json  15.279ms ±19.319%   4.779ms ±26.952%  6.883 MiB ±0.188%  2 ±0.000%        49.600ms ±15.436%  
+
+Finished bench:regression:stream:extension_flatten in 42.9s
+Starting bench:regression:stream:deep
+Label               import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+------------------  ------------------  -----------------  ------------------  ---------------  -------------------
+stream current **   19.341ms ±20.062%   50.622ms ±18.944%  9.273 MiB ±2.745%   13664 ±0.000%    100.551ms ±16.813% 
+stream previous **  14.527ms ±16.895%   50.247ms ±15.663%  9.688 MiB ±11.439%  13664 ±0.000%    93.995ms ±13.865%  
+
+Finished bench:regression:stream:deep in 1m 17.6s
+Starting bench:regression:stream:extension_deep
+Label                    import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+-----------------------  ------------------  -----------------  ------------------  ---------------  -------------------
+stream current **/*.js   18.537ms ±16.799%   45.259ms ±14.101%  10.421 MiB ±1.185%  7412 ±0.000%     92.416ms ±11.954%  
+stream previous **/*.js  16.282ms ±28.116%   53.932ms ±24.450%  10.402 MiB ±3.914%  7412 ±0.000%     103.145ms ±23.377% 
+
+Finished bench:regression:stream:extension_deep in 1m 16.9s
+Starting bench:regression:stream:partial_flatten
+Label                                            import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-----------------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream current {fixtures,out}/{first,second}/*   20.779ms ±25.324%   7.618ms ±25.952%  7.847 MiB ±0.191%  2 ±0.000%        60.967ms ±23.805%  
+stream previous {fixtures,out}/{first,second}/*  14.570ms ±18.411%   6.876ms ±15.214%  7.204 MiB ±0.340%  2 ±0.000%        50.163ms ±13.175%  
+
+Finished bench:regression:stream:partial_flatten in 43.5s
+Starting bench:regression:stream:partial_deep
+Label                              import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+---------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+stream current {fixtures,out}/**   19.856ms ±19.652%   8.956ms ±19.860%  6.999 MiB ±0.452%  184 ±0.000%      58.855ms ±16.987%  
+stream previous {fixtures,out}/**  17.490ms ±37.572%   9.623ms ±37.901%  7.479 MiB ±0.192%  184 ±0.000%      61.695ms ±35.966%  
+
+Finished bench:regression:stream:partial_deep in 46.7s
+Starting bench:regression:stream
+Finished bench:regression:stream in 1ms
+Completed bench:regression:stream in 5m 28.9s

@@ -1,0 +1,242 @@
+{
+  "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+  "installed": [
+    {
+      "path": "LICENSE",
+      "sha256": "f735badf5add8c6d340f0b63884abb5c4f73b496839a0af2c9957fd69ad554e6"
+    },
+    {
+      "path": "out/utils/array.js",
+      "sha256": "ee19d923d08227bb0a3e08cedba7d8e258360fa3c549294c8a2c13ba1a8f56b4"
+    },
+    {
+      "path": "out/providers/async.js",
+      "sha256": "a9e40889dcab54f6b269e882f68b1cc838683be045b797be7daf51f5ed4c420b"
+    },
+    {
+      "path": "out/readers/async.js",
+      "sha256": "027d4bfb9f6b298a0d7384ea006dd4bc7bf4027c00e7aa6d0042952634f287ff"
+    },
+    {
+      "path": "out/providers/filters/deep.js",
+      "sha256": "d230733f5ddc79ee6a94c69259d59f04dff34b66f0bf51294e390665f9fdfe97"
+    },
+    {
+      "path": "out/providers/filters/entry.js",
+      "sha256": "0763f0a578671d9d419ed0e076e42efdf0795419ee996464c82d9162d0e781e5"
+    },
+    {
+      "path": "out/providers/transformers/entry.js",
+      "sha256": "1ca001f3c001d181a666bc6a9aef0e71dc4d0a0d0cf242cb767664965c582c90"
+    },
+    {
+      "path": "out/utils/errno.js",
+      "sha256": "ddc8b0e87030a9fc3c765b38e5368fdc9b1199f4eefa8bfe23b9fd5563a809fc"
+    },
+    {
+      "path": "out/providers/filters/error.js",
+      "sha256": "2f5a056e1923d019dc5dd2b8136536f6875cb1a44690e755a5ec1c0a8159b0b2"
+    },
+    {
+      "path": "out/utils/fs.js",
+      "sha256": "6c8ef35128dc1291d5f6dda90b7b7a3a9d107cfde56f7750452918fbb16afe20"
+    },
+    {
+      "path": "out/index.js",
+      "sha256": "3a332416f5fea2f91445a8da4f5fee7a8840a4bbd8eec10911b73e84b3cac663"
+    },
+    {
+      "path": "out/providers/index.js",
+      "sha256": "2ebf7d856ebd5896ad687b1268888fa2966b71464bf2e995938f91c7238d1e6b"
+    },
+    {
+      "path": "out/readers/index.js",
+      "sha256": "2ebf7d856ebd5896ad687b1268888fa2966b71464bf2e995938f91c7238d1e6b"
+    },
+    {
+      "path": "out/types/index.js",
+      "sha256": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881"
+    },
+    {
+      "path": "out/utils/index.js",
+      "sha256": "0fda2b87728e46e26092e4d4257ad9f40167b327badb755a141259e422d6c306"
+    },
+    {
+      "path": "out/providers/matchers/matcher.js",
+      "sha256": "d9b6bd8b746fc1943cb726bcaa34a22b5a6f6abcccafb2b8cba0b9e491e142ba"
+    },
+    {
+      "path": "out/providers/matchers/partial.js",
+      "sha256": "f53c82b32fce65625fb87edf8652a465a229c4c7830c784acacfc69d55540deb"
+    },
+    {
+      "path": "out/utils/path.js",
+      "sha256": "21f3824cf814258d105f58b923900d89be509c705c854940a407536180b9d362"
+    },
+    {
+      "path": "out/utils/pattern.js",
+      "sha256": "cd6034a1a44696142b30aeeedba0dd650266f318113060ac29499f27d0617184"
+    },
+    {
+      "path": "out/providers/provider.js",
+      "sha256": "730febefde1c5f510feb045bc0a4af13921ffc79ff0859f6c283b9e96eb4585d"
+    },
+    {
+      "path": "out/readers/reader.js",
+      "sha256": "c40a686ef7097303d3f5da9cd54606ca8986e730850529d2e6264915a118a0a6"
+    },
+    {
+      "path": "out/settings.js",
+      "sha256": "ba2549bf10a862abc0545ee0ee048de59b64d118ad80ccd4bd0be548d909629f"
+    },
+    {
+      "path": "out/providers/stream.js",
+      "sha256": "6b8d480ca0eeb151866747b7df024b32de6866eb749d7f6d37d4e57fa12f40db"
+    },
+    {
+      "path": "out/readers/stream.js",
+      "sha256": "c209bd96de59085729f0da867ff40dc18ac7ef96a1a6c92003b4263a984328fa"
+    },
+    {
+      "path": "out/utils/stream.js",
+      "sha256": "7646a315996d3ed50c42d6759e844fadabef323f22395e7321a7d5297a660426"
+    },
+    {
+      "path": "out/utils/string.js",
+      "sha256": "9893696309eaea00693e9e40f4ee9e24635bbd96652bdaa647802618e34243da"
+    },
+    {
+      "path": "out/providers/sync.js",
+      "sha256": "79160304e512506f8f58fc0ddcd9b11cfb831c0bcb69030f26c33e912487db47"
+    },
+    {
+      "path": "out/readers/sync.js",
+      "sha256": "bfd8b68dd356599d48e57b2affe067a670fbe9fcc626ce03dc4f7fe73f9e882b"
+    },
+    {
+      "path": "out/managers/tasks.js",
+      "sha256": "b9a22cac55e3202582b20841ff47be21429b9348f12924488c25035051f0d4ef"
+    },
+    {
+      "path": "package.json",
+      "sha256": "4796ce8e22dad52b54536c8f978f2c6ea07751e9a306c1a0ddf439a79824da91"
+    },
+    {
+      "path": "README.md",
+      "sha256": "a5ff8477ed7f4a7736b4761de8d19bd25cafb4dcd6c7c214ec4a61798803c965"
+    },
+    {
+      "path": "out/utils/array.d.ts",
+      "sha256": "f6e4c7538f83388b8ea17935219091437faa31ea1e492ffc445956213dcc3cc5"
+    },
+    {
+      "path": "out/providers/async.d.ts",
+      "sha256": "37640bc59f3b4ab494f0a019645e64b386c0bb797d759b31f67012b894bc8a9b"
+    },
+    {
+      "path": "out/readers/async.d.ts",
+      "sha256": "0b659b3074f56dfa1d93d09b8934d5fca6b443a31dde3d423d493a61d13bc513"
+    },
+    {
+      "path": "out/providers/filters/deep.d.ts",
+      "sha256": "c3d952dd03b7b84c73aa35e0b553b7c2e1e3404328710f16d76340281056cca9"
+    },
+    {
+      "path": "out/providers/filters/entry.d.ts",
+      "sha256": "c6fc015b2493e17529cc1c3f61d4797cd66a216936a9d702a907c4d9bec21f8d"
+    },
+    {
+      "path": "out/providers/transformers/entry.d.ts",
+      "sha256": "d276f02b456273f555c102a01ea583cbee2f3dc41ff81f9b9ddc98efa9edb418"
+    },
+    {
+      "path": "out/utils/errno.d.ts",
+      "sha256": "d91f3f0642b2183be30ed6f0bec02fef44a81d3e4e433c4254b57fd210d19133"
+    },
+    {
+      "path": "out/providers/filters/error.d.ts",
+      "sha256": "322e6283f8f6fa94873b483aa330025a97b59dc5551e070a194a66367fb42bd6"
+    },
+    {
+      "path": "out/utils/fs.d.ts",
+      "sha256": "51b24dd95f85eeff5641cd3ada7e8661a8dcfefab2af28bf5becad0646e3277f"
+    },
+    {
+      "path": "out/index.d.ts",
+      "sha256": "1910c447b2117e7ce894de8651cb01b808ea269e654f702b472dacafc9dca60e"
+    },
+    {
+      "path": "out/providers/index.d.ts",
+      "sha256": "2ebf7d856ebd5896ad687b1268888fa2966b71464bf2e995938f91c7238d1e6b"
+    },
+    {
+      "path": "out/readers/index.d.ts",
+      "sha256": "2ebf7d856ebd5896ad687b1268888fa2966b71464bf2e995938f91c7238d1e6b"
+    },
+    {
+      "path": "out/types/index.d.ts",
+      "sha256": "a7867cbf4bf99f3515c374a7ebe33d0c3397d6117a45044a32ab6bdaff6e874d"
+    },
+    {
+      "path": "out/utils/index.d.ts",
+      "sha256": "0fda2b87728e46e26092e4d4257ad9f40167b327badb755a141259e422d6c306"
+    },
+    {
+      "path": "out/providers/matchers/matcher.d.ts",
+      "sha256": "3eb640fac9385fd6b6b44d87dfd2bc82bc76de307ebdf5703d522825c051ce5f"
+    },
+    {
+      "path": "out/providers/matchers/partial.d.ts",
+      "sha256": "b5a947e56244fbcc69916bbe8450122bc074de8f9208652e963be9d84a6bbc93"
+    },
+    {
+      "path": "out/utils/path.d.ts",
+      "sha256": "0a1338f53c5437ce3f9857dcf9dc7264e33244330832cf18f2c8427a5048e8e7"
+    },
+    {
+      "path": "out/utils/pattern.d.ts",
+      "sha256": "94f2ee0a242797a6dbe8e1df272ecf35e5cbd50be24536f8d7f7d60c7cfc2a7e"
+    },
+    {
+      "path": "out/providers/provider.d.ts",
+      "sha256": "13cbbe5eae001527829e516dbb5d59543230b0a561c4839ae6db2c89c5288a7d"
+    },
+    {
+      "path": "out/readers/reader.d.ts",
+      "sha256": "ecabb76ebfd7611220307d462a8982b0eef2eeaca8fed33b6937ebd499c5c942"
+    },
+    {
+      "path": "out/settings.d.ts",
+      "sha256": "ce8f2dfc0cb1a8a4c89e9f5165a67a2be458ea880ef18d69e818984af08b6493"
+    },
+    {
+      "path": "out/providers/stream.d.ts",
+      "sha256": "38e5285a565c16a5c0fe0c0068cc4d96e283e3c5515159949d67ab9d12cfe9dd"
+    },
+    {
+      "path": "out/readers/stream.d.ts",
+      "sha256": "ac36a72391398b6f2a92058f5128bada90b20a38e3cc146c193cd7c61801186d"
+    },
+    {
+      "path": "out/utils/stream.d.ts",
+      "sha256": "d9d6354f79efc283dfc3357389b9ab9e5dd2bc68528e2001ca1031d1bb050e43"
+    },
+    {
+      "path": "out/utils/string.d.ts",
+      "sha256": "bd71cde654a1f7d7e60219617872b3b7896fd191b2dd4526b727a5989d300a37"
+    },
+    {
+      "path": "out/providers/sync.d.ts",
+      "sha256": "78976c900d9dd1ab12016c4436690c6597eac78d318bc188f65627b383d8077e"
+    },
+    {
+      "path": "out/readers/sync.d.ts",
+      "sha256": "43d82b7d991d258922a8439cd49d362cfd4c0c351bdc442ac4328b21305a68d3"
+    },
+    {
+      "path": "out/managers/tasks.d.ts",
+      "sha256": "b9a1afbbf14f689f9edd8f046c7b4a34afa3c82c2250a5bbe49d63b6533c230c"
+    }
+  ],
+  "wrong": []
+}

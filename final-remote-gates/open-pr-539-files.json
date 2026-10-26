@@ -1,0 +1,62 @@
+[
+  {
+    "sha": "c6baaa1148e8da2e87d43c6b6e38314d8469d752",
+    "filename": "src/providers/filters/deep.ts",
+    "status": "modified",
+    "additions": 27,
+    "deletions": 4,
+    "changes": 31,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Fproviders%2Ffilters%2Fdeep.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Fproviders%2Ffilters%2Fdeep.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fdeep.ts?ref=073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+    "patch": "@@ -9,6 +9,11 @@ import type {\n } from '../../types/index.js';\n import type Settings from '../../settings.js';\n \n+type NegativePatterns = {\n+\tabsolute: PatternRe[];\n+\trelative: PatternRe[];\n+};\n+\n export default class DeepFilter {\n \treadonly #settings: Settings;\n \treadonly #matcherOptions: MatcherOptions;\n@@ -28,7 +33,7 @@ export default class DeepFilter {\n \t\treturn utils.pattern.convertPatternsToRe(affectDepthOfReadingPatterns, this.#matcherOptions);\n \t}\n \n-\t#filter(basePath: string, entry: Entry, matcher: PartialMatcher, negativeRe: PatternRe[]): boolean {\n+\t#filter(basePath: string, entry: Entry, matcher: PartialMatcher, negativeRe: NegativePatterns): boolean {\n \t\tif (this.#isSkippedByDeep(basePath, entry.path)) {\n \t\t\treturn false;\n \t\t}\n@@ -77,13 +82,31 @@ export default class DeepFilter {\n \t\treturn !this.#settings.baseNameMatch && !matcher.match(entryPath);\n \t}\n \n-\t#isSkippedByNegativePatterns(entryPath: string, patternsRe: PatternRe[]): boolean {\n-\t\treturn !utils.pattern.isMatchAny(entryPath, patternsRe);\n+\t#isSkippedByNegativePatterns(entryPath: string, patternsRe: NegativePatterns): boolean {\n+\t\tif (patternsRe.relative.length > 0) {\n+\t\t\tconst relativePath = utils.path.makeRelative(this.#settings.cwd, entryPath);\n+\t\t\tif (utils.pattern.isMatchAny(relativePath, patternsRe.relative)) {\n+\t\t\t\treturn false;\n+\t\t\t}\n+\t\t}\n+\n+\t\tif (patternsRe.absolute.length > 0) {\n+\t\t\tconst absolutePath = utils.path.makeAbsolute(this.#settings.cwd, entryPath);\n+\t\t\tif (utils.pattern.isMatchAny(absolutePath, patternsRe.absolute)) {\n+\t\t\t\treturn false;\n+\t\t\t}\n+\t\t}\n+\n+\t\treturn true;\n \t}\n \n \tpublic getFilter(basePath: string, positive: Pattern[], negative: Pattern[]): EntryFilterFunction {\n \t\tconst matcher = this.#getMatcher(positive);\n-\t\tconst negativeRe = this.#getNegativePatternsRe(negative);\n+\t\tconst [absolute, relative] = utils.pattern.partitionAbsoluteAndRelative(negative);\n+\t\tconst negativeRe = {\n+\t\t\tabsolute: this.#getNegativePatternsRe(absolute),\n+\t\t\trelative: this.#getNegativePatternsRe(relative),\n+\t\t};\n \n \t\treturn (entry) => this.#filter(basePath, entry, matcher, negativeRe);\n \t}"
+  },
+  {
+    "sha": "a3846a81f4ab7e39b46fdbbc3b96792037a6da1b",
+    "filename": "src/providers/filters/entry.ts",
+    "status": "modified",
+    "additions": 11,
+    "deletions": 1,
+    "changes": 12,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.ts?ref=073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+    "patch": "@@ -73,7 +73,7 @@ export default class EntryFilter {\n \t\t\treturn false;\n \t\t}\n \n-\t\tconst isMatchedByRelativeNegative = this.#isMatchToPatterns(filepath, patterns.negative.relative, isDirectory);\n+\t\tconst isMatchedByRelativeNegative = this.#isMatchToRelativeNegative(filepath, patterns.negative.relative, isDirectory);\n \t\tif (isMatchedByRelativeNegative) {\n \t\t\treturn false;\n \t\t}\n@@ -82,6 +82,16 @@ export default class EntryFilter {\n \t\treturn !isMatchedByAbsoluteNegative;\n \t}\n \n+\t#isMatchToRelativeNegative(filepath: string, patternsRe: PatternRe[], isDirectory: boolean): boolean {\n+\t\tif (patternsRe.length === 0) {\n+\t\t\treturn false;\n+\t\t}\n+\n+\t\tconst relativePath = utils.path.makeRelative(this.#settings.cwd, filepath);\n+\n+\t\treturn this.#isMatchToPatterns(relativePath, patternsRe, isDirectory);\n+\t}\n+\n \t#isMatchToAbsoluteNegative(filepath: string, patternsRe: PatternRe[], isDirectory: boolean): boolean {\n \t\tif (patternsRe.length === 0) {\n \t\t\treturn false;"
+  },
+  {
+    "sha": "4bc2530a01aae2291c46cfcfb3a5c3f25ab71d6f",
+    "filename": "src/tests/e2e/options/relative-ignore.e2e.ts",
+    "status": "added",
+    "additions": 64,
+    "deletions": 0,
+    "changes": 64,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Ftests%2Fe2e%2Foptions%2Frelative-ignore.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Ftests%2Fe2e%2Foptions%2Frelative-ignore.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Foptions%2Frelative-ignore.e2e.ts?ref=073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+    "patch": "@@ -0,0 +1,64 @@\n+import * as path from 'node:path';\n+import * as fg from '../../../index.js';\n+import * as runner from '../runner.js';\n+\n+const cwd = path.resolve('fixtures');\n+const root = fg.convertPathToPattern(cwd);\n+const absolute = (name: string): string => path.join(cwd, name).replaceAll('\\\\', '/');\n+const files = ['first/file.md', 'first/nested/file.md', 'first/nested/directory/file.md'];\n+\n+runner.suite('Relative ignore with absolute patterns', {\n+\tresultTransform: (entry) => entry.replaceAll('\\\\', '/'),\n+\ttests: [\n+\t\t{\n+\t\t\tpattern: `${root}/first/file.md`,\n+\t\t\toptions: { cwd, ignore: ['**/fixtures/**'] },\n+\t\t\texpected: () => [absolute('first/file.md')],\n+\t\t\tissue: 538,\n+\t\t},\n+\t\t{\n+\t\t\tpattern: `${root}/first/**/*.md`,\n+\t\t\toptions: { cwd, ignore: ['**/fixtures/**'] },\n+\t\t\texpected: () => files.map((name) => absolute(name)),\n+\t\t\tissue: 538,\n+\t\t},\n+\t\t{\n+\t\t\tpattern: `${root}/first/file.md`,\n+\t\t\toptions: { cwd, ignore: ['first/file.md'] },\n+\t\t\texpected: () => [],\n+\t\t\tissue: 538,\n+\t\t},\n+\t\t{\n+\t\t\tpattern: `${root}/first/**/*.md`,\n+\t\t\toptions: { cwd, ignore: ['first/nested/**'] },\n+\t\t\texpected: () => [absolute('first/file.md')],\n+\t\t\tissue: 538,\n+\t\t},\n+\t\t{\n+\t\t\tpattern: `${root}/first/**/*.md`,\n+\t\t\toptions: { cwd, ignore: [`${root}/first/nested/**`] },\n+\t\t\texpected: () => [absolute('first/file.md')],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'first/**/*.md',\n+\t\t\toptions: { cwd, ignore: ['first/nested/**', '**/fixtures/**'] },\n+\t\t\texpected: () => ['first/file.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: [`${root}/first/file.md`, 'file.md'],\n+\t\t\toptions: { cwd, absolute: true, ignore: ['**/fixtures/**'] },\n+\t\t\texpected: () => [absolute('first/file.md'), absolute('file.md')],\n+\t\t\tissue: 538,\n+\t\t},\n+\t\t{\n+\t\t\tpattern: `${root}/first/nested`,\n+\t\t\toptions: { cwd, onlyDirectories: true, ignore: ['first/nested/'] },\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'first/**/*.md',\n+\t\t\toptions: { cwd, ignore: [`${root}/first/nested/**`] },\n+\t\t\texpected: () => ['first/file.md'],\n+\t\t},\n+\t],\n+});"
+  },
+  {
+    "sha": "935058a15e6bb4c50b4bedc096b8b95943c46c85",
+    "filename": "src/utils/path.spec.ts",
+    "status": "modified",
+    "additions": 18,
+    "deletions": 0,
+    "changes": 18,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Futils%2Fpath.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Futils%2Fpath.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.spec.ts?ref=073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+    "patch": "@@ -5,6 +5,24 @@ import { describe, it } from 'mocha';\n import * as util from './path.js';\n \n describe('Utils \u2192 Path', () => {\n+\tdescribe('.makeRelative', () => {\n+\t\tit('should make an absolute path relative using forward slashes', () => {\n+\t\t\tassert.strictEqual(util.makeRelative(process.cwd(), path.resolve('root', 'file.md')), 'root/file.md');\n+\t\t});\n+\n+\t\tit('should preserve relative paths', () => {\n+\t\t\tassert.strictEqual(util.makeRelative(process.cwd(), '../root/file.md'), '../root/file.md');\n+\t\t});\n+\n+\t\tit('should resolve a relative working directory', () => {\n+\t\t\tassert.strictEqual(util.makeRelative('root', path.resolve('root', 'file.md')), 'file.md');\n+\t\t});\n+\n+\t\tit('should preserve paths outside the working directory', () => {\n+\t\t\tassert.strictEqual(util.makeRelative(path.resolve('root'), path.resolve('file.md')), '../file.md');\n+\t\t});\n+\t});\n+\n \tdescribe('.makeAbsolute', () => {\n \t\tit('should return absolute filepath', () => {\n \t\t\tconst expected = path.join(process.cwd(), 'file.md');"
+  },
+  {
+    "sha": "d8dbd90a978088748eafcbfaa83794bdc9cef07f",
+    "filename": "src/utils/path.ts",
+    "status": "modified",
+    "additions": 4,
+    "deletions": 0,
+    "changes": 4,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Futils%2Fpath.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/073260b5c5ba7fc02dd7f397d448ee73600bedfe/src%2Futils%2Fpath.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.ts?ref=073260b5c5ba7fc02dd7f397d448ee73600bedfe",
+    "patch": "@@ -34,6 +34,10 @@ export function makeAbsolute(cwd: string, filepath: string): string {\n \treturn path.resolve(cwd, filepath);\n }\n \n+export function makeRelative(cwd: string, filepath: string): string {\n+\treturn path.isAbsolute(filepath) ? path.relative(cwd, filepath).split(path.sep).join('/') : filepath;\n+}\n+\n export function appendTrailingSeparatorToDeviceRoot(filepath: string): string {\n \tif (DOS_DEVICE_DRIVE_ROOT_RE.test(filepath)) {\n \t\treturn `${filepath}\\\\`;"
+  }
+]

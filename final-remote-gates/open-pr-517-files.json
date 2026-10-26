@@ -1,0 +1,38 @@
+[
+  {
+    "sha": "e95d1dcfc8c5c598ff673d88d7e8d1148fe326d7",
+    "filename": "src/providers/filters/entry.spec.ts",
+    "status": "modified",
+    "additions": 18,
+    "deletions": 0,
+    "changes": 18,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Fproviders%2Ffilters%2Fentry.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Fproviders%2Ffilters%2Fentry.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.spec.ts?ref=3d11daf1cfaf472076c7517f5a1394ab635bf7bd",
+    "patch": "@@ -279,6 +279,24 @@ describe('Providers \u2192 Filters \u2192 Entry', () => {\n \t\t\t\t\toptions: { dot: false },\n \t\t\t\t});\n \t\t\t});\n+\n+\t\t\tit('should reject a file entry whose path already has a trailing slash', () => {\n+\t\t\t\tconst entry = tests.entry.builder().path('root/file.txt/').file().build();\n+\n+\t\t\t\treject(entry, {\n+\t\t\t\t\tpositive: ['root/file.txt/'],\n+\t\t\t\t\toptions: { onlyFiles: false },\n+\t\t\t\t});\n+\t\t\t});\n+\n+\t\t\tit('should accept a directory entry whose path already has a trailing slash', () => {\n+\t\t\t\tconst entry = tests.entry.builder().path('root/directory/').directory().build();\n+\n+\t\t\t\taccept(entry, {\n+\t\t\t\t\tpositive: ['root/directory/'],\n+\t\t\t\t\toptions: { onlyFiles: false },\n+\t\t\t\t});\n+\t\t\t});\n \t\t});\n \t});\n "
+  },
+  {
+    "sha": "e0d10197cf1644c3a3407f90b7a27d02296406ef",
+    "filename": "src/providers/filters/entry.ts",
+    "status": "modified",
+    "additions": 5,
+    "deletions": 0,
+    "changes": 5,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.ts?ref=3d11daf1cfaf472076c7517f5a1394ab635bf7bd",
+    "patch": "@@ -38,6 +38,11 @@ export default class EntryFilter {\n \n \t\tconst isDirectory = entry.dirent.isDirectory();\n \n+\t\t// A trailing slash requires a directory, even for statically resolved paths.\n+\t\tif (!isDirectory && filepath.endsWith('/')) {\n+\t\t\treturn false;\n+\t\t}\n+\n \t\tif (this.#onlyFileFilter(isDirectory) || this.#onlyDirectoryFilter(isDirectory)) {\n \t\t\treturn false;\n \t\t}"
+  },
+  {
+    "sha": "082aefd0880f50ad00d6245f42cf34168d095b69",
+    "filename": "src/tests/e2e/patterns/static.e2e.ts",
+    "status": "modified",
+    "additions": 54,
+    "deletions": 0,
+    "changes": 54,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Ftests%2Fe2e%2Fpatterns%2Fstatic.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/3d11daf1cfaf472076c7517f5a1394ab635bf7bd/src%2Ftests%2Fe2e%2Fpatterns%2Fstatic.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Fpatterns%2Fstatic.e2e.ts?ref=3d11daf1cfaf472076c7517f5a1394ab635bf7bd",
+    "patch": "@@ -15,6 +15,60 @@ runner.suite('Patterns Static (cwd)', {\n \t],\n });\n \n+runner.suite('Patterns Static (trailing slash)', {\n+\ttests: [\n+\t\t{\n+\t\t\tpattern: 'fixtures/file.md/',\n+\t\t\tissue: 458,\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'fixtures/file.md/',\n+\t\t\toptions: { onlyFiles: false },\n+\t\t\tissue: 458,\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'file.md/',\n+\t\t\toptions: { cwd: 'fixtures', onlyFiles: false },\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'fixtures/*.md/',\n+\t\t\toptions: { onlyFiles: false },\n+\t\t\texpected: () => [],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'fixtures/first/',\n+\t\t\toptions: { onlyFiles: false },\n+\t\t\texpected: () => ['fixtures/first/'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['fixtures/file.md/', 'fixtures/file.md'],\n+\t\t\texpected: () => ['fixtures/file.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['fixtures/file.md', 'fixtures/file.md/'],\n+\t\t\toptions: { unique: false },\n+\t\t\texpected: () => ['fixtures/file.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['fixtures/file.md/', 'fixtures/first/'],\n+\t\t\toptions: { onlyFiles: false },\n+\t\t\texpected: () => ['fixtures/first/'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: ['fixtures/file.md', '!fixtures/file.md/'],\n+\t\t\texpected: () => ['fixtures/file.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: 'fixtures/first/',\n+\t\t\toptions: { onlyFiles: false, ignore: ['fixtures/first/'] },\n+\t\t\texpected: () => [],\n+\t\t},\n+\t],\n+});\n+\n runner.suite('Patterns Static (ignore)', {\n \ttests: [\n \t\t// Files"
+  }
+]

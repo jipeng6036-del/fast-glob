@@ -1,0 +1,27 @@
+{
+  "productHead": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+  "upstreamBase": "bfe4a68733806774da2cc7a558d3f017cc471db7",
+  "checkedAt": "2026-10-26T18:20:00Z",
+  "openPrsReviewed": 17,
+  "actualFilePatchesReviewed": 58,
+  "allBodiesAndCommentsReviewed": true,
+  "overlappingOpenWork": [],
+  "sameIssueClaimsFound": [],
+  "policy": "Current repository CONTRIBUTING welcomes code bugfixes and requires npm setup/build/tests/benchmarks. No mandatory issue-first or assignment/approval step, AI prohibition, CLA or DCO requirement was found in the current applicable public files. Four requested owner-default policy paths returned 404; no private policy is inferred.",
+  "relatedOpenWork": {
+    "508": "Changes base extraction for unescaped question marks, not repeated leading dot segments.",
+    "527": "Adds drive-root separators during base grouping on Windows; separate stage and pattern.",
+    "529": "Groups prototype-named bases using Map; no repeated-dot normalization.",
+    "536": "Replaces the brace expansion engine and protects literals; no repeated-dot normalization.",
+    "539": "Makes relative exclusions cwd-relative during filtering; no repeated-dot normalization.",
+    "541": "Preserves negative basename polarity while adding globstars under baseNameMatch; does not change the later normalization return."
+  },
+  "relatedClosedHistory": {
+    "258": "Removes one leading dot segment from entry paths before filtering, and handles single-leading-dot matches. Actual patch reviewed. Does not normalize two or more leading segments when preparing tasks.",
+    "402": "Normalizes a single leading dot for unique-entry indexing to deduplicate overlapping patterns. Actual patch reviewed. Does not normalize repeated leading segments during task preparation.",
+    "190": "Closed duplicate-output issue for overlapping single-leading-dot patterns; not the omitted-match behavior reproduced here.",
+    "257": "Closed expansion/single-leading-dot matching history; current upstream still reproduces the distinct repeated-dot failure.",
+    "123": "Closed dot:true hidden-file issue; unrelated."
+  },
+  "scope": "No claim to fix the separate literal-backslash candidate. No existing issue is closed or claimed by this patch."
+}

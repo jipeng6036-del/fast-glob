@@ -1,0 +1,179 @@
+{
+  "head": "8c3f11b200a5f54a543f4c513c558ae498cc2bf7",
+  "updatedAt": "2026-10-26T18:23:24.797Z",
+  "warmup": 100,
+  "runs": 300,
+  "states": [
+    {
+      "id": "linux-22.13.0",
+      "command": "export PATH=/ram/node22min/node_modules/node/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "startedAt": "2026-10-26T17:39:27.133Z",
+      "version": "22.13.0",
+      "kind": "configured-ci",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:39:46.667Z"
+    },
+    {
+      "id": "linux-22.23.4",
+      "command": "export PATH=/ram/runtime22/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "startedAt": "2026-10-26T17:39:46.670Z",
+      "version": "22.23.4",
+      "kind": "configured-ci",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:40:03.351Z"
+    },
+    {
+      "id": "linux-24.14.0",
+      "command": "export PATH=/ram/runtime24/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "startedAt": "2026-10-26T17:40:03.353Z",
+      "version": "24.14.0",
+      "kind": "configured-ci",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:40:18.683Z"
+    },
+    {
+      "id": "linux-26.12.1",
+      "command": "export PATH=/usr/local/bin:$PATH; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream",
+      "startedAt": "2026-10-26T17:40:18.685Z",
+      "version": "26.12.1",
+      "kind": "configured-ci",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:40:32.532Z"
+    },
+    {
+      "id": "product-async",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:async",
+      "startedAt": "2026-10-26T17:40:32.534Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T17:53:25.114Z"
+    },
+    {
+      "id": "product-stream",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:stream",
+      "startedAt": "2026-10-26T17:40:32.535Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T17:51:19.380Z"
+    },
+    {
+      "id": "product-sync",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:product:sync",
+      "startedAt": "2026-10-26T17:51:19.380Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T18:00:30.080Z"
+    },
+    {
+      "id": "regression-default-async",
+      "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+      "startedAt": "2026-10-26T17:53:25.114Z",
+      "kind": "configured-benchmark",
+      "options": "{}",
+      "code": 0,
+      "finishedAt": "2026-10-26T17:58:42.054Z"
+    },
+    {
+      "id": "regression-default-stream",
+      "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+      "startedAt": "2026-10-26T17:58:42.055Z",
+      "kind": "configured-benchmark",
+      "options": "{}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:04:11.106Z"
+    },
+    {
+      "id": "regression-default-sync",
+      "command": "export BENCHMARK_OPTIONS='{}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+      "startedAt": "2026-10-26T18:00:30.080Z",
+      "kind": "configured-benchmark",
+      "options": "{}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:05:04.501Z"
+    },
+    {
+      "id": "regression-object-async",
+      "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+      "startedAt": "2026-10-26T18:04:11.107Z",
+      "kind": "configured-benchmark",
+      "options": "{\"objectMode\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:09:37.296Z"
+    },
+    {
+      "id": "regression-object-stream",
+      "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+      "startedAt": "2026-10-26T18:05:04.501Z",
+      "kind": "configured-benchmark",
+      "options": "{\"objectMode\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:10:50.668Z"
+    },
+    {
+      "id": "regression-object-sync",
+      "command": "export BENCHMARK_OPTIONS='{\"objectMode\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+      "startedAt": "2026-10-26T18:09:37.297Z",
+      "kind": "configured-benchmark",
+      "options": "{\"objectMode\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:14:15.736Z"
+    },
+    {
+      "id": "regression-absolute-async",
+      "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:async",
+      "startedAt": "2026-10-26T18:10:50.668Z",
+      "kind": "configured-benchmark",
+      "options": "{\"absolute\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:16:20.992Z"
+    },
+    {
+      "id": "regression-absolute-stream",
+      "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:stream",
+      "startedAt": "2026-10-26T18:14:15.736Z",
+      "kind": "configured-benchmark",
+      "options": "{\"absolute\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:20:03.867Z"
+    },
+    {
+      "id": "regression-absolute-sync",
+      "command": "export BENCHMARK_OPTIONS='{\"absolute\":true}'; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:regression:sync",
+      "startedAt": "2026-10-26T18:16:20.992Z",
+      "kind": "configured-benchmark",
+      "options": "{\"absolute\":true}",
+      "code": 0,
+      "finishedAt": "2026-10-26T18:21:22.063Z"
+    },
+    {
+      "id": "overhead-async",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:async",
+      "startedAt": "2026-10-26T18:20:03.867Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T18:21:46.818Z"
+    },
+    {
+      "id": "overhead-stream",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:stream",
+      "startedAt": "2026-10-26T18:21:22.063Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T18:23:22.460Z"
+    },
+    {
+      "id": "overhead-sync",
+      "command": "unset BENCHMARK_OPTIONS; unset WARMUP_COUNT RUNS_COUNT CONCURRENCY; node --run bench:overhead:sync",
+      "startedAt": "2026-10-26T18:21:46.818Z",
+      "kind": "configured-benchmark",
+      "options": null,
+      "code": 0,
+      "finishedAt": "2026-10-26T18:23:24.797Z"
+    }
+  ]
+}

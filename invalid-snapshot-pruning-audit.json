@@ -1,0 +1,91 @@
+{
+  "invalidReason": "Split E2E missing configured SNAPSHOT_SKIP_PRUNING=1 mutated tracked snapshot bytes; not counted as final gates.",
+  "archiveSha256": "069d1ef0ee40cf3fa24b4f5bbce44d8628a35d857529db739fd5f01e67435fc9",
+  "snapshotFiles": 15,
+  "mismatches": [
+    {
+      "path": "__snapshots__/unique.e2e.js",
+      "bytes": 306,
+      "blob": "c3cfec0f73981a911196db8c9bdd11f102cbb570",
+      "expectedBlob": "189d6abd6ede7d9dcfb3cc60884f526a1ebc74ec"
+    },
+    {
+      "path": "__snapshots__/static.e2e.js",
+      "bytes": 4153,
+      "blob": "5e12afc95de121071307427ed8cac87926724485",
+      "expectedBlob": "48b96ca7f449b75230156269651d66eb5b6f2b76"
+    },
+    {
+      "path": "__snapshots__/regular.e2e.js",
+      "bytes": 75996,
+      "blob": "d3cb6ae396ca7852e0ea882f2d65a13ac2713dc7",
+      "expectedBlob": "b53f44b690828c5f5cde26baaba8634bccab81f9"
+    },
+    {
+      "path": "__snapshots__/only-files.e2e.js",
+      "bytes": 1948,
+      "blob": "19ea2add07b6375bfc02c23bca57a2f1844fbdcf",
+      "expectedBlob": "6ad91ca7ed4a09442b4a90b4451d1a23645f1082"
+    },
+    {
+      "path": "__snapshots__/only-directories.e2e.js",
+      "bytes": 3511,
+      "blob": "81cc62db03efb79d10a616775e8dece1318ecfbc",
+      "expectedBlob": "4ac08cc4f5eea8f74547f49e871b6037e23e8efc"
+    },
+    {
+      "path": "__snapshots__/mark-directories.e2e.js",
+      "bytes": 478,
+      "blob": "2c5bd5cdf9204c96f27d71a66f705894e7a4a560",
+      "expectedBlob": "7345d528bd0d1000af67ef44145ffefe5b7e254b"
+    },
+    {
+      "path": "__snapshots__/ignore.e2e.js",
+      "bytes": 302,
+      "blob": "3c9297a6361aec23e53ad092a4668dcccfc9675f",
+      "expectedBlob": "f5c4d63ddc11e266155d7219bbd65580efa87532"
+    },
+    {
+      "path": "__snapshots__/errors.e2e.js",
+      "bytes": 263,
+      "blob": "ce144f1b18301f5c18908e8d4634dc0a9a7a6cd0",
+      "expectedBlob": "7b2116924a8c88032b5e11459dd7bc4ed859ea3c"
+    },
+    {
+      "path": "__snapshots__/dot.e2e.js",
+      "bytes": 2801,
+      "blob": "46301e2e1d6dfab85e6aacce9453823513be2ee3",
+      "expectedBlob": "cbfc0ddb6c43e27b8139abd8f32b768055c407e9"
+    },
+    {
+      "path": "__snapshots__/deep.e2e.js",
+      "bytes": 545,
+      "blob": "beab5809ee03f632c49c5f2ab7e553c380c0b9a0",
+      "expectedBlob": "e6a96785886f1ef2d4c860694431214f18b709e2"
+    },
+    {
+      "path": "__snapshots__/cwd.e2e.js",
+      "bytes": 1651,
+      "blob": "bcd66d218857caea1e762c5bf25acac74d28b9ad",
+      "expectedBlob": "8ccd3d45a98f49bb6a523ccff66ce330ba4aff6d"
+    },
+    {
+      "path": "__snapshots__/case-sensitive-match.e2e.js",
+      "bytes": 146,
+      "blob": "f94fcbd02c146b0f9003d1fbc01173ed03b661e0",
+      "expectedBlob": "38421be67e746b59875016a04934528838f280a5"
+    },
+    {
+      "path": "__snapshots__/base-name-match.e2e.js",
+      "bytes": 655,
+      "blob": "65a6dcad61680f64de201840f3bdea0b3b5a303d",
+      "expectedBlob": "9cc8c65a14c0279bf91d627ddb2650c68f1a6e29"
+    },
+    {
+      "path": "__snapshots__/absolute.e2e.js",
+      "bytes": 5259,
+      "blob": "c7a9b9afc03c87b6359ff1785a4cd8edefb540a7",
+      "expectedBlob": "5dad3665f2731f0dba6a2f5532b47312544be3e5"
+    }
+  ]
+}

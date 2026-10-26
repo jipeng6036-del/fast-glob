@@ -1,0 +1,20 @@
+[
+  {
+    "node": "22.13.0",
+    "code": 0,
+    "seconds": 21.5,
+    "command": "export PATH=/ram/node22min/node_modules/node/bin:$PATH; cd /ram/candidate; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream"
+  },
+  {
+    "node": "22.23.4",
+    "code": 0,
+    "seconds": 24.9,
+    "command": "export PATH=/ram/runtime22/bin:$PATH; cd /ram/candidate; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream"
+  },
+  {
+    "node": "24.14.0",
+    "code": 0,
+    "seconds": 25.1,
+    "command": "export PATH=/ram/runtime24/bin:$PATH; cd /ram/candidate; node --version; npm run build && npm run test:e2e:sync && npm run test:e2e:async && npm run test:e2e:stream"
+  }
+]

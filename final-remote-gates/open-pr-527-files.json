@@ -1,0 +1,62 @@
+[
+  {
+    "sha": "fc21b2f8b97fee34ebbd8b4d02e8785d25dab6b7",
+    "filename": "src/index.spec.ts",
+    "status": "modified",
+    "additions": 17,
+    "deletions": 0,
+    "changes": 17,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Findex.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Findex.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Findex.spec.ts?ref=6e02db4ec6364a898bcc3127c05c78840d8941c4",
+    "patch": "@@ -1,4 +1,5 @@\n import * as assert from 'node:assert';\n+import * as path from 'node:path';\n import { describe, it } from 'mocha';\n import * as tests from './tests/index.js';\n import type { EntryItem, ErrnoException } from './types/index.js';\n@@ -52,6 +53,22 @@ describe('Package', () => {\n \n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should read the root of a drive rather than the current directory', () => {\n+\t\t\tconst directories: string[] = [];\n+\t\t\tconst readdirSync = (directory: string): never[] => {\n+\t\t\t\tdirectories.push(directory);\n+\n+\t\t\t\treturn [];\n+\t\t\t};\n+\n+\t\t\tfg.globSync('C:/*', { fs: { readdirSync } });\n+\n+\t\t\tconst actual = directories.map((directory) => path.resolve(directory));\n+\t\t\tconst expected = tests.platform.isWindows() ? 'C:\\\\' : path.resolve('C:');\n+\n+\t\t\tassert.deepStrictEqual(actual, [expected]);\n+\t\t});\n \t});\n \n \tdescribe('.sync', () => {"
+  },
+  {
+    "sha": "d542b53f195f386ace710ef84a35f5fc5c4bb990",
+    "filename": "src/managers/tasks.spec.ts",
+    "status": "modified",
+    "additions": 11,
+    "deletions": 0,
+    "changes": 11,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Fmanagers%2Ftasks.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Fmanagers%2Ftasks.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fmanagers%2Ftasks.spec.ts?ref=6e02db4ec6364a898bcc3127c05c78840d8941c4",
+    "patch": "@@ -219,6 +219,17 @@ describe('Managers \u2192 Task', () => {\n \n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should keep the trailing slash for the root of a drive on Windows', () => {\n+\t\t\t// On Windows, `C:` without a trailing slash is the current directory on drive C, not its root.\n+\t\t\tconst windows: PatternsGroup = { 'C:/': ['C:/*', 'C:/**/*.md'], 'c:/': ['c:/*'], 'C:/root': ['C:/root/*'] };\n+\t\t\tconst posix: PatternsGroup = { 'C:': ['C:/*', 'C:/**/*.md'], 'c:': ['c:/*'], 'C:/root': ['C:/root/*'] };\n+\t\t\tconst expected = tests.platform.isWindows() ? windows : posix;\n+\n+\t\t\tconst actual = manager.groupPatternsByBaseDirectory(['C:/*', 'C:/**/*.md', 'c:/*', 'C:/root/*']);\n+\n+\t\t\tassert.deepStrictEqual(actual, expected);\n+\t\t});\n \t});\n \n \tdescribe('.convertPatternGroupsToTasks', () => {"
+  },
+  {
+    "sha": "29f2a4c961aba254c2442d2ea1b73e0af420b5e3",
+    "filename": "src/managers/tasks.ts",
+    "status": "modified",
+    "additions": 1,
+    "deletions": 0,
+    "changes": 1,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Fmanagers%2Ftasks.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Fmanagers%2Ftasks.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fmanagers%2Ftasks.ts?ref=6e02db4ec6364a898bcc3127c05c78840d8941c4",
+    "patch": "@@ -120,6 +120,7 @@ export function groupPatternsByBaseDirectory(patterns: Pattern[]): PatternsGroup\n \t\t * so escaping leads to referencing non-existent paths.\n \t\t */\n \t\tbase = utils.path.removeBackslashes(base);\n+\t\tbase = utils.path.appendTrailingSeparatorToDriveRoot(base, pattern);\n \n \t\tif (Object.hasOwn(group, base)) {\n \t\t\tgroup[base].push(pattern);"
+  },
+  {
+    "sha": "91e990d3f263e6dec934d328fb7fd96c84771131",
+    "filename": "src/utils/path.spec.ts",
+    "status": "modified",
+    "additions": 15,
+    "deletions": 0,
+    "changes": 15,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Futils%2Fpath.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Futils%2Fpath.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.spec.ts?ref=6e02db4ec6364a898bcc3127c05c78840d8941c4",
+    "patch": "@@ -32,6 +32,21 @@ describe('Utils \u2192 Path', () => {\n \t\t});\n \t});\n \n+\tdescribe('.appendTrailingSeparatorToDriveRoot', () => {\n+\t\tit('should return base directory without changes', () => {\n+\t\t\tassert.strictEqual(util.appendTrailingSeparatorToDriveRoot('.', '*'), '.');\n+\t\t\tassert.strictEqual(util.appendTrailingSeparatorToDriveRoot('/', '/*'), '/');\n+\t\t\tassert.strictEqual(util.appendTrailingSeparatorToDriveRoot('C:/a', 'C:/a/*'), 'C:/a');\n+\t\t\tassert.strictEqual(util.appendTrailingSeparatorToDriveRoot('C:', 'C:'), 'C:');\n+\t\t});\n+\n+\t\tit('should append trailing separator to the root of a drive on Windows', () => {\n+\t\t\tconst expected = process.platform === 'win32' ? 'C:/' : 'C:';\n+\n+\t\t\tassert.strictEqual(util.appendTrailingSeparatorToDriveRoot('C:', 'C:/*'), expected);\n+\t\t});\n+\t});\n+\n \tdescribe('.escape', () => {\n \t\tit('should return pattern without additional escape characters', () => {\n \t\t\tassert.strictEqual(util.escape(String.raw`\\!abc`), String.raw`\\!abc`);"
+  },
+  {
+    "sha": "4028d338c7262657c72479529f950df2c0f9710f",
+    "filename": "src/utils/path.ts",
+    "status": "modified",
+    "additions": 16,
+    "deletions": 0,
+    "changes": 16,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Futils%2Fpath.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/6e02db4ec6364a898bcc3127c05c78840d8941c4/src%2Futils%2Fpath.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpath.ts?ref=6e02db4ec6364a898bcc3127c05c78840d8941c4",
+    "patch": "@@ -23,6 +23,10 @@ const DOS_DEVICE_PATH_RE = /^\\\\\\\\(?=[.?])/;\n  * but the Windows API requires the separator to read the root directory of a drive.\n  */\n const DOS_DEVICE_DRIVE_ROOT_RE = /^\\\\\\\\[.?]\\\\[a-z]:$/i;\n+/**\n+ * A drive letter without the trailing separator, for example `C:`.\n+ */\n+const DRIVE_LETTER_RE = /^[a-z]:$/i;\n /**\n  * All backslashes except those escaping special characters.\n  * Windows: !()+@{}\n@@ -42,6 +46,18 @@ export function appendTrailingSeparatorToDeviceRoot(filepath: string): string {\n \treturn filepath;\n }\n \n+/**\n+ * Windows treats a drive letter without the trailing separator (`C:`) as the current directory on that drive,\n+ * so the base directory of a pattern starting at the root of a drive (`C:/*`) must keep its separator.\n+ */\n+export function appendTrailingSeparatorToDriveRoot(base: string, pattern: Pattern): string {\n+\tif (IS_WINDOWS_PLATFORM && DRIVE_LETTER_RE.test(base) && pattern.startsWith(`${base}/`)) {\n+\t\treturn `${base}/`;\n+\t}\n+\n+\treturn base;\n+}\n+\n export function removeLeadingDotSegment(entry: string): string {\n \t// We do not use `startsWith` because this is 10x slower than current implementation for some cases.\n \t// eslint-disable-next-line @typescript-eslint/prefer-string-starts-ends-with"
+  }
+]

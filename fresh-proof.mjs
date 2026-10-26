@@ -1,0 +1,8 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import {spawnSync} from 'node:child_process';
+const dir='/ram/install-probe-reports';const env={...process.env,SNAPSHOT_SKIP_PRUNING:'1'};
+let fd=fs.openSync(dir+'/fresh-baseline-build.log','w');let p=spawnSync('npm',['run','build'],{cwd:'/ram/install-probe-base',env,stdio:['ignore',fd,fd]});fs.closeSync(fd);if(p.status!==0)throw Error('Baseline build failed');
+for(const [name,cwd,passed,failed]of [['base','/ram/install-probe-base',24,24],['candidate','/ram/install-probe-candidate',48,0]]){
+ fd=fs.openSync(dir+'/fresh-'+name+'-native-proof.log','w');p=spawnSync('node',['/tmp/dot-proof.mjs',cwd+'/out/index.js',dir+'/fresh-'+name+'-native-proof.json'],{cwd,env,stdio:['ignore',fd,fd]});fs.closeSync(fd);const data=JSON.parse(fs.readFileSync(dir+'/fresh-'+name+'-native-proof.json'));if(data.passed!==passed||data.failed!==failed||p.status!==(failed?1:0))throw Error('Proof mismatch');
+}
+p=spawnSync('npm',['pack','--json','--pack-destination',dir],{cwd:'/ram/install-probe-candidate',env,encoding:'utf8'});fs.writeFileSync(dir+'/fresh-pack.json',p.stdout);fs.writeFileSync(dir+'/fresh-pack.stderr.log',p.stderr);if(p.status!==0)throw Error('Pack failed');
+const tar=fs.readFileSync(dir+'/fast-glob-4.0.0.tgz'),sha256=crypto.createHash('sha256').update(tar).digest('hex');if(sha256!=='f310b714278332f5c77dd418aa63f193107c9a58545d516301bd89acb685be41')throw Error('Fresh archive changed '+sha256);fs.writeFileSync(dir+'/fresh-proof-done.json',JSON.stringify({head:fs.readFileSync('/tmp/final-head.txt','utf8').trim(),code:0,packageSha256:sha256,finishedAt:new Date().toISOString()},null,2));

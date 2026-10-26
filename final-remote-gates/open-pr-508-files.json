@@ -1,0 +1,38 @@
+[
+  {
+    "sha": "5dcec86d196b524d3be83b30f51f4ba5b66034d8",
+    "filename": "src/tests/e2e/patterns/regular.e2e.ts",
+    "status": "modified",
+    "additions": 18,
+    "deletions": 0,
+    "changes": 18,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/755a41e369f87ff3a972ad773939f029a21846dd/src%2Ftests%2Fe2e%2Fpatterns%2Fregular.e2e.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/755a41e369f87ff3a972ad773939f029a21846dd/src%2Ftests%2Fe2e%2Fpatterns%2Fregular.e2e.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Ftests%2Fe2e%2Fpatterns%2Fregular.e2e.ts?ref=755a41e369f87ff3a972ad773939f029a21846dd",
+    "patch": "@@ -503,3 +503,21 @@ runner.suite('Patterns Regular (segmented lists)', {\n \t\t{ pattern: '{book.xml,library/**/a/book.md}', options: { cwd: 'fixtures/third' } },\n \t],\n });\n+\n+runner.suite('Patterns Regular (question mark in the base directory)', {\n+\ttests: [\n+\t\t{\n+\t\t\tpattern: 'fi?st/file.md',\n+\t\t\toptions: { cwd: 'fixtures' },\n+\t\t\tissue: 380,\n+\t\t\texpected: () => ['first/file.md'],\n+\t\t},\n+\t\t{\n+\t\t\tpattern: '?????/file.md',\n+\t\t\toptions: { cwd: 'fixtures' },\n+\t\t\tissue: 380,\n+\t\t\texpected: () => ['first/file.md'],\n+\t\t},\n+\t\t{ pattern: 'fixtures/fi?st/file.md', issue: 380, expected: () => ['fixtures/first/file.md'] },\n+\t],\n+});"
+  },
+  {
+    "sha": "f2d3ee672c27094c1e8541eed533ba6c26ad275e",
+    "filename": "src/utils/pattern.spec.ts",
+    "status": "modified",
+    "additions": 60,
+    "deletions": 0,
+    "changes": 60,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/755a41e369f87ff3a972ad773939f029a21846dd/src%2Futils%2Fpattern.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/755a41e369f87ff3a972ad773939f029a21846dd/src%2Futils%2Fpattern.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpattern.spec.ts?ref=755a41e369f87ff3a972ad773939f029a21846dd",
+    "patch": "@@ -341,6 +341,66 @@ describe('Utils \u2192 Pattern', () => {\n \n \t\t\tassert.strictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should returns the current directory for a leading question mark segment', () => {\n+\t\t\tconst expected = '.';\n+\n+\t\t\tconst actual = util.getBaseDirectory('?/file.txt');\n+\n+\t\t\tassert.strictEqual(actual, expected);\n+\t\t});\n+\n+\t\tit('should not treat a question mark segment as a part of the base directory', () => {\n+\t\t\tconst expected = 'root';\n+\n+\t\t\tconst actual = util.getBaseDirectory('root/a?b/file.txt');\n+\n+\t\t\tassert.strictEqual(actual, expected);\n+\t\t});\n+\n+\t\tit('should keep an escaped question mark segment as a part of the base directory', () => {\n+\t\t\tconst expected = '?';\n+\n+\t\t\tconst actual = util.getBaseDirectory(String.raw`\\?/file.txt`);\n+\n+\t\t\tassert.strictEqual(actual, expected);\n+\t\t});\n+\n+\t\tit('should preserve the root of an absolute pattern with a question mark', () => {\n+\t\t\tconst actual = util.getBaseDirectory('/a?/file.txt');\n+\n+\t\t\tassert.strictEqual(actual, '/');\n+\t\t});\n+\n+\t\tit('should not include an earlier wildcard after an escaped question mark', () => {\n+\t\t\tconst actual = util.getBaseDirectory(String.raw`foo\\?/bar*/x?/file.txt`);\n+\n+\t\t\tassert.strictEqual(actual, 'foo?');\n+\t\t});\n+\n+\t\tit('should unescape the base before a question mark segment', () => {\n+\t\t\tconst actual = util.getBaseDirectory(String.raw`foo\\?/a?/file.txt`);\n+\n+\t\t\tassert.strictEqual(actual, 'foo?');\n+\t\t});\n+\n+\t\tit('should treat a question mark after an escaped backslash as a wildcard', () => {\n+\t\t\tconst actual = util.getBaseDirectory(String.raw`root/\\\\?/file.txt`);\n+\n+\t\t\tassert.strictEqual(actual, 'root');\n+\t\t});\n+\n+\t\tit('should preserve a Windows device prefix', () => {\n+\t\t\tconst actual = util.getBaseDirectory('//?/C:/folder/file.txt');\n+\n+\t\t\tassert.strictEqual(actual, '//?/C:/folder');\n+\t\t});\n+\n+\t\tit('should recognize question mark wildcards after a Windows device prefix', () => {\n+\t\t\tconst actual = util.getBaseDirectory('//?/C:/a?/file.txt');\n+\n+\t\t\tassert.strictEqual(actual, '//?/C:');\n+\t\t});\n \t});\n \n \tdescribe('.hasGlobStar', () => {"
+  },
+  {
+    "sha": "0ed9e20bb431aaeb806bbbfb7bf3377500e636e6",
+    "filename": "src/utils/pattern.ts",
+    "status": "modified",
+    "additions": 5,
+    "deletions": 1,
+    "changes": 6,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/755a41e369f87ff3a972ad773939f029a21846dd/src%2Futils%2Fpattern.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/755a41e369f87ff3a972ad773939f029a21846dd/src%2Futils%2Fpattern.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Futils%2Fpattern.ts?ref=755a41e369f87ff3a972ad773939f029a21846dd",
+    "patch": "@@ -132,7 +132,11 @@ export function isPatternRelatedToParentDirectory(pattern: Pattern): boolean {\n }\n \n export function getBaseDirectory(pattern: Pattern): string {\n-\treturn globParent(pattern, { flipBackslashes: false });\n+\t// `is-glob` intentionally excludes bare `?` in strict mode, while fast-glob treats it as a wildcard.\n+\t// Preserve escaped characters and Windows device prefixes; matching still uses the original pattern.\n+\tconst patternForBase = pattern.replaceAll(/^\\/\\/\\?\\/|\\\\[\\s\\S]|\\?/g, (match) => match === '?' ? '*' : match);\n+\n+\treturn globParent(patternForBase, { flipBackslashes: false });\n }\n \n export function hasGlobStar(pattern: Pattern): boolean {"
+  }
+]

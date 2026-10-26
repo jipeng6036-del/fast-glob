@@ -1,0 +1,38 @@
+[
+  {
+    "sha": "af349a3080a7edeb818e12e32e29e8245d590da0",
+    "filename": "src/index.spec.ts",
+    "status": "modified",
+    "additions": 37,
+    "deletions": 1,
+    "changes": 38,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Findex.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Findex.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Findex.spec.ts?ref=5d40c3d6d1e4c21915ee855bff5da62ffb97cfef",
+    "patch": "@@ -1,7 +1,7 @@\n import * as assert from 'node:assert';\n import { describe, it } from 'mocha';\n import * as tests from './tests/index.js';\n-import type { EntryItem, ErrnoException } from './types/index.js';\n+import type { Entry, EntryItem, ErrnoException } from './types/index.js';\n import * as fg from './index.js';\n \n // Only for validating the input data.\n@@ -52,6 +52,15 @@ describe('Package', () => {\n \n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n+\n+\t\tit('should return the same entry name for static and dynamic patterns', () => {\n+\t\t\tconst [staticEntry] = fg.globSync('fixtures/first/file.md', { objectMode: true });\n+\t\t\tconst [dynamicEntry] = fg.globSync('fixtures/first/*.md', { objectMode: true });\n+\n+\t\t\tassert.strictEqual(staticEntry.name, 'file.md');\n+\t\t\tassert.strictEqual(staticEntry.dirent.name, 'file.md');\n+\t\t\tassert.strictEqual(staticEntry.name, dynamicEntry.name);\n+\t\t});\n \t});\n \n \tdescribe('.sync', () => {\n@@ -106,6 +115,15 @@ describe('Package', () => {\n \t\t\tassert.deepStrictEqual(actual, expected);\n \t\t});\n \n+\t\tit('should return the same entry name for static and dynamic patterns', async () => {\n+\t\t\tconst [staticEntry] = await fg.glob('fixtures/first/file.md', { objectMode: true });\n+\t\t\tconst [dynamicEntry] = await fg.glob('fixtures/first/*.md', { objectMode: true });\n+\n+\t\t\tassert.strictEqual(staticEntry.name, 'file.md');\n+\t\t\tassert.strictEqual(staticEntry.dirent.name, 'file.md');\n+\t\t\tassert.strictEqual(staticEntry.name, dynamicEntry.name);\n+\t\t});\n+\n \t\tit('should abort processing dynamic pattern with abort signal', async () => {\n \t\t\tconst signal = AbortSignal.timeout(5);\n \n@@ -196,6 +214,24 @@ describe('Package', () => {\n \t\t\t});\n \t\t});\n \n+\t\tit('should return the same entry name for static and dynamic patterns', (done) => {\n+\t\t\tconst actual: string[][] = [];\n+\n+\t\t\tconst stream = fg.globStream(['fixtures/first/file.md', 'fixtures/first/*.md'], { objectMode: true, unique: false });\n+\n+\t\t\tstream.on('data', (entry: Entry) => {\n+\t\t\t\tactual.push([entry.path, entry.name, entry.dirent.name]);\n+\t\t\t});\n+\t\t\tstream.once('error', (error: ErrnoException) => assert.fail(error));\n+\t\t\tstream.once('end', () => {\n+\t\t\t\tassert.deepStrictEqual(actual, [\n+\t\t\t\t\t['fixtures/first/file.md', 'file.md', 'file.md'],\n+\t\t\t\t\t['fixtures/first/file.md', 'file.md', 'file.md'],\n+\t\t\t\t]);\n+\t\t\t\tdone();\n+\t\t\t});\n+\t\t});\n+\n \t\tit('should abort processing dynamic pattern with abort signal', (done) => {\n \t\t\tconst signal = AbortSignal.timeout(5);\n "
+  },
+  {
+    "sha": "3e05b9f9a8c4e9a72eed7b252655c91b6ac7029c",
+    "filename": "src/readers/reader.spec.ts",
+    "status": "modified",
+    "additions": 12,
+    "deletions": 0,
+    "changes": 12,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Freaders%2Freader.spec.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Freaders%2Freader.spec.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Freaders%2Freader.spec.ts?ref=5d40c3d6d1e4c21915ee855bff5da62ffb97cfef",
+    "patch": "@@ -77,6 +77,18 @@ describe('Readers \u2192 Reader', () => {\n \t\t\tassert.ok(actual.dirent.isFile());\n \t\t});\n \n+\t\tit('should return created entry with the last part of the pattern as the name', () => {\n+\t\t\tconst reader = getReader();\n+\t\t\tconst pattern = 'directory/config.json';\n+\t\t\tconst stats = new Stats({ mode: StatsMode.File });\n+\n+\t\t\tconst actual = reader.makeEntry(stats, pattern);\n+\n+\t\t\tassert.strictEqual(actual.name, 'config.json');\n+\t\t\tassert.strictEqual(actual.path, pattern);\n+\t\t\tassert.strictEqual(actual.dirent.name, 'config.json');\n+\t\t});\n+\n \t\tit('should return created entry with fs.Stats', () => {\n \t\t\tconst reader = getReader({ stats: true });\n \t\t\tconst pattern = 'config.json';"
+  },
+  {
+    "sha": "fcc8f7fbd81007e4af321e599f45008c9ef90b68",
+    "filename": "src/readers/reader.ts",
+    "status": "modified",
+    "additions": 4,
+    "deletions": 2,
+    "changes": 6,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Freaders%2Freader.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/5d40c3d6d1e4c21915ee855bff5da62ffb97cfef/src%2Freaders%2Freader.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Freaders%2Freader.ts?ref=5d40c3d6d1e4c21915ee855bff5da62ffb97cfef",
+    "patch": "@@ -33,10 +33,12 @@ export abstract class Reader<T> {\n \t}\n \n \tprotected _makeEntry(stats: FsStats, pattern: Pattern): Entry {\n+\t\tconst name = path.basename(pattern);\n+\n \t\tconst entry: Entry = {\n-\t\t\tname: pattern,\n+\t\t\tname,\n \t\t\tpath: pattern,\n-\t\t\tdirent: utils.fs.createDirentFromStats(pattern, stats),\n+\t\t\tdirent: utils.fs.createDirentFromStats(name, stats),\n \t\t};\n \n \t\tif (this.#settings.stats) {"
+  }
+]

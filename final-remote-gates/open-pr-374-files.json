@@ -1,0 +1,26 @@
+[
+  {
+    "sha": "54280fe0b716a745a839aea5df7fcc0852e9d99d",
+    "filename": "src/providers/filters/entry.ts",
+    "status": "modified",
+    "additions": 2,
+    "deletions": 2,
+    "changes": 4,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/d93ba2f1987ecd97496976607b8304fc895ec6e9/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/d93ba2f1987ecd97496976607b8304fc895ec6e9/src%2Fproviders%2Ffilters%2Fentry.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fproviders%2Ffilters%2Fentry.ts?ref=d93ba2f1987ecd97496976607b8304fc895ec6e9",
+    "patch": "@@ -3,7 +3,7 @@ import { Entry, EntryFilterFunction, MicromatchOptions, Pattern, PatternRe } fro\n import * as utils from '../../utils';\n \n export default class EntryFilter {\n-\tpublic readonly index: Map<string, undefined> = new Map();\n+\tpublic readonly index: Map<unknown, undefined> = new Map();\n \n \tconstructor(private readonly _settings: Settings, private readonly _micromatchOptions: MicromatchOptions) {}\n \n@@ -40,7 +40,7 @@ export default class EntryFilter {\n \t}\n \n \tprivate _isDuplicateEntry(entry: Entry): boolean {\n-\t\treturn this.index.has(entry.path);\n+\t\treturn this.index.has(this._settings.uniqueBy(entry));\n \t}\n \n \tprivate _createIndexRecord(entry: Entry): void {"
+  },
+  {
+    "sha": "a2eb67fba9ba07891f4289755702b362fe659eab",
+    "filename": "src/settings.ts",
+    "status": "modified",
+    "additions": 8,
+    "deletions": 1,
+    "changes": 9,
+    "blob_url": "https://github.com/mrmlnc/fast-glob/blob/d93ba2f1987ecd97496976607b8304fc895ec6e9/src%2Fsettings.ts",
+    "raw_url": "https://github.com/mrmlnc/fast-glob/raw/d93ba2f1987ecd97496976607b8304fc895ec6e9/src%2Fsettings.ts",
+    "contents_url": "https://api.github.com/repos/mrmlnc/fast-glob/contents/src%2Fsettings.ts?ref=d93ba2f1987ecd97496976607b8304fc895ec6e9",
+    "patch": "@@ -1,7 +1,7 @@\n import * as fs from 'fs';\n import * as os from 'os';\n \n-import { FileSystemAdapter, Pattern } from './types';\n+import { Entry, FileSystemAdapter, Pattern } from './types';\n \n /**\n  * The `os.cpus` method can return zero. We expect the number of cores to be greater than zero.\n@@ -152,6 +152,12 @@ export type Options = {\n \t * @default true\n \t */\n \tunique?: boolean;\n+\t/**\n+\t * Overrides the uniqueness value when `unique` is set to `true`.\n+\t *\n+\t * @default (entry) => entry.path\n+\t */\n+\tuniqueBy?: (entry: Entry) => unknown;\n };\n \n export default class Settings {\n@@ -176,6 +182,7 @@ export default class Settings {\n \tpublic readonly suppressErrors: boolean = this._getValue(this._options.suppressErrors, false);\n \tpublic readonly throwErrorOnBrokenSymbolicLink: boolean = this._getValue(this._options.throwErrorOnBrokenSymbolicLink, false);\n \tpublic readonly unique: boolean = this._getValue(this._options.unique, true);\n+\tpublic readonly uniqueBy: (entry: Entry) => unknown = this._getValue(this._options.uniqueBy, (entry: Entry) => entry.path);\n \n \tconstructor(private readonly _options: Options = {}) {\n \t\tif (this.onlyDirectories) {"
+  }
+]

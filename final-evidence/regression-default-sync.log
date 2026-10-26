@@ -1,0 +1,46 @@
+Using /ram/candidate/herebyfile.mjs to run bench:regression:sync
+Starting bench:regression:sync:flatten
+Label            import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+---------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync current *   19.142ms ±16.971%   2.261ms ±17.205%  7.410 MiB ±1.657%  6 ±0.000%        50.570ms ±14.169%  
+sync previous *  14.591ms ±22.401%   2.211ms ±26.191%  6.756 MiB ±1.578%  6 ±0.000%        45.690ms ±18.400%  
+
+Finished bench:regression:sync:flatten in 38.7s
+Starting bench:regression:sync:extension_flatten
+Label                 import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+--------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync current *.json   18.427ms ±14.156%   2.213ms ±14.701%  7.383 MiB ±0.444%  2 ±0.000%        48.689ms ±10.989%  
+sync previous *.json  13.982ms ±17.153%   2.130ms ±15.458%  6.743 MiB ±0.912%  2 ±0.000%        43.276ms ±11.734%  
+
+Finished bench:regression:sync:extension_flatten in 36.9s
+Starting bench:regression:sync:deep
+Label             import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+----------------  ------------------  -----------------  ------------------  ---------------  -------------------
+sync current **   19.386ms ±21.047%   24.036ms ±22.986%  10.346 MiB ±0.468%  13664 ±0.000%    73.533ms ±19.041%  
+sync previous **  16.049ms ±29.538%   25.994ms ±25.545%  9.739 MiB ±0.466%   13664 ±0.000%    74.515ms ±25.685%  
+
+Finished bench:regression:sync:deep in 58.5s
+Starting bench:regression:sync:extension_deep
+Label                  import.time (time)  time (time)        memory (memory)    entries (value)  process.time (time)
+---------------------  ------------------  -----------------  -----------------  ---------------  -------------------
+sync current **/*.js   19.471ms ±23.785%   23.482ms ±24.473%  9.634 MiB ±0.542%  7412 ±0.000%     73.229ms ±22.139%  
+sync previous **/*.js  14.727ms ±19.721%   22.828ms ±17.508%  8.937 MiB ±0.635%  7412 ±0.000%     67.071ms ±15.407%  
+
+Finished bench:regression:sync:extension_deep in 56.2s
+Starting bench:regression:sync:partial_flatten
+Label                                          import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+---------------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync current {fixtures,out}/{first,second}/*   22.683ms ±36.847%   5.026ms ±38.577%  7.619 MiB ±0.159%  2 ±0.000%        62.147ms ±34.427%  
+sync previous {fixtures,out}/{first,second}/*  14.581ms ±14.165%   4.048ms ±11.150%  6.976 MiB ±0.187%  2 ±0.000%        46.666ms ±10.453%  
+
+Finished bench:regression:sync:partial_flatten in 42.7s
+Starting bench:regression:sync:partial_deep
+Label                            import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync current {fixtures,out}/**   18.937ms ±15.526%   4.727ms ±18.645%  7.969 MiB ±3.217%  184 ±0.000%      52.539ms ±11.805%  
+sync previous {fixtures,out}/**  15.598ms ±20.806%   4.732ms ±18.440%  7.152 MiB ±1.467%  184 ±0.000%      50.443ms ±17.270%  
+
+Finished bench:regression:sync:partial_deep in 41.1s
+Starting bench:regression:sync
+Finished bench:regression:sync in 1ms
+Completed bench:regression:sync in 4m 34.3s

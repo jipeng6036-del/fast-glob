@@ -1,0 +1,15 @@
+npm warn deprecated folktale@2.3.2: This package is no longer actively maintained. Only security patches will be provided, if needed. Consider switching to fp-ts.
+npm warn deprecated debug@4.1.1: Debug versions >=3.2.0 <3.2.7 || >=4 <4.3.1 have a low-severity ReDos regression when used in a Node.js environment. It is recommended you upgrade to 3.2.7 or 4.3.1. (https://github.com/visionmedia/debug/issues/797)
+npm error code E404
+npm error 404 Not Found - GET https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.72.1.tgz - Not found
+npm error 404
+npm error 404  The requested resource '@typescript-eslint/typescript-estree@https://registry.npmjs.org/@typescript-eslint/typescript-estree/-/typescript-estree-8.72.1.tgz' could not be found or you do not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm notice
+npm notice New major version of npm available! 11.20.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+npm error A complete log of this run can be found in: /root/.npm/_logs/2026-10-26T17_12_40_720Z-debug-0.log

@@ -1,0 +1,554 @@
+{
+  "node": "v26.12.1",
+  "source": "/ram/install-probe-base/out/index.js",
+  "passed": 24,
+  "failed": 24,
+  "results": [
+    {
+      "prefix": "",
+      "pattern": "root.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "root.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "root.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "*.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "*.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "*.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "nested/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "nested/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "nested/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "**/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "**/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "",
+      "pattern": "**/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./root.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "./root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./root.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "./root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./root.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "./root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./*.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./*.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./*.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./nested/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "./nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./nested/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "./nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./nested/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [
+        "./nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./**/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./**/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "./",
+      "pattern": "./**/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [
+        "root.txt",
+        "nested/child.txt"
+      ],
+      "pass": true
+    },
+    {
+      "prefix": "././",
+      "pattern": "././root.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././root.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././root.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././*.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././*.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././*.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././nested/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././nested/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././nested/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././**/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././**/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "././",
+      "pattern": "././**/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././root.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././root.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././root.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././*.txt",
+      "mode": "globSync",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././*.txt",
+      "mode": "glob",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././*.txt",
+      "mode": "globStream",
+      "expected": [
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././nested/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././nested/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././nested/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././**/*.txt",
+      "mode": "globSync",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././**/*.txt",
+      "mode": "glob",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    },
+    {
+      "prefix": "./././",
+      "pattern": "./././**/*.txt",
+      "mode": "globStream",
+      "expected": [
+        "nested/child.txt",
+        "root.txt"
+      ],
+      "actual": [],
+      "pass": false
+    }
+  ]
+}

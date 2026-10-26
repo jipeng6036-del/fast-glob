@@ -1,0 +1,311 @@
+[
+  {
+    "id": "fast-glob@4.0.0",
+    "name": "fast-glob",
+    "version": "4.0.0",
+    "size": 25875,
+    "unpackedSize": 96993,
+    "shasum": "2c84d48f8668ca32c1be4ff01bee708d8b905e75",
+    "integrity": "sha512-O7/wENEmi9kSgW4ZkV8EKIxeEYKbtDubEQ9x/mElI8KBthRqD4sqQZGxJ65e9gQLclL1hw2mGnRIDJSwQvlGGw==",
+    "filename": "fast-glob-4.0.0.tgz",
+    "files": [
+      {
+        "path": "LICENSE",
+        "size": 1069,
+        "mode": 420
+      },
+      {
+        "path": "README.md",
+        "size": 25559,
+        "mode": 420
+      },
+      {
+        "path": "out/index.d.ts",
+        "size": 2376,
+        "mode": 420
+      },
+      {
+        "path": "out/index.js",
+        "size": 3770,
+        "mode": 420
+      },
+      {
+        "path": "out/managers/tasks.d.ts",
+        "size": 1259,
+        "mode": 420
+      },
+      {
+        "path": "out/managers/tasks.js",
+        "size": 5798,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/async.d.ts",
+        "size": 555,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/async.js",
+        "size": 658,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/deep.d.ts",
+        "size": 352,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/deep.js",
+        "size": 2424,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/entry.d.ts",
+        "size": 379,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/entry.js",
+        "size": 3404,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/error.d.ts",
+        "size": 238,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/filters/error.js",
+        "size": 498,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/index.d.ts",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/index.js",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/matchers/matcher.d.ts",
+        "size": 865,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/matchers/matcher.js",
+        "size": 1516,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/matchers/partial.d.ts",
+        "size": 130,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/matchers/partial.js",
+        "size": 1315,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/provider.d.ts",
+        "size": 819,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/provider.js",
+        "size": 2108,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/stream.d.ts",
+        "size": 548,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/stream.js",
+        "size": 1122,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/sync.d.ts",
+        "size": 525,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/sync.js",
+        "size": 639,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/transformers/entry.d.ts",
+        "size": 258,
+        "mode": 420
+      },
+      {
+        "path": "out/providers/transformers/entry.js",
+        "size": 1090,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/async.d.ts",
+        "size": 806,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/async.js",
+        "size": 910,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/index.d.ts",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/index.js",
+        "size": 84,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/reader.d.ts",
+        "size": 656,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/reader.js",
+        "size": 1139,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/stream.d.ts",
+        "size": 745,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/stream.js",
+        "size": 1850,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/sync.d.ts",
+        "size": 700,
+        "mode": 420
+      },
+      {
+        "path": "out/readers/sync.js",
+        "size": 1157,
+        "mode": 420
+      },
+      {
+        "path": "out/settings.d.ts",
+        "size": 4327,
+        "mode": 420
+      },
+      {
+        "path": "out/settings.js",
+        "size": 2477,
+        "mode": 420
+      },
+      {
+        "path": "out/types/index.d.ts",
+        "size": 1230,
+        "mode": 420
+      },
+      {
+        "path": "out/types/index.js",
+        "size": 11,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/array.d.ts",
+        "size": 154,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/array.js",
+        "size": 558,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/errno.d.ts",
+        "size": 208,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/errno.js",
+        "size": 164,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/fs.d.ts",
+        "size": 365,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/fs.js",
+        "size": 1017,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/index.d.ts",
+        "size": 259,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/index.js",
+        "size": 259,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/path.d.ts",
+        "size": 833,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/path.js",
+        "size": 2916,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/pattern.d.ts",
+        "size": 2784,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/pattern.js",
+        "size": 6956,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/stream.d.ts",
+        "size": 107,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/stream.js",
+        "size": 583,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/string.d.ts",
+        "size": 352,
+        "mode": 420
+      },
+      {
+        "path": "out/utils/string.js",
+        "size": 570,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 3290,
+        "mode": 420
+      }
+    ],
+    "entryCount": 59,
+    "bundled": []
+  }
+]

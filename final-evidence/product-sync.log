@@ -1,0 +1,58 @@
+Using /ram/candidate/herebyfile.mjs to run bench:product:sync
+Starting bench:product:sync:flatten
+Label                import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync fast-glob *     20.916ms ±17.906%   2.465ms ±19.291%  7.420 MiB ±1.716%  6 ±0.000%        54.776ms ±13.725%  
+sync tinyglobby *    8.079ms ±12.895%    3.233ms ±22.558%  5.702 MiB ±0.218%  6 ±0.000%        40.392ms ±12.903%  
+sync node-fs-glob *  0.293ms ±31.266%    5.511ms ±33.288%  5.424 MiB ±3.142%  6 ±0.000%        36.755ms ±15.390%  
+sync node-glob *     6.787ms ±33.232%    3.559ms ±27.395%  6.163 MiB ±4.870%  6 ±0.000%        44.205ms ±22.107%  
+
+Finished bench:product:sync:flatten in 1m 10.3s
+Starting bench:product:sync:extension_flatten
+Label                     import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync fast-glob *.json     21.989ms ±21.993%   2.643ms ±25.222%  7.401 MiB ±1.184%  2 ±0.000%        58.430ms ±18.492%  
+sync tinyglobby *.json    8.741ms ±16.620%    3.109ms ±20.687%  5.858 MiB ±2.993%  2 ±0.000%        44.255ms ±16.368%  
+sync node-fs-glob *.json  0.275ms ±25.130%    5.027ms ±37.300%  5.441 MiB ±4.019%  2 ±0.000%        35.278ms ±18.058%  
+sync node-glob *.json     6.093ms ±29.082%    3.117ms ±16.405%  5.962 MiB ±0.401%  2 ±0.000%        39.042ms ±12.782%  
+
+Finished bench:product:sync:extension_flatten in 1m 11.6s
+Starting bench:product:sync:deep
+Label                 import.time (time)  time (time)        memory (memory)      entries (value)  process.time (time)
+--------------------  ------------------  -----------------  -------------------  ---------------  -------------------
+sync fast-glob **     18.792ms ±15.482%   23.562ms ±13.251%  10.350 MiB ±0.467%   13664 ±0.000%    71.585ms ±11.705%  
+sync tinyglobby **    8.236ms ±15.318%    22.945ms ±17.840%  8.981 MiB ±0.872%    13664 ±0.000%    61.788ms ±15.064%  
+sync node-fs-glob **  0.304ms ±41.131%    86.529ms ±26.467%  13.466 MiB ±10.571%  13664 ±0.000%    122.720ms ±24.557% 
+sync node-glob **     5.828ms ±30.665%    53.659ms ±19.657%  20.039 MiB ±3.069%   13664 ±0.000%    92.965ms ±15.718%  
+
+Finished bench:product:sync:deep in 2m 19.3s
+Starting bench:product:sync:extension_deep
+Label                      import.time (time)  time (time)        memory (memory)     entries (value)  process.time (time)
+-------------------------  ------------------  -----------------  ------------------  ---------------  -------------------
+sync fast-glob **/*.js     19.306ms ±22.167%   22.376ms ±16.308%  9.639 MiB ±0.552%   7412 ±0.000%     71.279ms ±15.067%  
+sync tinyglobby **/*.js    7.835ms ±11.226%    21.354ms ±14.376%  7.840 MiB ±1.133%   7467 ±0.000%     58.013ms ±12.242%  
+sync node-fs-glob **/*.js  0.274ms ±23.321%    69.897ms ±15.419%  11.131 MiB ±1.292%  7412 ±0.000%     103.430ms ±13.357% 
+sync node-glob **/*.js     6.287ms ±30.141%    50.719ms ±20.286%  18.855 MiB ±0.257%  7412 ±0.000%     92.480ms ±18.485%  
+
+Finished bench:product:sync:extension_deep in 2m 9.9s
+Starting bench:product:sync:partial_flatten
+Label                                              import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-------------------------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync fast-glob {fixtures,out}/{first,second}/*     19.642ms ±16.099%   4.336ms ±18.799%  7.625 MiB ±0.202%  2 ±0.000%        53.521ms ±14.066%  
+sync tinyglobby {fixtures,out}/{first,second}/*    8.163ms ±12.708%    3.263ms ±20.492%  5.921 MiB ±0.484%  2 ±0.000%        41.131ms ±14.418%  
+sync node-fs-glob {fixtures,out}/{first,second}/*  0.301ms ±40.967%    6.488ms ±34.236%  5.566 MiB ±2.904%  2 ±0.000%        38.361ms ±23.701%  
+sync node-glob {fixtures,out}/{first,second}/*     5.814ms ±29.796%    4.553ms ±14.293%  6.350 MiB ±2.628%  2 ±0.000%        37.782ms ±10.203%  
+
+Finished bench:product:sync:partial_flatten in 1m 8s
+Starting bench:product:sync:partial_deep
+Label                                import.time (time)  time (time)       memory (memory)    entries (value)  process.time (time)
+-----------------------------------  ------------------  ----------------  -----------------  ---------------  -------------------
+sync fast-glob {fixtures,out}/**     20.879ms ±25.660%   4.948ms ±20.327%  7.953 MiB ±3.065%  184 ±0.000%      57.186ms ±18.385%  
+sync tinyglobby {fixtures,out}/**    8.147ms ±12.825%    4.143ms ±18.559%  5.764 MiB ±0.200%  184 ±0.000%      41.473ms ±13.418%  
+sync node-fs-glob {fixtures,out}/**  0.258ms ±26.472%    8.454ms ±23.597%  6.128 MiB ±2.271%  184 ±0.000%      37.501ms ±12.991%  
+sync node-glob {fixtures,out}/**     6.062ms ±32.071%    6.138ms ±22.586%  6.533 MiB ±0.419%  184 ±0.000%      42.264ms ±19.249%  
+
+Finished bench:product:sync:partial_deep in 1m 11.3s
+Starting bench:product:sync
+Finished bench:product:sync in 1ms
+Completed bench:product:sync in 9m 10.6s
